@@ -1,47 +1,149 @@
-import { combineReducers } from "redux";
+import { combineReducers, Reducer } from "redux";
 import * as types from "../actions/actionTypes";
 
-// Move this
-export const VisibilityFilters = {
-  SHOW_ALL: "SHOW_ALL",
-  SHOW_COMPLETED: "SHOW_COMPLETED",
-  SHOW_ACTIVE: "SHOW_ACTIVE"
-};
+import defaultStore from "../store/defaultStore";
+import {
+  ICards,
+  IEffects,
+  IGameData,
+  IPillars,
+  IStore,
+  IUserData
+} from "../store/store";
 
-function visibilityFilter(state = VisibilityFilters.SHOW_ALL, action: any) {
+function userData(state = defaultStore.userData, action: any): IUserData {
   switch (action.type) {
-    case types.SET_VISIBILITY_FILTER:
-      return action.filter;
-    default:
-      return state;
-  }
-}
-function todos(state = [], action: any) {
-  switch (action.type) {
-    case types.ADD_TODO:
-      return [
+    case types.UPDATE_USER_FIELD:
+      return {
         ...state,
-        {
-          text: action.text,
-          completed: false
-        }
-      ];
-    case types.TOGGLE_TODO:
-      // Improve typing
-      return state.map((todo: any, index) => {
-        if (index === action.index) {
-          return Object.assign({}, todo, {
-            completed: !todo.completed
-          });
-        }
-        return todo;
-      });
+        [action.field]: action.value
+      };
     default:
       return state;
   }
 }
-const app = combineReducers({
-  visibilityFilter,
-  todos
+function gameData(state = defaultStore.gameData, action: any): IGameData {
+  switch (action.type) {
+    case types.START_GAME:
+      return {
+        ...state
+      };
+    case types.DRAW_CARD:
+      return {
+        ...state,
+        currentCard: state.playDeck[0]
+      };
+    case types.CHOOSE:
+      const newPillars: IPillars = { ...state.pillars };
+      const responses = state.cards[state.currentCard].contents.responses;
+      let newReserve: string[] = [...state.reserveDeck];
+      const newPlay: string[] = [];
+      if (action.choice) {
+        for (const pillar in responses.accept.effects) {
+          if (state.pillars.hasOwnProperty(pillar)) {
+            changePillar(newPillars, pillar, responses.accept.effects);
+          }
+        }
+        newReserve = addCards(
+          removeCards(newReserve, responses.accept.cardsRemoved),
+          responses.accept.cardsAdded
+        );
+      } else {
+        for (const pillar in responses.reject.effects) {
+          if (state.pillars.hasOwnProperty(pillar)) {
+            changePillar(newPillars, pillar, responses.reject.effects);
+          }
+        }
+        newReserve = addCards(
+          removeCards(newReserve, responses.reject.cardsRemoved),
+          responses.reject.cardsAdded
+        );
+      }
+
+      for (const potentialCard of newReserve) {
+        if (isPlayable(potentialCard, newPillars, state.cards)) {
+          newPlay.push(potentialCard);
+        }
+      }
+
+      shuffle(newPlay);
+
+      return {
+        ...state,
+        pillars: newPillars,
+        reserveDeck: newReserve,
+        playDeck: newPlay
+      };
+
+    default:
+      return state;
+  }
+}
+
+function shuffle(a: any[]) {
+  let j;
+  let x;
+  let i;
+  for (i = a.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    x = a[i];
+    a[i] = a[j];
+    a[j] = x;
+  }
+  return a;
+}
+
+function isPlayable(cardId: string, pillars: IPillars, cards: ICards) {
+  const card = cards[cardId];
+
+  let valid: boolean = true;
+  for (const pillar in pillars) {
+    if (pillars.hasOwnProperty(pillar)) {
+      const element = pillars[pillar];
+      if (card.weightings[pillar] > element.value) {
+        valid = false;
+      }
+    }
+  }
+  return valid;
+}
+
+function addCards(cards: string[], cardsToAdd: string[]): string[] {
+  return [...new Set([...cards, ...cardsToAdd])];
+}
+
+function removeCards(cards: string[], cardsToRemove: string[]): string[] {
+  return cards.filter(card => {
+    let isIn: boolean = true;
+    for (const toRemove of cardsToRemove) {
+      if (card === toRemove) {
+        isIn = false;
+      }
+    }
+    return isIn;
+  });
+}
+
+// function addCardToReserve(cardId: string, state: IGameData): string[] {
+//   return [...state.reserveDeck, cardId];
+// }
+
+// function removeCardFromReserve(cardId: string, state: IGameData): string[] {
+//   return state.playDeck.slice(state.reserveDeck.indexOf(cardId), 1);
+// }
+
+function changePillar(newPillars: IPillars, pillar: string, effects: IEffects) {
+  const increment = Math.round(effects[pillar]);
+  const newPillar = newPillars[pillar];
+  const newValue = newPillar.value + increment;
+  if (newValue < newPillar.max && newValue > newPillar.min) {
+    newPillars[pillar].value += increment;
+  }
+  return newPillars;
+}
+
+const app: Reducer<IStore> = combineReducers({
+  userData,
+  gameData
 });
 export default app;

@@ -1,6 +1,19 @@
-import { style } from "typestyle";
+import { CSSProperties } from "react";
 
-export const bodyFont = style({
+const BODY_FONT_SIZE = 20;
+const HEADER_FONT_SIZE = 36;
+
+export const bodyFont = {
   fontFamily: "Open Sans, sans-serif",
-  fontSize: "20px"
-});
+  fontSize: BODY_FONT_SIZE
+} as CSSProperties;
+
+export const bodyFontCentered = {
+  ...bodyFont,
+  textAlign: "center"
+} as CSSProperties;
+
+export const headerFontCentered = {
+  ...bodyFontCentered,
+  fontSize: HEADER_FONT_SIZE
+} as CSSProperties;

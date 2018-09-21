@@ -1,11 +1,37 @@
 import * as types from "./actionTypes";
 
-export function addTodo(text: string) {
-  return { type: types.ADD_TODO, text };
+// Game control
+export function startGame() {
+  return { type: types.START_GAME };
 }
-export function toggleTodo(index: number) {
-  return { type: types.TOGGLE_TODO, index };
+
+// Game
+export function drawCard() {
+  return { type: types.DRAW_CARD };
 }
-export function setVisibilityFilter(filter: string) {
-  return { type: types.SET_VISIBILITY_FILTER, filter };
+
+// export function addCardToPlay(cardId: string) {
+//   return { type: types.ADD_CARD_TO_PLAY, cardId };
+// }
+
+// export function addCardToReserve(cardId: string) {
+//   return { type: types.ADD_CARD_TO_RESERVE, cardId };
+// }
+
+// export function removeCardFromPlay(cardId: string) {
+//   return { type: types.REMOVE_CARD_FROM_PLAY, cardId };
+// }
+
+// export function removeCardFromReserve(cardId: string) {
+//   return { type: types.REMOVE_CARD_FROM_RESERVE, cardId };
+// }
+
+export function choose(cardId: string, choice: boolean) {
+  return { type: types.CHOOSE, cardId, choice };
+}
+
+// User
+export function updateUserField(field: string, value: string | number) {
+  const payload = { field, value };
+  return { type: types.UPDATE_USER_FIELD, payload };
 }
