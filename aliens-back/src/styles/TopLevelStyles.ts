@@ -1,13 +1,21 @@
 import { CSSProperties } from "react";
+import * as css from "./basicStyles";
 
 export const top = {
+  background: css.BEIGE1,
   display: "flex",
   flexDirection: "row"
 } as CSSProperties;
 
-export const leftMargin = { flex: "1 1" } as CSSProperties;
+export const leftMargin = {
+  background: css.BROWN,
+  flex: "1 1"
+} as CSSProperties;
 
-export const rightMargin = { flex: "1 1" } as CSSProperties;
+export const rightMargin = {
+  background: css.BROWN,
+  flex: "1 1"
+} as CSSProperties;
 
 export const middle = {
   display: "flex",

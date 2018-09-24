@@ -31,16 +31,7 @@ class Game extends React.Component<IGameProps> {
       <GameView gameData={this.props} drawCard={this.props.drawCardDispatch} />
     );
   }
-
-  // public getRandomCardID: () => string = () => {
-  //   return randomElement(this.props.playDeck);
-  // };
 }
-
-// const randomElement = (array: any[]) => {
-//   const index = Math.floor(Math.random() * array.length);
-//   return array[index];
-// };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   drawCardDispatch: () => dispatch(drawCard())

@@ -1,10 +1,15 @@
 import { CSSProperties } from "react";
+import * as css from "./basicStyles";
 
 export const responses = {
   display: "flex",
-  flexDirection: "row"
+  flexDirection: "column"
 } as CSSProperties;
 
 export const response = {
-  flex: "1 0"
-}as CSSProperties;
+  ...css.bodyFont,
+  background: "none",
+  border: 0,
+  flex: "1 0",
+  textAlign: "left"
+} as CSSProperties;

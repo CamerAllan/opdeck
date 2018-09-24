@@ -7,7 +7,6 @@ import * as css from "../styles/cardStyles";
 interface ICardViewProps {
   name: string;
   text: string;
-  image: string;
   responses: IResponses;
 }
 

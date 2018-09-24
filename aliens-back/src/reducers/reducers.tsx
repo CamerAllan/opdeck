@@ -97,10 +97,15 @@ function isPlayable(cardId: string, pillars: IPillars, cards: ICards) {
   const card = cards[cardId];
 
   let valid: boolean = true;
-  for (const pillar in pillars) {
+  for (const pillar in card.weightings) {
     if (pillars.hasOwnProperty(pillar)) {
       const element = pillars[pillar];
-      if (card.weightings[pillar] > element.value) {
+      const lessThan = card.weightings[pillar].lessThan as number;
+      if (lessThan && lessThan < element.value) {
+        valid = false;
+      }
+      const moreThan = card.weightings[pillar].moreThan as number;
+      if (moreThan && moreThan > element.value) {
         valid = false;
       }
     }

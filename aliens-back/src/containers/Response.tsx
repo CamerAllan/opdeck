@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { choose } from "../actions/actions";
-import ResponseView from "../presentation/ResponseView";
+import ResponsesView from "../presentation/ResponseView";
 import { IResponses, IStore } from "../store/store";
 
 interface IResponseStateProps {
@@ -29,7 +29,7 @@ class Response extends React.Component<IResponseProps> {
     };
 
     return (
-      <ResponseView
+      <ResponsesView
         responses={this.props.responses}
         agreeFunction={agreeFunction}
         disagreeFunction={disagreeFunction}

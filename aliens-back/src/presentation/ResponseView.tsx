@@ -8,7 +8,7 @@ interface IResponseViewProps {
   disagreeFunction: () => void;
 }
 
-class ResponseView extends React.Component<IResponseViewProps> {
+class ResponsesView extends React.Component<IResponseViewProps> {
   public render() {
     return (
       <div style={css.responses}>
@@ -23,4 +23,4 @@ class ResponseView extends React.Component<IResponseViewProps> {
   }
 }
 
-export default ResponseView;
+export default ResponsesView;

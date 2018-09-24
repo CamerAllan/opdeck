@@ -12,6 +12,11 @@ export interface IGameData {
   settings: ISettings;
 }
 
+export interface IPerson {
+  name: string;
+
+}
+
 export interface ISettings {
   deckSize: number;
 }
@@ -22,7 +27,12 @@ export interface ICard {
 }
 
 export interface IWeightings {
-  [pillar: string]: number;
+  [pillar: string]: IWeighting;
+}
+
+export interface IWeighting {
+  lessThan?: number;
+  moreThan?: number;
 }
 
 export interface IPillars {
@@ -39,7 +49,6 @@ export interface IPillar {
 export interface ICardContents {
   name: string;
   text: string;
-  image: string;
   responses: IResponses;
 }
 

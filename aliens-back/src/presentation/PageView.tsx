@@ -11,11 +11,11 @@ class Page extends React.Component<IStore> {
       <div style={css.top}>
         <div style={css.leftMargin} />
         <div style={css.middle}>
-          <div style={css.header}>HEADER</div>
+          <div style={css.header} />
           <div style={css.body}>
             <Game {...this.props.gameData} />
           </div>
-          <div style={css.footer}>FOOTER</div>
+          <div style={css.footer} />
         </div>
         <div style={css.rightMargin} />
       </div>

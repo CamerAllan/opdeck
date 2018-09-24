@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+// import * as css from "./basicStyles";
 
 export const pillars = {
   display: "flex",
@@ -7,4 +8,4 @@ export const pillars = {
 
 export const pillar = {
   flex: "1 0"
-}as CSSProperties;
+} as CSSProperties;
