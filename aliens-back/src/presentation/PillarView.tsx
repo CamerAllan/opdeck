@@ -8,12 +8,21 @@ interface IPillarViewProps {
   min: number;
   max: number;
   description: string;
+  effect: number;
 }
 
 class PillarView extends React.Component<IPillarViewProps> {
   public render() {
+    let pillarStyle = css.pillar;
+    if (this.props.effect !== 0) {
+      if (this.props.effect > 0) {
+        pillarStyle = css.raisePillar;
+      } else {
+        pillarStyle = css.lowerPillar;
+      }
+    }
     return (
-      <div style={css.pillar}>
+      <div style={pillarStyle}>
         <div style={basicCSS.bodyFontCentered}>{this.props.name}</div>
         <div style={basicCSS.bodyFontCentered}>{this.props.value}</div>
       </div>

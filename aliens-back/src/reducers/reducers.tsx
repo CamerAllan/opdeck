@@ -80,6 +80,16 @@ function gameData(state = defaultStore.gameData, action: any): IGameData {
   }
 }
 
+function interfaceData(state = defaultStore.interfaceData, action: any) {
+  switch (action.type) {
+    case types.UPDATE_DECISION_HOVER: {
+      return { ...state, hoverLoc: action.value };
+    }
+    default:
+      return state;
+  }
+}
+
 function shuffle(a: any[]) {
   let j;
   let x;
@@ -149,6 +159,7 @@ function changePillar(newPillars: IPillars, pillar: string, effects: IEffects) {
 
 const app: Reducer<IStore> = combineReducers({
   userData,
-  gameData
+  gameData,
+  interfaceData
 });
 export default app;

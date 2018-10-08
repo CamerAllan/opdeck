@@ -1,6 +1,11 @@
 export interface IStore {
   userData: IUserData;
   gameData: IGameData;
+  interfaceData: IInterfaceData;
+}
+
+export interface IInterfaceData {
+  hoverLoc: HoverLoc;
 }
 
 export interface IGameData {
@@ -14,7 +19,6 @@ export interface IGameData {
 
 export interface IPerson {
   name: string;
-
 }
 
 export interface ISettings {
@@ -81,4 +85,10 @@ export enum Gender {
   MALE,
   FEMALE,
   OTHER
+}
+
+export enum HoverLoc {
+  ACCEPT,
+  REJECT,
+  ELSE
 }

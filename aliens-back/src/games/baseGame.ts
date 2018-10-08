@@ -350,13 +350,13 @@ export default {
         image: "www.this-card-has-no-image.com",
         responses: {
           accept: {
-            text: "Aw no",
+            text: "Oh no",
             cardsAdded: ["loanOffer"],
             cardsRemoved: ["loanRetake"],
             effects: { Money: -3 }
           },
           reject: {
-            text: "Aw no",
+            text: "Oh no",
             cardsAdded: ["loanOffer"],
             cardsRemoved: ["loanRetake"],
             effects: { Money: -3 }
@@ -482,7 +482,7 @@ export default {
           },
           reject: {
             text: "Coal will do just fine",
-            cardsAdded: ["dirtyFingers"],
+            cardsAdded: [],
             cardsRemoved: ["renewables"],
             effects: { Popularity: -1 }
           }

@@ -1,9 +1,9 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { choose } from "../actions/actions";
+import { choose, updateDecisionHover } from "../actions/actions";
 import ResponsesView from "../presentation/ResponseView";
-import { IResponses, IStore } from "../store/store";
+import { HoverLoc, IResponses, IStore } from "../store/store";
 
 interface IResponseStateProps {
   responses: IResponses;
@@ -13,6 +13,7 @@ interface IResponseStateProps {
 
 interface IResponseDispatchProps {
   choiceDispatch: (cardId: string, choice: boolean) => void;
+  hoverDispatch: (choice: HoverLoc) => void;
 }
 
 type IResponseProps = IResponseDispatchProps & IResponseStateProps;
@@ -27,12 +28,24 @@ class Response extends React.Component<IResponseProps> {
       this.props.choiceDispatch(this.props.currentCard, false);
       this.props.drawCard();
     };
+    const agreeHoverFunction = () => {
+      this.props.hoverDispatch(HoverLoc.ACCEPT);
+    };
+    const disagreeHoverFunction = () => {
+      this.props.hoverDispatch(HoverLoc.REJECT);
+    };
+    const offHoverFunction = () => {
+      this.props.hoverDispatch(HoverLoc.ELSE);
+    };
 
     return (
       <ResponsesView
         responses={this.props.responses}
         agreeFunction={agreeFunction}
         disagreeFunction={disagreeFunction}
+        agreeHoverFunction={agreeHoverFunction}
+        disagreeHoverFunction={disagreeHoverFunction}
+        offHoverFunction={offHoverFunction}
       />
     );
   }
@@ -40,7 +53,8 @@ class Response extends React.Component<IResponseProps> {
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   choiceDispatch: (cardId: string, choice: boolean) =>
-    dispatch(choose(cardId, choice))
+    dispatch(choose(cardId, choice)),
+  hoverDispatch: (choice: HoverLoc) => dispatch(updateDecisionHover(choice))
 });
 
 const mapStateToProps = (state: IStore, ownProps: IResponseStateProps) => {

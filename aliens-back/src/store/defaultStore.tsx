@@ -1,9 +1,12 @@
 import Game from "../games/baseGame";
-import { IStore } from "./store";
+import { HoverLoc, IStore } from "./store";
 
 const defaultStore: IStore = {
   userData: {},
-  gameData: Game
+  gameData: Game,
+  interfaceData: {
+    hoverLoc: HoverLoc.ELSE
+  }
 };
 
 export default defaultStore;
