@@ -24,7 +24,7 @@ class PillarView extends React.Component<IPillarViewProps> {
     return (
       <div style={pillarStyle}>
         <div style={basicCSS.bodyFontCentered}>{this.props.name}</div>
-        <div style={basicCSS.bodyFontCentered}>{this.props.value}</div>
+        <div style={basicCSS.bodyFontCentered}>{this.props.value / this.props.max}</div>
       </div>
     );
   }

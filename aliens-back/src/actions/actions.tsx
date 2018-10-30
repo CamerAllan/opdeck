@@ -12,6 +12,15 @@ export function drawCard() {
 }
 
 export function choose(cardId: string, choice: boolean) {
+  const toSend = { cardId, choice };
+  fetch("/choose", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(toSend)
+  });
   return { type: types.CHOOSE, cardId, choice };
 }
 

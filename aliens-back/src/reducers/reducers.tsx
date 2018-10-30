@@ -139,19 +139,11 @@ function removeCards(cards: string[], cardsToRemove: string[]): string[] {
   });
 }
 
-// function addCardToReserve(cardId: string, state: IGameData): string[] {
-//   return [...state.reserveDeck, cardId];
-// }
-
-// function removeCardFromReserve(cardId: string, state: IGameData): string[] {
-//   return state.playDeck.slice(state.reserveDeck.indexOf(cardId), 1);
-// }
-
 function changePillar(newPillars: IPillars, pillar: string, effects: IEffects) {
   const increment = Math.round(effects[pillar]);
   const newPillar = newPillars[pillar];
   const newValue = newPillar.value + increment;
-  if (newValue < newPillar.max && newValue > newPillar.min) {
+  if (newValue <= newPillar.max && newValue >= newPillar.min) {
     newPillars[pillar].value += increment;
   }
   return newPillars;
