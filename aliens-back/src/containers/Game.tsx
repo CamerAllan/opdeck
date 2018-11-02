@@ -4,19 +4,14 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { drawCard } from "../actions/actions";
 import GameView from "../presentation/GameView";
-import { HoverLoc, ICards, IPillars, ISettings, IStore } from "../store/store";
+import { HoverLoc, IGameData, IStore } from "../store/store";
 
 interface IGameDispatchProps {
   drawCardDispatch: () => void;
 }
 
 interface IGameStateProps {
-  pillars: IPillars;
-  playDeck: string[];
-  reserveDeck: string[];
-  cards: ICards;
-  currentCard: string;
-  settings: ISettings;
+  gameData: IGameData;
   hoverLoc: HoverLoc;
 }
 
@@ -30,7 +25,7 @@ class Game extends React.Component<IGameProps> {
   public render() {
     return (
       <GameView
-        gameData={this.props}
+        gameData={this.props.gameData}
         drawCard={this.props.drawCardDispatch}
         hoverLoc={this.props.hoverLoc}
       />
@@ -42,9 +37,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   drawCardDispatch: () => dispatch(drawCard())
 });
 
-const mapStateToProps = (state: IStore) => {
+const mapStateToProps = (state: IStore): IGameStateProps => {
   return {
-    ...state.gameData,
+    gameData: state.gameData,
     hoverLoc: state.interfaceData.hoverLoc
   };
 };

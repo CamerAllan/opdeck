@@ -1,10 +1,7 @@
-import { IGameData } from "../store/store";
+import { IGame } from "../store/store";
 
 export default {
   currentCard: "goodMorning",
-  settings: {
-    deckSize: 2
-  },
   pillars: {
     Army: {
       value: 0,
@@ -540,4 +537,4 @@ export default {
       }
     }
   }
-} as IGameData;
+} as IGame;

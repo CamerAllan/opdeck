@@ -5,12 +5,16 @@ import defaultStore from "../store/defaultStore";
 import {
   ICards,
   IEffects,
+  IGame,
   IGameData,
   IPillars,
   IStore,
   IUserData
 } from "../store/store";
 
+function game(state = defaultStore.game): IGame {
+  return state;
+}
 function userData(state = defaultStore.userData, action: any): IUserData {
   switch (action.type) {
     case types.UPDATE_USER_FIELD:
@@ -152,6 +156,7 @@ function changePillar(newPillars: IPillars, pillar: string, effects: IEffects) {
 const app: Reducer<IStore> = combineReducers({
   userData,
   gameData,
+  game,
   interfaceData
 });
 export default app;

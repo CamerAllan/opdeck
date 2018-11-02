@@ -1,3 +1,6 @@
+// Page
+export const LOGIN = "LOGIN";
+
 // Game control
 export const START_GAME = "START_GAME";
 

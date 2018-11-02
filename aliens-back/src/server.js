@@ -16,17 +16,18 @@ test_db.onReady = () => {
 };
 
 app.post("/choose", function(req, res) {
-  test_db.setInfo(req.body["cardId"], req.body["choice"], function(
-    err,
-    key,
-    value
-  ) {
-    if (err) {
-      res.status(400);
-      return res.send();
+  test_db.appendItem(
+    {
+      [req.body["gameId"]]: { [req.body["cardId"]]: req.body["answer"] }
+    },
+    function(err, key, value) {
+      if (err) {
+        res.status(400);
+        return res.send();
+      }
+      console.log("[setInfo] " + key + " : " + value);
     }
-    console.log("[setInfo] " + key + " : " + value);
-  });
+  );
   res.status(200);
   return res.send();
 });
