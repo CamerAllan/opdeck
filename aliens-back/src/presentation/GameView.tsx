@@ -2,10 +2,10 @@ import * as React from "react";
 import Card from "../containers/Card";
 import Pillars from "../containers/Pillars";
 import Response from "../containers/Response";
-import { HoverLoc, IGameData } from "../store/store";
+import { HoverLoc, IGame } from "../store/store";
 
 interface IGameViewProps {
-  gameData: IGameData;
+  gameData: IGame;
   drawCard: () => void;
   hoverLoc: HoverLoc;
 }

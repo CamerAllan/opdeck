@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import Game from "src/containers/Game";
+import Login from "src/containers/Login";
 import { IStore } from "src/store/store";
 import * as css from "src/styles/TopLevelStyles";
 
@@ -13,7 +14,11 @@ class Page extends React.Component<IStore> {
         <div style={css.middle}>
           <div style={css.header} />
           <div style={css.body}>
-            <Game {...this.props.gameData} />
+            {!this.props.userData ? (
+              <Login {...this.props.userData} />
+            ) : (
+              <Game {...this.props.gameData} />
+            )}
           </div>
           <div style={css.footer} />
         </div>

@@ -5,6 +5,9 @@
   "dependencies": {
     "@types/react-redux": "^6.0.9",
     "@types/redux": "^3.6.0",
+    "express": "^4.16.4",
+    "fetch": "^1.1.0",
+    "morgan": "^1.9.1",
     "prettier": "^1.14.2",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
@@ -12,6 +15,7 @@
     "react-scripts-ts": "2.17.0",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
+    "tinydb": "^0.1.0",
     "typestyle": "^2.0.1"
   },
   "scripts": {
@@ -25,7 +29,9 @@
     "@types/node": "^10.9.4",
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
+    "prettier-tslint": "^0.4.0",
     "tslint-config-prettier": "^1.15.0",
     "typescript": "^3.0.3"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

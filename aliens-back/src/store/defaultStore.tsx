@@ -3,7 +3,8 @@ import { HoverLoc, IStore } from "./store";
 
 const defaultStore: IStore = {
   userData: {},
-  gameData: Game,
+  game: Game,
+  gameData: { ...Game, gameId: "yett", settings: { deckSize: 420 } },
   interfaceData: {
     hoverLoc: HoverLoc.ELSE
   }

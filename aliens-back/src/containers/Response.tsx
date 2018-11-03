@@ -3,16 +3,18 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { choose, updateDecisionHover } from "../actions/actions";
 import ResponsesView from "../presentation/ResponseView";
+import { IChooseRequest } from "../store/requestTypes";
 import { HoverLoc, IResponses, IStore } from "../store/store";
 
 interface IResponseStateProps {
+  gameId: string;
   responses: IResponses;
   currentCard: string;
   drawCard: () => void;
 }
 
 interface IResponseDispatchProps {
-  choiceDispatch: (cardId: string, choice: boolean) => void;
+  choiceDispatch: (choice: IChooseRequest) => void;
   hoverDispatch: (choice: HoverLoc) => void;
 }
 
@@ -20,12 +22,18 @@ type IResponseProps = IResponseDispatchProps & IResponseStateProps;
 
 class Response extends React.Component<IResponseProps> {
   public render() {
+    const tc = {
+      gameId: this.props.gameId,
+      cardId: this.props.currentCard
+    };
     const agreeFunction = () => {
-      this.props.choiceDispatch(this.props.currentCard, true);
+      const c: IChooseRequest = { ...tc, answer: true };
+      this.props.choiceDispatch(c);
       this.props.drawCard();
     };
     const disagreeFunction = () => {
-      this.props.choiceDispatch(this.props.currentCard, false);
+      const c: IChooseRequest = { ...tc, answer: false };
+      this.props.choiceDispatch(c);
       this.props.drawCard();
     };
     const agreeHoverFunction = () => {
@@ -52,14 +60,14 @@ class Response extends React.Component<IResponseProps> {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  choiceDispatch: (cardId: string, choice: boolean) =>
-    dispatch(choose(cardId, choice)),
+  choiceDispatch: (choice: IChooseRequest) => dispatch(choose(choice)),
   hoverDispatch: (choice: HoverLoc) => dispatch(updateDecisionHover(choice))
 });
 
 const mapStateToProps = (state: IStore, ownProps: IResponseStateProps) => {
   const card: string = state.gameData.currentCard;
   return {
+    gameId: state.gameData.gameId,
     responses: state.gameData.cards[card].contents.responses,
     currentCard: card,
     drawCard: ownProps.drawCard

@@ -1,5 +1,11 @@
+import * as R from "../store/requestTypes";
 import { HoverLoc } from "../store/store";
 import * as types from "./actionTypes";
+
+// Page
+export function login(value: string) {
+  return { type: types.LOGIN, value };
+}
 
 // Game control
 export function startGame() {
@@ -11,8 +17,16 @@ export function drawCard() {
   return { type: types.DRAW_CARD };
 }
 
-export function choose(cardId: string, choice: boolean) {
-  return { type: types.CHOOSE, cardId, choice };
+export function choose(choice: R.IChooseRequest) {
+  fetch("/choose", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(choice)
+  });
+  return { type: types.CHOOSE, cardId: choice.cardId, choice: choice.answer };
 }
 
 // User

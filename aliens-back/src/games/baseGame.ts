@@ -1,10 +1,7 @@
-import { IGameData } from "../store/store";
+import { IGame } from "../store/store";
 
 export default {
   currentCard: "goodMorning",
-  settings: {
-    deckSize: 2
-  },
   pillars: {
     Army: {
       value: 0,
@@ -492,7 +489,7 @@ export default {
     greenFingers: {
       weightings: {},
       contents: {
-        name: "",
+        name: "Green fingers",
         text:
           "Your nation has one of the lowest carbon footprints in the world",
         image: "www.this-card-has-no-image.com",
@@ -517,7 +514,7 @@ export default {
     greenerFingers: {
       weightings: {},
       contents: {
-        name: "",
+        name: "Dirt",
         text:
           "A neighbouring country offers you a large sum to dump their waste in your waters",
         image: "www.this-card-has-no-image.com",
@@ -540,4 +537,4 @@ export default {
       }
     }
   }
-} as IGameData;
+} as IGame;

@@ -5,12 +5,16 @@ import defaultStore from "../store/defaultStore";
 import {
   ICards,
   IEffects,
+  IGame,
   IGameData,
   IPillars,
   IStore,
   IUserData
 } from "../store/store";
 
+function game(state = defaultStore.game): IGame {
+  return state;
+}
 function userData(state = defaultStore.userData, action: any): IUserData {
   switch (action.type) {
     case types.UPDATE_USER_FIELD:
@@ -139,19 +143,11 @@ function removeCards(cards: string[], cardsToRemove: string[]): string[] {
   });
 }
 
-// function addCardToReserve(cardId: string, state: IGameData): string[] {
-//   return [...state.reserveDeck, cardId];
-// }
-
-// function removeCardFromReserve(cardId: string, state: IGameData): string[] {
-//   return state.playDeck.slice(state.reserveDeck.indexOf(cardId), 1);
-// }
-
 function changePillar(newPillars: IPillars, pillar: string, effects: IEffects) {
   const increment = Math.round(effects[pillar]);
   const newPillar = newPillars[pillar];
   const newValue = newPillar.value + increment;
-  if (newValue < newPillar.max && newValue > newPillar.min) {
+  if (newValue <= newPillar.max && newValue >= newPillar.min) {
     newPillars[pillar].value += increment;
   }
   return newPillars;
@@ -160,6 +156,7 @@ function changePillar(newPillars: IPillars, pillar: string, effects: IEffects) {
 const app: Reducer<IStore> = combineReducers({
   userData,
   gameData,
+  game,
   interfaceData
 });
 export default app;
