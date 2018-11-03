@@ -21,11 +21,19 @@ class PillarView extends React.Component<IPillarViewProps> {
         pillarStyle = css.lowerPillar;
       }
     }
+
+    const percentageFill =
+      100 * (this.props.value / (this.props.max - this.props.min));
+
     return (
-      <div style={pillarStyle}>
-        <div style={basicCSS.bodyFontCentered}>{this.props.name}</div>
-        <div style={basicCSS.bodyFontCentered}>{this.props.value}</div>
-      </div>
+      <>
+        <div style={pillarStyle}>
+          <div style={basicCSS.bodyFontCentered}>{this.props.name}</div>
+          <div style={css.pillarBarOutline}>
+            <div style={css.pillarBarFill(percentageFill)} />
+          </div>
+        </div>
+      </>
     );
   }
 }
