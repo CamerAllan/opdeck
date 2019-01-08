@@ -1,0 +1,22 @@
+{
+  "user1": {
+    "games": {
+      "game1": {
+        "turns": [{ "cardId": "card1" }, { "cardId": "card2" }]
+      },
+      "game2": {
+        "turns": [{ "cardId": "card1" }, { "cardId": "card2" }]
+      }
+    }
+  },
+  "user2": {
+    "games": {
+      "game1": {
+        "turns": [{ "cardId": "card1" }, { "cardId": "card2" }]
+      },
+      "game2": {
+        "turns": [{ "cardId": "card1" }, { "cardId": "card2" }]
+      }
+    }
+  }
+}

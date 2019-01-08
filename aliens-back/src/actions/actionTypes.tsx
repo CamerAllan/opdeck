@@ -5,7 +5,7 @@ export const LOGIN = "LOGIN";
 export const START_GAME = "START_GAME";
 
 // User data
-export const UPDATE_USER_FIELD = "UPDATE_USER_DETAIL";
+export const ADD_USER = "ADD_USER";
 
 // Game data
 export const DRAW_CARD = "DRAW_CARD";

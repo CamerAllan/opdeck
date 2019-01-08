@@ -14,8 +14,8 @@ class Page extends React.Component<IStore> {
         <div style={css.middle}>
           <div style={css.header} />
           <div style={css.body}>
-            {!this.props.userData ? (
-              <Login {...this.props.userData} />
+            {!this.props.interfaceData.gameInProgress ? (
+              <Login />
             ) : (
               <Game {...this.props.gameData} />
             )}

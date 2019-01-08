@@ -1,67 +1,67 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const Datastore = require("nedb");
 const logger = require("morgan");
-const TinyDB = require("tinydb");
 const app = express();
-
-test_db = new TinyDB("./test.db");
 
 app.use(express.static(path.join(__dirname, "build")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger("dev"));
-test_db.onReady = () => {
-  console.log("Database ready");
+
+const gameDB = new Datastore({ filename: "./gameData.db", autoload: true });
+const errCallback = (err, newDoc) => {
+  if (err) {
+    res.status(400);
+    return res.send();
+  }
 };
 
-app.post("/choose", function(req, res) {
-  test_db.appendItem(
+app.post("/addUser", (req, res) => {
+  const userDoc = { userId: req.body["userId"], games: {} };
+  gameDB.insert(userDoc, errCallback);
+  res.status(200);
+  return res.send();
+});
+
+app.post("/addGame", (req, res) => {
+  const stringToPush = "games." + req.body["gameId"];
+  gameDB.update(
+    { userId: req.body["userId"] },
+    { $set: { [stringToPush]: { turns: {} } } },
+    {},
+    errCallback
+  );
+  res.status(200);
+  return res.send();
+});
+
+app.post("/addTurn", (req, res) => {
+  const stringToPush =
+    "games." + req.body["gameId"] + ".turns." + req.body["turnNum"];
+
+  gameDB.update(
     {
-      [req.body["gameId"]]: { [req.body["cardId"]]: req.body["answer"] }
+      userId: req.body["userId"]
     },
-    function(err, key, value) {
+    {
+      $set: {
+        [stringToPush]: req.body
+      }
+    },
+    {},
+    (err, newDoc) => {
       if (err) {
         res.status(400);
         return res.send();
       }
-      console.log("[setInfo] " + key + " : " + value);
     }
   );
   res.status(200);
   return res.send();
 });
 
+function getString() {}
+
 app.listen(process.env.PORT || 8080);
-
-// // set info to DB
-// test_db.setInfo("title", "Test DB", function(err, key, value) {
-//   if (err) {
-//     console.log(err);
-//     return;
-//   }
-
-//   console.log("[setInfo] " + key + " : " + value);
-// });
-
-// // get info from DB
-// test_db.getInfo("title", function(err, key, value) {
-//   if (err) {
-//     console.log(err);
-//     return;
-//   }
-
-//   console.log("[getInfo] " + key + " : " + value);
-// });
-
-// // do other things below
-// test_db.forEach(function(err, item) {
-//   if (err) {
-//     console.log(err);
-//     return;
-//   }
-
-//   for (var key in item) {
-//     console.log(key + " : " + item[key]);
-//   }
-// });

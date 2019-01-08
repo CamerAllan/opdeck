@@ -1,26 +1,21 @@
 import * as React from "react";
 
-import * as basicCSS from "../styles/basicStyles";
+import { FormEvent } from "react";
+// import * as basicCSS from "../styles/basicStyles";
 // import * as css from "../styles/loginStyles";
 
 interface ILoginViewProps {
-  userId: string;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => any;
 }
 
 class LoginView extends React.Component<ILoginViewProps> {
   public render() {
     return (
       <div>
-        <div style={basicCSS.bodyFontCentered}>{this.props.userId}</div>
-        <div>
-          <form>
-            <label>
-              Name:
-              <input type="text" name="name" />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
+        <form onSubmit={this.props.onSubmit}>
+          <label htmlFor="username">Enter username</label>
+          <input id="username" name="username" type="text" />
+        </form>
       </div>
     );
   }

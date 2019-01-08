@@ -1,4 +1,4 @@
-import { combineReducers, Reducer } from "redux";
+import { Reducer } from "redux";
 import * as types from "../actions/actionTypes";
 
 import defaultStore from "../store/defaultStore";
@@ -7,92 +7,11 @@ import {
   IEffects,
   IGame,
   IGameData,
+  IInterfaceData,
   IPillars,
   IStore,
   IUserData
 } from "../store/store";
-
-function game(state = defaultStore.game): IGame {
-  return state;
-}
-function userData(state = defaultStore.userData, action: any): IUserData {
-  switch (action.type) {
-    case types.UPDATE_USER_FIELD:
-      return {
-        ...state,
-        [action.field]: action.value
-      };
-    default:
-      return state;
-  }
-}
-function gameData(state = defaultStore.gameData, action: any): IGameData {
-  switch (action.type) {
-    case types.START_GAME:
-      return {
-        ...state
-      };
-    case types.DRAW_CARD:
-      return {
-        ...state,
-        currentCard: state.playDeck[0]
-      };
-    case types.CHOOSE:
-      const newPillars: IPillars = { ...state.pillars };
-      const responses = state.cards[state.currentCard].contents.responses;
-      let newReserve: string[] = [...state.reserveDeck];
-      const newPlay: string[] = [];
-      if (action.choice) {
-        for (const pillar in responses.accept.effects) {
-          if (state.pillars.hasOwnProperty(pillar)) {
-            changePillar(newPillars, pillar, responses.accept.effects);
-          }
-        }
-        newReserve = addCards(
-          removeCards(newReserve, responses.accept.cardsRemoved),
-          responses.accept.cardsAdded
-        );
-      } else {
-        for (const pillar in responses.reject.effects) {
-          if (state.pillars.hasOwnProperty(pillar)) {
-            changePillar(newPillars, pillar, responses.reject.effects);
-          }
-        }
-        newReserve = addCards(
-          removeCards(newReserve, responses.reject.cardsRemoved),
-          responses.reject.cardsAdded
-        );
-      }
-
-      for (const potentialCard of newReserve) {
-        if (isPlayable(potentialCard, newPillars, state.cards)) {
-          newPlay.push(potentialCard);
-        }
-      }
-
-      shuffle(newPlay);
-
-      return {
-        ...state,
-        pillars: newPillars,
-        reserveDeck: newReserve,
-        playDeck: newPlay
-      };
-
-    default:
-      return state;
-  }
-}
-
-function interfaceData(state = defaultStore.interfaceData, action: any) {
-  switch (action.type) {
-    case types.UPDATE_DECISION_HOVER: {
-      return { ...state, hoverLoc: action.value };
-    }
-    default:
-      return state;
-  }
-}
 
 function shuffle(a: any[]) {
   let j;
@@ -153,10 +72,103 @@ function changePillar(newPillars: IPillars, pillar: string, effects: IEffects) {
   return newPillars;
 }
 
-const app: Reducer<IStore> = combineReducers({
-  userData,
-  gameData,
-  game,
-  interfaceData
-});
+function mainReducer(state = defaultStore, action: any): IStore {
+  console.log(action);
+
+  const interfaceData = state.interfaceData as IInterfaceData;
+  const gameData = state.gameData as IGameData;
+  const userData = state.userData as IUserData;
+  const game = state.game as IGame;
+
+  switch (action.type) {
+    // USER
+    case types.ADD_USER: {
+      return {
+        ...state,
+        userData: { ...userData, userId: action.payload.userId }
+      };
+    }
+
+    // GAME
+    case types.DRAW_CARD:
+      return {
+        ...state,
+        gameData: { ...gameData, currentCard: gameData.playDeck[0] }
+      };
+    case types.CHOOSE:
+      const newPillars: IPillars = { ...gameData.pillars };
+      const responses = gameData.cards[gameData.currentCard].contents.responses;
+      let newReserve: string[] = [...gameData.reserveDeck];
+      const newPlay: string[] = [];
+      if (action.choice) {
+        for (const pillar in responses.accept.effects) {
+          if (gameData.pillars.hasOwnProperty(pillar)) {
+            changePillar(newPillars, pillar, responses.accept.effects);
+          }
+        }
+        newReserve = addCards(
+          removeCards(newReserve, responses.accept.cardsRemoved),
+          responses.accept.cardsAdded
+        );
+      } else {
+        for (const pillar in responses.reject.effects) {
+          if (gameData.pillars.hasOwnProperty(pillar)) {
+            changePillar(newPillars, pillar, responses.reject.effects);
+          }
+        }
+        newReserve = addCards(
+          removeCards(newReserve, responses.reject.cardsRemoved),
+          responses.reject.cardsAdded
+        );
+      }
+
+      for (const potentialCard of newReserve) {
+        if (isPlayable(potentialCard, newPillars, gameData.cards)) {
+          newPlay.push(potentialCard);
+        }
+      }
+
+      shuffle(newPlay);
+
+      return {
+        ...state,
+        gameData: {
+          ...gameData,
+          pillars: newPillars,
+          reserveDeck: newReserve,
+          playDeck: newPlay,
+          turnNum: gameData.turnNum + 1
+        }
+      };
+
+    // INTERFACE
+    case types.UPDATE_DECISION_HOVER: {
+      return {
+        ...state,
+        interfaceData: { ...interfaceData, hoverLoc: action.value }
+      };
+    }
+    // OTHER
+    case types.START_GAME: {
+      return {
+        ...state,
+        gameData: {
+          ...game,
+          turnNum: 0,
+          gameId: "supergame",
+          settings: {}
+        },
+        interfaceData: {
+          ...interfaceData,
+          gameInProgress: true
+        }
+      };
+    }
+    default: {
+      return { ...state };
+    }
+  }
+}
+
+const app: Reducer<IStore> = mainReducer;
 export default app;

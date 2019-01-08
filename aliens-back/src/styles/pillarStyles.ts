@@ -32,7 +32,7 @@ export const pillarBarOutline = {
 
 export const pillarBarFill = (percentageFill: number) => {
   return {
-    backgroundColor: css.BEIGE1,
+    backgroundColor: css.GREY,
     height: `${percentageFill}%`
   } as CSSProperties;
 };

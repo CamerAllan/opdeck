@@ -1,20 +1,17 @@
 import * as React from "react";
 
+import { FormEvent } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import LoginView from "src/presentation/LoginView";
-import { login } from "../actions/actions";
-import { IStore } from "../store/store";
+import { addUser, startGame } from "../actions/actions";
 
 interface ILoginDispatchProps {
-  loginDispatch: (userId: string) => void;
+  addUserDispatch: (userData: any) => void;
+  startGameDispatch: (userData: any) => void;
 }
 
-interface ILoginStateProps {
-  userId: string;
-}
-
-type ILoginProps = ILoginDispatchProps & ILoginStateProps;
+type ILoginProps = ILoginDispatchProps;
 
 class Login extends React.Component<ILoginProps> {
   constructor(props: ILoginProps) {
@@ -22,19 +19,26 @@ class Login extends React.Component<ILoginProps> {
   }
 
   public render() {
-    return <LoginView {...this.props} />;
+    const onSubmit: (event: FormEvent<HTMLFormElement>) => void = event => {
+      event.preventDefault();
+      const fd: FormData = new FormData(event.target as any);
+      this.props.addUserDispatch(fd);
+      this.props.startGameDispatch(fd);
+    };
+    return <LoginView onSubmit={onSubmit} />;
   }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  loginDispatch: (userId: string) => dispatch(login(userId))
+  addUserDispatch: (userData: any) => dispatch(addUser(userData)),
+  startGameDispatch: (userData: any) => dispatch(startGame(userData))
 });
 
-const mapStateToProps = (state: IStore, ownProps: ILoginStateProps) => {
-  return { userId: ownProps.userId };
+const mapStateToProps = () => {
+  return;
 };
 
-export default connect<ILoginStateProps, ILoginDispatchProps>(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Login);

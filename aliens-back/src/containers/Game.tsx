@@ -39,7 +39,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
 const mapStateToProps = (state: IStore): IGameStateProps => {
   return {
-    gameData: state.gameData,
+    gameData: state.gameData as IGameData,
     hoverLoc: state.interfaceData.hoverLoc
   };
 };

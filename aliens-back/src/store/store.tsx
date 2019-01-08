@@ -1,16 +1,18 @@
 export interface IStore {
   userData: IUserData;
-  gameData: IGameData;
+  gameData?: IGameData;
   game: IGame;
   interfaceData: IInterfaceData;
 }
 
 export interface IInterfaceData {
   hoverLoc: HoverLoc;
+  gameInProgress: boolean;
 }
 
 export interface IGameData {
   gameId: string;
+  turnNum: number;
   pillars: IPillars;
   playDeck: string[];
   reserveDeck: string[];
@@ -32,7 +34,7 @@ export interface IPerson {
 }
 
 export interface ISettings {
-  deckSize: number;
+  deckSize?: number;
 }
 
 export interface ICard {
@@ -83,6 +85,7 @@ export interface IEffects {
 }
 
 export interface IUserData {
+  userId?: string;
   age?: number;
   sex?: Gender;
 }
