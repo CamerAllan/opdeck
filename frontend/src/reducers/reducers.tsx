@@ -148,6 +148,7 @@ function mainReducer(state = defaultStore, action: any): IStore {
         interfaceData: { ...interfaceData, hoverLoc: action.value }
       };
     }
+
     // OTHER
     case types.START_GAME: {
       return {

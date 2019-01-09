@@ -8,6 +8,7 @@ interface IPillarViewProps {
   min: number;
   max: number;
   description: string;
+  colour: string;
   effect: number;
 }
 
@@ -29,7 +30,7 @@ class PillarView extends React.Component<IPillarViewProps> {
       <>
         <div style={pillarStyle}>
           <div style={basicCSS.bodyFontCentered}>{this.props.name}</div>
-          <div style={css.pillarBarOutline}>
+          <div style={css.pillarBarOutline(this.props.colour)}>
             <div style={css.pillarBarFill(percentageFill)} />
           </div>
         </div>

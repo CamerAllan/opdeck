@@ -18,6 +18,8 @@ const errCallback = (err, newDoc) => {
   }
 };
 
+console.log("Backend live");
+
 app.post("/addUser", (req, res) => {
   const userDoc = { userId: req.body["userId"], games: {} };
   gameDB.insert(userDoc, errCallback);
@@ -26,7 +28,7 @@ app.post("/addUser", (req, res) => {
 });
 
 app.post("/addGame", (req, res) => {
-  const stringToPush = "games." + req.body["gameId"];
+  const stringToPush = `games.${req.body["gameId"]}`;
   gameDB.update(
     { userId: req.body["userId"] },
     { $set: { [stringToPush]: { turns: {} } } },
@@ -39,7 +41,7 @@ app.post("/addGame", (req, res) => {
 
 app.post("/addTurn", (req, res) => {
   const stringToPush =
-    "games." + req.body["gameId"] + ".turns." + req.body["turnNum"];
+    `games.${req.body["gameId"]}.turns.${req.body["turnNum"]}`;
 
   gameDB.update(
     {
@@ -62,6 +64,11 @@ app.post("/addTurn", (req, res) => {
   return res.send();
 });
 
-function getString() {}
+app.get("/all", (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  gameDB.find({}, (err, docs) => { res.status(200); res.send(JSON.stringify(docs)) });
+})
+
+function getString() { }
 
 app.listen(process.env.PORT || 8080);
