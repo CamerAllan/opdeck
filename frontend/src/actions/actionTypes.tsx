@@ -3,6 +3,9 @@ export const LOGIN = "LOGIN";
 
 // Game control
 export const START_GAME = "START_GAME";
+export const START_GAME_SUCCESS = "START_GAME_SUCCESS";
+export const START_GAME_STARTED = "START_GAME_STARTED";
+export const START_GAME_FAILURE = "START_GAME_FAILURE";
 
 // User data
 export const ADD_USER = "ADD_USER";

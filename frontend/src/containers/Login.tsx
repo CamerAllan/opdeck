@@ -2,9 +2,11 @@ import * as React from "react";
 
 import { FormEvent } from "react";
 import { connect } from "react-redux";
-import { Dispatch } from "redux";
+import { AnyAction, } from "redux";
 import LoginView from "src/presentation/LoginView";
 import { addUser, startGame } from "../actions/actions";
+import { ThunkDispatch } from "redux-thunk";
+import { IStore } from "src/store/store";
 
 interface ILoginDispatchProps {
   addUserDispatch: (userData: any) => void;
@@ -29,16 +31,12 @@ class Login extends React.Component<ILoginProps> {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, any, AnyAction>) => ({
   addUserDispatch: (userData: any) => dispatch(addUser(userData)),
   startGameDispatch: (userData: any) => dispatch(startGame(userData))
 });
 
-const mapStateToProps = () => {
-  return;
-};
-
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Login);

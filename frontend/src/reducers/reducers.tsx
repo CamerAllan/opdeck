@@ -150,13 +150,13 @@ function mainReducer(state = defaultStore, action: any): IStore {
     }
 
     // OTHER
-    case types.START_GAME: {
+    case types.START_GAME_SUCCESS: {
       return {
         ...state,
         gameData: {
           ...game,
           turnNum: 0,
-          gameId: "supergame",
+          gameId: action.payload.gameId,
           settings: {}
         },
         interfaceData: {

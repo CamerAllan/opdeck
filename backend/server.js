@@ -21,22 +21,34 @@ const errCallback = (err, newDoc) => {
 console.log("Backend live");
 
 app.post("/addUser", (req, res) => {
-  const userDoc = { userId: req.body["userId"], games: {} };
-  gameDB.insert(userDoc, errCallback);
-  res.status(200);
-  return res.send();
+  gameDB.find({ userId: req.body["userId"] }, (err, docs) => {
+    if (Object.keys(docs).length == 0) {
+      console.log("Creating new user " + req.body["userId"]);
+      const userDoc = { userId: req.body["userId"], games: {} };
+      gameDB.insert(userDoc, errCallback);
+      res.status(200);
+      return res.send();
+    }
+  });
 });
 
-app.post("/addGame", (req, res) => {
-  const stringToPush = `games.${req.body["gameId"]}`;
-  gameDB.update(
-    { userId: req.body["userId"] },
-    { $set: { [stringToPush]: { turns: {} } } },
-    {},
-    errCallback
-  );
-  res.status(200);
-  return res.send();
+app.get("/addGame/:user", (req, res) => {
+  gameDB.find({ userId: req.params.user }, (err, docs) => {
+    console.log(docs);
+    const newGameId = Object.keys(docs[0].games).length + 1;
+    const stringToPush = `games.${newGameId}`;
+    gameDB.update(
+      { userId: req.params["user"] },
+      { $set: { [stringToPush]: { turns: {} } } },
+      {},
+      errCallback
+    );
+    res.status(200);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({
+      newGameId
+    }))
+  });
 });
 
 app.post("/addTurn", (req, res) => {
@@ -69,6 +81,5 @@ app.get("/all", (req, res) => {
   gameDB.find({}, (err, docs) => { res.status(200); res.send(JSON.stringify(docs)) });
 })
 
-function getString() { }
 
 app.listen(process.env.PORT || 8080);
