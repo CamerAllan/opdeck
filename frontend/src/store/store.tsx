@@ -59,7 +59,7 @@ export interface IPillar {
   value: number;
   min: number;
   max: number;
-  description: string;
+  description?: string;
   colour: string;
 }
 

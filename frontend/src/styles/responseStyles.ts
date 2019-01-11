@@ -3,7 +3,7 @@ import * as css from "./basicStyles";
 
 export const responses = {
   display: "flex",
-  flexDirection: "column"
+  flexDirection: "column",
 } as CSSProperties;
 
 export const response = {

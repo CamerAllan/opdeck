@@ -9,7 +9,8 @@ import {
   IGameData,
   IResponses,
   IStore,
-  IUserData
+  IUserData,
+  IPillars
 } from "../store/store";
 
 interface IResponseStateProps {
@@ -18,6 +19,7 @@ interface IResponseStateProps {
   responses: IResponses;
   currentCard: string;
   turnNum: number;
+  pillars: IPillars;
   drawCard: () => void;
 }
 
@@ -34,7 +36,8 @@ class Response extends React.Component<IResponseProps> {
       userId: this.props.userId,
       gameId: this.props.gameId,
       cardId: this.props.currentCard,
-      turnNum: this.props.turnNum
+      turnNum: this.props.turnNum,
+      pillars: this.props.pillars
     };
     const agreeFunction = () => {
       const c: ITurnRequest = {
@@ -90,7 +93,8 @@ const mapStateToProps = (state: IStore, ownProps: IResponseStateProps) => {
     responses: gameData.cards[card].contents.responses,
     currentCard: card,
     turnNum: gameData.turnNum,
-    drawCard: ownProps.drawCard
+    drawCard: ownProps.drawCard,
+    pillars: gameData.pillars
   };
 };
 

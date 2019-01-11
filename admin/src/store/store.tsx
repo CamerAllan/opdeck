@@ -1,8 +1,7 @@
+import { ITurnRequest } from "./requestTypes";
+
 export interface IStore {
-  userData: IUserData;
-  gameData?: IGameData;
-  game: IGame;
-  interfaceData: IInterfaceData;
+  data: ITurnRequest[]
 }
 
 export interface IInterfaceData {
@@ -59,7 +58,8 @@ export interface IPillar {
   value: number;
   min: number;
   max: number;
-  description: string;
+  description?: string;
+  colour: string;
 }
 
 export interface ICardContents {

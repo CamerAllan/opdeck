@@ -3,6 +3,7 @@ import Card from "../containers/Card";
 import Pillars from "../containers/Pillars";
 import Response from "../containers/Response";
 import { HoverLoc, IGame } from "../store/store";
+import * as css from "../styles/basicStyles";
 
 interface IGameViewProps {
   gameData: IGame;
@@ -28,15 +29,40 @@ class GameView extends React.Component<IGameViewProps> {
         break;
       }
     }
-    return (
-      <div>
+    return (<div style={{
+      paddingTop: "20px",
+      paddingLeft: "20px",
+      paddingRight: "20px",
+    }}>
+      <div style={{
+        border: "solid",
+        borderRadius: "5px",
+        borderWidth: "5",
+        borderColor: css.DARK2,
+        paddingLeft: "20px",
+        paddingRight: "20px",
+        paddingBottom: "20px",
+        marginBottom: "20px"
+      }}>
         <Pillars
           pillars={this.props.gameData.pillars}
           effectWeightings={effectWeightings}
         />
+      </div>
+      <div style={{
+        border: "solid",
+        borderRadius: "5px",
+        borderWidth: "5",
+        borderColor: css.DARK2,
+        paddingLeft: "20px",
+        paddingRight: "20px",
+        marginBottom: "20px"
+      }}>
+
         <Card {...card} />
         <Response {...this.props} />
       </div>
+    </div>
     );
   }
 }

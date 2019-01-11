@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { IStore } from "src/store/store";
 import * as css from "src/styles/TopLevelStyles";
+import DataVis from "src/containers/DataVis";
 
 class Page extends React.Component<IStore> {
   public render() {
@@ -12,7 +13,7 @@ class Page extends React.Component<IStore> {
         <div style={css.middle}>
           <div style={css.header} />
           <div style={css.body}>
-            {/* CONTENT */}
+            <DataVis />
           </div>
           <div style={css.footer} />
         </div>

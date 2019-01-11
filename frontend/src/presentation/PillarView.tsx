@@ -7,7 +7,7 @@ interface IPillarViewProps {
   value: number;
   min: number;
   max: number;
-  description: string;
+  description?: string;
   colour: string;
   effect: number;
 }

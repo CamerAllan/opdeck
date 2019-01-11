@@ -13,6 +13,7 @@ import {
   IUserData
 } from "../store/store";
 
+// cheeky nondeterminism will break redux time travel between games
 function shuffle(a: any[]) {
   let j;
   let x;
@@ -73,8 +74,6 @@ function changePillar(newPillars: IPillars, pillar: string, effects: IEffects) {
 }
 
 function mainReducer(state = defaultStore, action: any): IStore {
-  console.log(action);
-
   const interfaceData = state.interfaceData as IInterfaceData;
   const gameData = state.gameData as IGameData;
   const userData = state.userData as IUserData;

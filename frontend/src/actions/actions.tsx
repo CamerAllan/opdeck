@@ -40,9 +40,7 @@ export function startGame(userData: any) {
       },
     }).then((response) =>
       response.json().then(data => {
-        console.log(data);
         const id: number = data ? data.newGameId : 999
-        console.log(id);
         dispatch(startGameSuccess(id));
       }).catch((reason) => {
         dispatch(startGameFailure(reason));
