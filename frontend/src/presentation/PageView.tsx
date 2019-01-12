@@ -17,8 +17,8 @@ class Page extends React.Component<IStore> {
             {!this.props.interfaceData.gameInProgress ? (
               <Login />
             ) : (
-              <Game {...this.props.gameData} />
-            )}
+                <Game {...this.props.gameData} />
+              )}
           </div>
           <div style={css.footer} />
         </div>

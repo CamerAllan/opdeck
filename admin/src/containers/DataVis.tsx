@@ -34,7 +34,6 @@ class DataVis extends React.Component<IDataVisProps> {
         const cardStats = {}
 
         if (data) {
-            console.log(data);
 
             for (const user of data) {
                 for (const gameKey in user.games) {

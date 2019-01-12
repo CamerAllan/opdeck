@@ -59,7 +59,7 @@ class GameView extends React.Component<IGameViewProps> {
         marginBottom: "20px"
       }}>
 
-        <Card {...card} />
+        <Card contents={card.contents} pillars={this.props.gameData.pillars} />
         <Response {...this.props} />
       </div>
     </div>

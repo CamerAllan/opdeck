@@ -8,7 +8,6 @@ interface IDataVisStateProps {
 
 class DataVisView extends React.Component<IDataVisStateProps> {
     public render() {
-        console.log(this.props.data);
         return (<VictoryChart>
             <VictoryAxis
                 style={{

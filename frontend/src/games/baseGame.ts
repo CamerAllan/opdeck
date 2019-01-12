@@ -10,11 +10,11 @@ export default {
       description: "A measure of the strength of your army",
       colour: "#f45342"
     },
-    Religion: {
+    Science: {
       value: 0,
       min: 0,
       max: 10,
-      description: "A measure of the religiosity of the people",
+      description: "A measure of the your scientific advancement",
       colour: "#fcff75"
     },
     Popularity: {
@@ -39,11 +39,11 @@ export default {
     "recruitment",
     "raid",
     "speech",
-    "churchSpire",
+    "labBroke",
     "electionInterfere",
     "renewables",
     "goodDeed",
-    "churchBribe",
+    "scienceBribe",
     "loanOffer",
     "recruitmentDrive",
     "warStart"
@@ -60,13 +60,13 @@ export default {
             text: "I rule with an iron fist",
             cardsAdded: [],
             cardsRemoved: ["goodMorning"],
-            effects: { Army: 6, Money: 5, Religion: 5, Popularity: 4 }
+            effects: { Army: 6, Money: 5, Science: 5, Popularity: 4 }
           },
           reject: {
             text: "I am a benevolent leader",
             cardsAdded: [],
             cardsRemoved: ["goodMorning"],
-            effects: { Army: 4, Money: 5, Religion: 5, Popularity: 6 }
+            effects: { Army: 4, Money: 5, Science: 5, Popularity: 6 }
           }
         }
       }
@@ -140,18 +140,18 @@ export default {
         }
       }
     },
-    churchBribe: {
+    scienceBribe: {
       weightings: {},
       contents: {
         name: "A Bribe?",
-        text: "The church want more power, and they're willing to pay for it",
+        text: "The scientists want more power, and they're willing to pay for it",
         responses: {
           accept: {
             text: "But of course",
             cardsAdded: [],
             cardsRemoved: [],
             effects: {
-              Religion: 2,
+              Science: 2,
               Money: 2
             }
           },
@@ -159,23 +159,23 @@ export default {
             text: "I refuse",
             cardsAdded: [],
             cardsRemoved: [],
-            effects: { Religion: -1 }
+            effects: { Science: -1 }
           }
         }
       }
     },
-    churchSpire: {
+    labBroke: {
       weightings: {},
       contents: {
-        name: "Church Spire",
-        text: "The spire of the church was destroyed in a tornado",
+        name: "Laboratory",
+        text: "A highly advanced laboratory was destroyed in a tornado",
         responses: {
           accept: {
             text: "Pay to fix it",
             cardsAdded: [],
             cardsRemoved: [],
             effects: {
-              Religion: 1,
+              Science: 1,
               Money: -1
             }
           },
@@ -183,7 +183,7 @@ export default {
             text: "They'll manage",
             cardsAdded: [],
             cardsRemoved: [],
-            effects: { Religion: -1 }
+            effects: { Science: -1 }
           }
         }
       }
