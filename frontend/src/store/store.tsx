@@ -1,7 +1,6 @@
 export interface IStore {
   userData: IUserData;
   gameData?: IGameData;
-  game: IGame;
   interfaceData: IInterfaceData;
 }
 
@@ -11,17 +10,14 @@ export interface IInterfaceData {
 }
 
 export interface IGameData {
+  game: IGame;
   gameId: string;
   turnNum: number;
-  pillars: IPillars;
-  playDeck: string[];
-  reserveDeck: string[];
-  cards: ICards;
-  currentCard: string;
   settings: ISettings;
 }
 
 export interface IGame {
+  name: string;
   pillars: IPillars;
   playDeck: string[];
   reserveDeck: string[];

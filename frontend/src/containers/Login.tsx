@@ -6,11 +6,11 @@ import { AnyAction, } from "redux";
 import LoginView from "src/presentation/LoginView";
 import { addUser, startGame } from "../actions/actions";
 import { ThunkDispatch } from "redux-thunk";
-import { IStore } from "src/store/store";
+import { IStore, IUserData } from "src/store/store";
 
 interface ILoginDispatchProps {
-  addUserDispatch: (userData: any) => void;
-  startGameDispatch: (userData: any) => void;
+  addUserDispatch: (userData: IUserData) => void;
+  startGameDispatch: (userData: IUserData, gameName: string) => void;
 }
 
 type ILoginProps = ILoginDispatchProps;
@@ -24,16 +24,19 @@ class Login extends React.Component<ILoginProps> {
     const onSubmit: (event: FormEvent<HTMLFormElement>) => void = event => {
       event.preventDefault();
       const fd: FormData = new FormData(event.target as any);
-      this.props.addUserDispatch(fd);
-      this.props.startGameDispatch(fd);
+      const userId = fd.get("username");
+      if (typeof userId === "string") {
+        this.props.addUserDispatch({ userId });
+        this.props.startGameDispatch({ userId }, "alienTest");
+      }
     };
     return <LoginView onSubmit={onSubmit} />;
   }
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, any, AnyAction>) => ({
-  addUserDispatch: (userData: any) => dispatch(addUser(userData)),
-  startGameDispatch: (userData: any) => dispatch(startGame(userData))
+  addUserDispatch: (userData: IUserData) => dispatch(addUser(userData)),
+  startGameDispatch: (userData: IUserData, gameName: string) => dispatch(startGame(userData, gameName))
 });
 
 export default connect(

@@ -1,6 +1,5 @@
-import { IGame } from "../store/store";
-
-export default {
+exports.game = {
+  id: "alienTest",
   currentCard: "goodMorning",
   pillars: {
     Army: {
@@ -541,4 +540,4 @@ export default {
       }
     }
   }
-} as IGame;
+};

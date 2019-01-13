@@ -8,17 +8,20 @@ import * as css from "src/styles/TopLevelStyles";
 
 class Page extends React.Component<IStore> {
   public render() {
+
+    let page = <Login />;
+
+    if (this.props.interfaceData.gameInProgress) {
+      page = <Game {...this.props.gameData} />
+    }
+
     return (
       <div style={css.top}>
         <div style={css.leftMargin} />
         <div style={css.middle}>
           <div style={css.header} />
           <div style={css.body}>
-            {!this.props.interfaceData.gameInProgress ? (
-              <Login />
-            ) : (
-                <Game {...this.props.gameData} />
-              )}
+            {page}
           </div>
           <div style={css.footer} />
         </div>

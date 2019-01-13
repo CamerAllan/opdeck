@@ -2,18 +2,18 @@ import * as React from "react";
 import Card from "../containers/Card";
 import Pillars from "../containers/Pillars";
 import Response from "../containers/Response";
-import { HoverLoc, IGame } from "../store/store";
+import { HoverLoc, IGameData } from "../store/store";
 import * as css from "../styles/basicStyles";
 
 interface IGameViewProps {
-  gameData: IGame;
+  gameData: IGameData;
   drawCard: () => void;
   hoverLoc: HoverLoc;
 }
 
 class GameView extends React.Component<IGameViewProps> {
   public render() {
-    const card = this.props.gameData.cards[this.props.gameData.currentCard];
+    const card = this.props.gameData.game.cards[this.props.gameData.game.currentCard];
     let effectWeightings;
     switch (this.props.hoverLoc) {
       case HoverLoc.ACCEPT: {
@@ -45,7 +45,7 @@ class GameView extends React.Component<IGameViewProps> {
         marginBottom: "20px"
       }}>
         <Pillars
-          pillars={this.props.gameData.pillars}
+          pillars={this.props.gameData.game.pillars}
           effectWeightings={effectWeightings}
         />
       </div>
@@ -59,7 +59,7 @@ class GameView extends React.Component<IGameViewProps> {
         marginBottom: "20px"
       }}>
 
-        <Card contents={card.contents} pillars={this.props.gameData.pillars} />
+        <Card contents={card.contents} pillars={this.props.gameData.game.pillars} />
         <Response {...this.props} />
       </div>
     </div>

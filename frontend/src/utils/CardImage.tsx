@@ -13,7 +13,6 @@ export interface ICardImageProps {
 }
 
 const CardImage = (props: ICardImageProps) => {
-    console.log(props.name);
     switch (props.name) {
         case "Money":
             return <Money {...props} />;

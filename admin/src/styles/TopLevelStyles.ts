@@ -2,19 +2,9 @@ import { CSSProperties } from "react";
 import * as css from "./basicStyles";
 
 export const top = {
-  background: css.GREY,
+  background: css.LIGHT,
   display: "flex",
   flexDirection: "row"
-} as CSSProperties;
-
-export const leftMargin = {
-  background: css.SILVER,
-  flex: "1 1"
-} as CSSProperties;
-
-export const rightMargin = {
-  background: css.SILVER,
-  flex: "1 1"
 } as CSSProperties;
 
 export const middle = {

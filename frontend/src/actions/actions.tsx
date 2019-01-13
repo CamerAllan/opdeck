@@ -2,7 +2,7 @@ import { Action } from "redux";
 import { ThunkDispatch } from 'redux-thunk';
 import * as types from "./actionTypes";
 import * as R from "../store/requestTypes";
-import { HoverLoc, IStore } from "../store/store";
+import { HoverLoc, IStore, IGame, IUserData } from "../store/store";
 
 
 // Game
@@ -23,16 +23,11 @@ export function takeTurn(choice: R.ITurnRequest) {
 }
 
 // Game control
-export function startGame(userData: any) {
+export function startGame(userData: IUserData, gameName: string) {
   return async (dispatch: ThunkDispatch<IStore, void, Action>) => {
     dispatch(startGameStarted);
 
-    const req = { userId: "NO_USER_ID" };
-    for (const key of userData.entries()) {
-      req.userId = key[1];
-    }
-
-    fetch(`/addGame/${req.userId}`, {
+    fetch(`/addGame/user/${userData.userId}/game/${gameName}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -41,17 +36,19 @@ export function startGame(userData: any) {
     }).then((response) =>
       response.json().then(data => {
         const id: number = data ? data.newGameId : 999
-        dispatch(startGameSuccess(id));
+        const gameDef: IGame = data ? data.newGameDef : "err";
+        dispatch(startGameSuccess(id, gameDef));
       }).catch((reason) => {
         dispatch(startGameFailure(reason));
       }));
   }
 }
 
-const startGameSuccess = (gameId: number) => ({
+const startGameSuccess = (gameId: number, gameDef: IGame) => ({
   type: types.START_GAME_SUCCESS,
   payload: {
-    gameId
+    gameId,
+    gameDef
   }
 });
 
@@ -67,11 +64,10 @@ const startGameFailure = (error: any) => ({
 });
 
 // User
-export function addUser(userData: any) {
+export function addUser(userData: IUserData) {
   const payload = { userId: "NO_USER_ID" };
-  for (const key of userData.entries()) {
-    payload.userId = key[1];
-  }
+
+  payload.userId = userData.userId ? userData.userId : "Bad user ID";
 
   fetch("/addUser", {
     method: "POST",

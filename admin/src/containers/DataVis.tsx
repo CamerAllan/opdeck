@@ -14,7 +14,8 @@ interface IDataVisDispatchProps {
 }
 
 interface IDataVisStateProps {
-    data: any
+    data: any;
+    cardStats: any
 }
 
 type IDataVisProps = IDataVisDispatchProps & IDataVisStateProps;
@@ -30,51 +31,8 @@ class DataVis extends React.Component<IDataVisProps> {
 
     public render() {
 
-        const data = this.props.data;
-        const cardStats = {}
-
-        if (data) {
-
-            for (const user of data) {
-                for (const gameKey in user.games) {
-                    if (user.games.hasOwnProperty(gameKey)) {
-                        const game = user.games[gameKey];
-                        for (const turnKey in game.turns) {
-                            if (game.turns.hasOwnProperty(turnKey)) {
-                                const turn = game.turns[turnKey];
-                                const card = turn.cardId;
-
-                                if (!cardStats[card]) {
-                                    cardStats[card] = { accept: 0, reject: 0, total: 0, balance: 0 }
-                                }
-
-                                if (turn.answer) {
-                                    cardStats[card].accept += 1;
-
-                                } else {
-                                    cardStats[card].reject += 1;
-                                }
-
-                                cardStats[card].total += 1;
-                                cardStats[card].balance = (cardStats[card].accept - cardStats[card].reject) / cardStats[card].total;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        const filteredStats = [];
-
-        for (const key in cardStats) {
-            if (cardStats.hasOwnProperty(key)) {
-                const card = cardStats[key];
-                filteredStats.push({ id: key, balance: card.balance })
-            }
-        }
-
         return (
-            <DataVisView data={filteredStats} />
+            <DataVisView data={this.props.cardStats} />
         );
     }
 }
@@ -83,8 +41,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, any, AnyAction>) => 
     getAllDataDispatch: () => dispatch(getAllData())
 });
 
-const mapStateToProps = (state: IStore): IDataVisStateProps => {
-    return { data: state.data };
+const mapStateToProps = (state: IStore, ownProps: IDataVisStateProps): IDataVisStateProps => {
+    return { data: state.data, cardStats: ownProps.cardStats };
 };
 
 export default connect<IDataVisStateProps, IDataVisDispatchProps>(

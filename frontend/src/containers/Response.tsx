@@ -86,15 +86,15 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 const mapStateToProps = (state: IStore, ownProps: IResponseStateProps) => {
   const gameData: IGameData = { ...state.gameData } as IGameData;
   const userData: IUserData = { ...state.userData } as IUserData;
-  const card: string = gameData.currentCard;
+  const card: string = gameData.game.currentCard;
   return {
     userId: userData.userId as string,
     gameId: gameData.gameId,
-    responses: gameData.cards[card].contents.responses,
+    responses: gameData.game.cards[card].contents.responses,
     currentCard: card,
     turnNum: gameData.turnNum,
     drawCard: ownProps.drawCard,
-    pillars: gameData.pillars
+    pillars: gameData.game.pillars
   };
 };
 

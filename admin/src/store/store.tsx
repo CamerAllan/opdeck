@@ -1,7 +1,8 @@
 import { ITurnRequest } from "./requestTypes";
 
 export interface IStore {
-  data: ITurnRequest[]
+  data: ITurnRequest[];
+  selectedData: ITurnRequest[];
 }
 
 export interface IInterfaceData {

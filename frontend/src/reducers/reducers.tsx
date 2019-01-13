@@ -77,7 +77,7 @@ function mainReducer(state = defaultStore, action: any): IStore {
   const interfaceData = state.interfaceData as IInterfaceData;
   const gameData = state.gameData as IGameData;
   const userData = state.userData as IUserData;
-  const game = state.game as IGame;
+  const game = (state.gameData ? state.gameData.game : null) as IGame;
 
   switch (action.type) {
     // USER
@@ -92,16 +92,18 @@ function mainReducer(state = defaultStore, action: any): IStore {
     case types.DRAW_CARD:
       return {
         ...state,
-        gameData: { ...gameData, currentCard: gameData.playDeck[0] }
+        gameData: {
+          ...gameData, game: { ...game, currentCard: game.playDeck[0] }
+        }
       };
     case types.CHOOSE:
-      const newPillars: IPillars = { ...gameData.pillars };
-      const responses = gameData.cards[gameData.currentCard].contents.responses;
-      let newReserve: string[] = [...gameData.reserveDeck];
+      const newPillars: IPillars = { ...game.pillars };
+      const responses = game.cards[game.currentCard].contents.responses;
+      let newReserve: string[] = [...game.reserveDeck];
       const newPlay: string[] = [];
       if (action.choice) {
         for (const pillar in responses.accept.effects) {
-          if (gameData.pillars.hasOwnProperty(pillar)) {
+          if (game.pillars.hasOwnProperty(pillar)) {
             changePillar(newPillars, pillar, responses.accept.effects);
           }
         }
@@ -111,7 +113,7 @@ function mainReducer(state = defaultStore, action: any): IStore {
         );
       } else {
         for (const pillar in responses.reject.effects) {
-          if (gameData.pillars.hasOwnProperty(pillar)) {
+          if (game.pillars.hasOwnProperty(pillar)) {
             changePillar(newPillars, pillar, responses.reject.effects);
           }
         }
@@ -122,7 +124,7 @@ function mainReducer(state = defaultStore, action: any): IStore {
       }
 
       for (const potentialCard of newReserve) {
-        if (isPlayable(potentialCard, newPillars, gameData.cards)) {
+        if (isPlayable(potentialCard, newPillars, game.cards)) {
           newPlay.push(potentialCard);
         }
       }
@@ -133,10 +135,13 @@ function mainReducer(state = defaultStore, action: any): IStore {
         ...state,
         gameData: {
           ...gameData,
-          pillars: newPillars,
-          reserveDeck: newReserve,
-          playDeck: newPlay,
-          turnNum: gameData.turnNum + 1
+          turnNum: gameData.turnNum + 1,
+          game: {
+            ...game,
+            pillars: newPillars,
+            reserveDeck: newReserve,
+            playDeck: newPlay,
+          }
         }
       };
 
@@ -153,7 +158,7 @@ function mainReducer(state = defaultStore, action: any): IStore {
       return {
         ...state,
         gameData: {
-          ...game,
+          game: { ...action.payload.gameDef },
           turnNum: 0,
           gameId: action.payload.gameId,
           settings: {}
