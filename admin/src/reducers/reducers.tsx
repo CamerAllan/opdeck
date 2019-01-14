@@ -13,6 +13,29 @@ function mainReducer(state = defaultStore, action: any): IStore {
                 data: action.payload.data,
             }
         }
+        case types.SELECT_CARD: {
+            return {
+                ...state,
+                selectedData: {
+                    ...state.selectedData,
+                    cards: [
+                        ...state.selectedData.cards,
+                        action.payload.cardId
+                    ]
+                }
+            }
+        }
+        case types.DESELECT_CARD: {
+            return {
+                ...state,
+                selectedData: {
+                    ...state.selectedData,
+                    cards: [
+                        ...state.selectedData.cards.filter(item => item !== action.payload.cardId),
+                    ]
+                }
+            }
+        }
         default: return { ...state }
     }
 }

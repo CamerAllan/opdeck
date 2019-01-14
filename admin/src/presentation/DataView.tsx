@@ -7,6 +7,7 @@ interface IDataStateProps {
     data: any;
     selectedData: any
     cardStats: any
+    selectedCardStats: any
 }
 
 class DataView extends React.Component<IDataStateProps> {
@@ -17,7 +18,7 @@ class DataView extends React.Component<IDataStateProps> {
                     <DataSelect {...this.props} />
                 </div>
                 <div style={css.dataVisCont}>
-                    <DataVis {...this.props} />
+                    <DataVis cardStats={this.props.selectedCardStats} />
                 </div>
             </div>);
     }

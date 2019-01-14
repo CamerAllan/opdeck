@@ -3,7 +3,7 @@ import { IStore } from "./store";
 
 const defaultStore: IStore = {
   data: [],
-  selectedData: []
+  selectedData: { cards: [], users: [] }
 };
 
 export default defaultStore;

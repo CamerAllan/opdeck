@@ -14,7 +14,6 @@ interface IDataVisDispatchProps {
 }
 
 interface IDataVisStateProps {
-    data: any;
     cardStats: any
 }
 
@@ -41,11 +40,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, any, AnyAction>) => 
     getAllDataDispatch: () => dispatch(getAllData())
 });
 
-const mapStateToProps = (state: IStore, ownProps: IDataVisStateProps): IDataVisStateProps => {
-    return { data: state.data, cardStats: ownProps.cardStats };
-};
-
 export default connect<IDataVisStateProps, IDataVisDispatchProps>(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(DataVis);

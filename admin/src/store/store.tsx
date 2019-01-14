@@ -2,8 +2,16 @@ import { ITurnRequest } from "./requestTypes";
 
 export interface IStore {
   data: ITurnRequest[];
-  selectedData: ITurnRequest[];
+  selectedData: ISelectedData;
 }
+
+export interface ISelectedData {
+  cards: string[];
+  users: string[];
+}
+
+
+// Frontend
 
 export interface IInterfaceData {
   hoverLoc: HoverLoc;

@@ -40,3 +40,17 @@ const getAllDataFailure = (error: any) => ({
         error
     }
 });
+
+export const selectCard = (cardId: string) => ({
+    type: types.SELECT_CARD,
+    payload: {
+        cardId
+    }
+})
+
+export const deselectCard = (cardId: string) => ({
+    type: types.DESELECT_CARD,
+    payload: {
+        cardId
+    }
+})

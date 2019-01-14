@@ -66,16 +66,19 @@ class Data extends React.Component<IDataProps> {
         }
 
         const filteredStats = [];
+        const selectedCardStats = [];
 
         for (const key in cardStats) {
             if (cardStats.hasOwnProperty(key)) {
                 const card = cardStats[key];
                 filteredStats.push({ id: key, ...card })
+                if (this.props.selectedData.cards.indexOf(key) > -1) {
+                    selectedCardStats.push({ id: key, ...card });
+                }
             }
         }
-
         return (
-            <DataView data={this.props.data} selectedData={this.props.selectedData} cardStats={filteredStats} />
+            <DataView data={this.props.data} selectedData={this.props.selectedData} cardStats={filteredStats} selectedCardStats={selectedCardStats} />
         );
     }
 }
