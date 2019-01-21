@@ -3,10 +3,12 @@ import { ITurnRequest } from "./requestTypes";
 export interface IStore {
   data: ITurnRequest[];
   selectedData: ISelectedData;
+  game?: IGame;
 }
 
 export interface ISelectedData {
   cards: string[];
+  filter: IWeightings;
   users: string[];
 }
 

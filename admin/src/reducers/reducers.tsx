@@ -12,6 +12,12 @@ function mainReducer(state = defaultStore, action: any): IStore {
         data: action.payload.data
       };
     }
+    case types.GET_GAME_DATA_SUCCESS: {
+      return {
+        ...state,
+        game: action.payload.game
+      };
+    }
     case types.SELECT_CARD: {
       return {
         ...state,
@@ -20,6 +26,18 @@ function mainReducer(state = defaultStore, action: any): IStore {
           cards: action.payload.cardIds
         }
       };
+    }
+    case types.FILTER_PILLARS: {
+      return {
+        ...state,
+        selectedData: {
+          ...state.selectedData,
+          filter: {
+            ...state.selectedData.filter,
+            ...action.payload.filter
+          }
+        }
+      }
     }
     default:
       return { ...state };

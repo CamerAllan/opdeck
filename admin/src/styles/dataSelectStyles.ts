@@ -16,3 +16,11 @@ export const selectable = {
     height: "25px"
 } as CSSProperties;
 
+export const limitCont = {
+    display: "flex",
+    flexFlow: "row"
+} as CSSProperties
+
+export const limit = {
+    flex: "1 0 auto"
+} as CSSProperties

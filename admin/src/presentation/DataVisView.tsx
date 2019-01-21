@@ -25,6 +25,7 @@ function balanceChart(data: any, xName: string, yName: string) {
 
   return (
     <V.FlexibleWidthXYPlot
+      animation={true}
       margin={{ left: 120, right: 50, top: 50, bottom: 50 }}
       yType={"ordinal"}
       getX={getX}
@@ -46,6 +47,7 @@ function totalChart(data: any, xName: string, yName: string) {
 
   return (
     <V.FlexibleWidthXYPlot
+      animation={true}
       margin={{ left: 50, right: 50, top: 50, bottom: 120 }}
       xType={"ordinal"}
       getX={getX}

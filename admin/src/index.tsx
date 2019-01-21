@@ -3,8 +3,9 @@ import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, compose, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-
-import "./index.css";
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+// import "./index.css";
 import Page from "./presentation/PageView";
 import App from "./reducers/reducers";
 import registerServiceWorker from "./registerServiceWorker";

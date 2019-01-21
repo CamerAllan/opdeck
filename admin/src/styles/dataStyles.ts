@@ -10,5 +10,5 @@ export const dataSelectCont = {
 } as CSSProperties;
 
 export const dataVisCont = {
-  flex: "2 0"
+  flex: "3 0"
 } as CSSProperties;

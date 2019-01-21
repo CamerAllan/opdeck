@@ -23,7 +23,7 @@ const errCallback = (err, newDoc) => {
 // Load any new locally defined games
 // TODO: validate on load
 var normalizedPath = require("path").join(__dirname, "games");
-fs.readdirSync(normalizedPath).forEach(function(file) {
+fs.readdirSync(normalizedPath).forEach(function (file) {
   const game = require("./games/" + file).game;
   gameData.update(
     { id: game.id },
@@ -112,7 +112,7 @@ app.get("/addGame/user/:user/game/:gameName", (req, res) => {
 app.post("/addTurn", (req, res) => {
   const stringToPush = `games.${req.body["gameId"]}.turns.${
     req.body["turnNum"]
-  }`;
+    }`;
 
   userData.update(
     {
@@ -164,12 +164,12 @@ app.get("/games", (req, res) => {
 app.get("/game/:gameId", (req, res) => {
   res.setHeader("Content-Type", "application/json");
   gameData.find({ id: req.params.gameId }, (err, docs) => {
-    if (err || docs.length == 0) {
+    if (err || docs.length != 1) {
       res.status(404);
       res.send(JSON.stringify(err));
     } else {
       res.status(200);
-      res.send(JSON.stringify(docs));
+      res.send(JSON.stringify(docs[0]));
     }
   });
 });

@@ -2,27 +2,26 @@
 import * as types from "./actionTypes";
 import { ThunkDispatch } from "redux-thunk";
 import { Action } from "redux";
-import { IStore } from "src/store/store";
+import { IStore, IWeightings, IGame } from "src/store/store";
 
 export function getAllData() {
   return async (dispatch: ThunkDispatch<IStore, void, Action>) => {
     dispatch(getAllDataStarted);
-    fetch(`/all`, {
+    const response = await fetch(`/all`, {
       method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       }
-    }).then(response => {
-      response
-        .json()
-        .then(data => {
-          dispatch(getAllDataSuccess(data));
-        })
-        .catch(reason => {
-          dispatch(getAllDataFailure(reason));
-        });
-    });
+    })
+    response
+      .json()
+      .then(data => {
+        dispatch(getAllDataSuccess(data));
+      })
+      .catch(reason => {
+        dispatch(getAllDataFailure(reason));
+      });
   };
 }
 
@@ -44,9 +43,56 @@ const getAllDataFailure = (error: any) => ({
   }
 });
 
-export const selectCard = (cardIds: string[]) => ({
+export function getGameData(gameName: string) {
+  return async (dispatch: ThunkDispatch<IStore, void, Action>) => {
+    dispatch(getGameDataStarted);
+    const response = await fetch(`/game/${gameName}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+    response
+      .json()
+      .then(game => {
+        dispatch(getGameDataSuccess(game));
+      })
+      .catch(reason => {
+        dispatch(getGameDataFailure(reason));
+      });
+  };
+}
+
+const getGameDataSuccess = (game: IGame) => ({
+  type: types.GET_GAME_DATA_SUCCESS,
+  payload: {
+    game
+  }
+});
+
+const getGameDataStarted = () => ({
+  type: types.GET_GAME_DATA_STARTED
+});
+
+const getGameDataFailure = (error: any) => ({
+  type: types.GET_GAME_DATA_FAILED,
+  payload: {
+    error
+  }
+});
+
+
+export const selectCards = (cardIds: string[]) => ({
   type: types.SELECT_CARD,
   payload: {
     cardIds
   }
 });
+
+export const filterPillars = (filter: IWeightings) => ({
+  type: types.FILTER_PILLARS,
+  payload: {
+    filter
+  }
+})

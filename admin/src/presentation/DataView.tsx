@@ -2,8 +2,10 @@ import * as React from "react";
 import DataSelect from "../containers/DataSelect";
 import DataVis from "../containers/DataVis";
 import * as css from "../styles/dataStyles";
+import { IGame } from "src/store/store";
 
 interface IDataStateProps {
+    game?: IGame;
     data: any;
     selectedData: any
     cardStats: any
