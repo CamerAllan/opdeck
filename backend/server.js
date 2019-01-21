@@ -23,7 +23,7 @@ const errCallback = (err, newDoc) => {
 // Load any new locally defined games
 // TODO: validate on load
 var normalizedPath = require("path").join(__dirname, "games");
-fs.readdirSync(normalizedPath).forEach(function (file) {
+fs.readdirSync(normalizedPath).forEach(function(file) {
   const game = require("./games/" + file).game;
   gameData.update(
     { id: game.id },
@@ -55,10 +55,11 @@ app.post("/addUser", (req, res) => {
 });
 
 app.get("/addGame/user/:user/game/:gameName", (req, res) => {
-  const response = {}
+  const response = {};
   const userFind = new Promise((resolve, reject) => {
     userData.find({ userId: req.params.user }, (err, docs) => {
-      const newGameId = Object.keys(docs[0].games).length + 1;
+      const newGameId =
+        docs.length == 0 ? 0 : Object.keys(docs[0].games).length + 1;
       const stringToPush = `games.${newGameId}`;
       userData.update(
         { userId: req.params["user"] },
@@ -67,8 +68,12 @@ app.get("/addGame/user/:user/game/:gameName", (req, res) => {
         errCallback
       );
       resolve(newGameId);
+    });
+  })
+    .then(val => {
+      response.newGameId = val;
     })
-  }).then((val) => { response.newGameId = val }).catch((reason) => console.log(reason));
+    .catch(reason => console.log(reason));
 
   const gameFind = new Promise((resolve, reject) => {
     gameData.find({ id: req.params.gameName }, (err, docs) => {
@@ -80,26 +85,34 @@ app.get("/addGame/user/:user/game/:gameName", (req, res) => {
       }
       if (docs.length > 1) {
         reject("Game definition id duplicate detected");
-      }
-      else {
+      } else {
         resolve(docs[0]);
       }
     });
-  }).then((val) => { response.newGameDef = val }).catch((reason) => console.log(reason));;
+  })
+    .then(val => {
+      response.newGameDef = val;
+    })
+    .catch(reason => console.log(reason));
 
-  Promise.all([gameFind, userFind]).then(() => {
-    res.status(200);
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({
-      newGameId: response.newGameId, newGameDef: response.newGameDef
-    }));
-  }).catch((reason) => console.log(reason));
-
+  Promise.all([gameFind, userFind])
+    .then(() => {
+      res.status(200);
+      res.setHeader("Content-Type", "application/json");
+      res.send(
+        JSON.stringify({
+          newGameId: response.newGameId,
+          newGameDef: response.newGameDef
+        })
+      );
+    })
+    .catch(reason => console.log(reason));
 });
 
 app.post("/addTurn", (req, res) => {
-  const stringToPush =
-    `games.${req.body["gameId"]}.turns.${req.body["turnNum"]}`;
+  const stringToPush = `games.${req.body["gameId"]}.turns.${
+    req.body["turnNum"]
+  }`;
 
   userData.update(
     {
@@ -123,40 +136,42 @@ app.post("/addTurn", (req, res) => {
 });
 
 app.get("/all", (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  userData.find({}, (err, docs) => { res.status(200); res.send(JSON.stringify(docs)) });
-})
-
+  res.setHeader("Content-Type", "application/json");
+  userData.find({}, (err, docs) => {
+    res.status(200);
+    res.send(JSON.stringify(docs));
+  });
+});
 
 // Game routes
 app.get("/games", (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
+  res.setHeader("Content-Type", "application/json");
   gameData.find({}, (err, docs) => {
     if (err || docs.length == 0) {
       res.status(500);
-      res.send(JSON.stringify(err))
-    }
-    else {
+      res.send(JSON.stringify(err));
+    } else {
       const availableGames = [];
-      docs.forEach(g => { availableGames.push(g.id) })
+      docs.forEach(g => {
+        availableGames.push(g.id);
+      });
       res.status(200);
-      res.send(JSON.stringify(availableGames))
+      res.send(JSON.stringify(availableGames));
     }
   });
 });
 
 app.get("/game/:gameId", (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
+  res.setHeader("Content-Type", "application/json");
   gameData.find({ id: req.params.gameId }, (err, docs) => {
     if (err || docs.length == 0) {
       res.status(404);
-      res.send(JSON.stringify(err))
-    }
-    else {
+      res.send(JSON.stringify(err));
+    } else {
       res.status(200);
-      res.send(JSON.stringify(docs))
+      res.send(JSON.stringify(docs));
     }
   });
-})
+});
 
 app.listen(process.env.PORT || 8080);

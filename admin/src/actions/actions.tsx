@@ -5,52 +5,48 @@ import { Action } from "redux";
 import { IStore } from "src/store/store";
 
 export function getAllData() {
-    return async (dispatch: ThunkDispatch<IStore, void, Action>) => {
-        dispatch(getAllDataStarted);
-        fetch(`/all`, {
-            method: "GET",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-        }).then((response) => {
-            response.json().then(data => {
-                dispatch(getAllDataSuccess(data));
-            }).catch((reason) => {
-                dispatch(getAllDataFailure(reason));
-            })
+  return async (dispatch: ThunkDispatch<IStore, void, Action>) => {
+    dispatch(getAllDataStarted);
+    fetch(`/all`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    }).then(response => {
+      response
+        .json()
+        .then(data => {
+          dispatch(getAllDataSuccess(data));
+        })
+        .catch(reason => {
+          dispatch(getAllDataFailure(reason));
         });
-    }
+    });
+  };
 }
 
 const getAllDataSuccess = (data: any) => ({
-    type: types.GET_ALL_DATA_SUCCESS,
-    payload: {
-        data
-    }
+  type: types.GET_ALL_DATA_SUCCESS,
+  payload: {
+    data
+  }
 });
 
 const getAllDataStarted = () => ({
-    type: types.GET_ALL_DATA_STARTED
+  type: types.GET_ALL_DATA_STARTED
 });
 
 const getAllDataFailure = (error: any) => ({
-    type: types.GET_ALL_DATA_FAILED,
-    payload: {
-        error
-    }
+  type: types.GET_ALL_DATA_FAILED,
+  payload: {
+    error
+  }
 });
 
-export const selectCard = (cardId: string) => ({
-    type: types.SELECT_CARD,
-    payload: {
-        cardId
-    }
-})
-
-export const deselectCard = (cardId: string) => ({
-    type: types.DESELECT_CARD,
-    payload: {
-        cardId
-    }
-})
+export const selectCard = (cardIds: string[]) => ({
+  type: types.SELECT_CARD,
+  payload: {
+    cardIds
+  }
+});
