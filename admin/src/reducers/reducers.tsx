@@ -28,13 +28,17 @@ function mainReducer(state = defaultStore, action: any): IStore {
       };
     }
     case types.FILTER_PILLARS: {
+      const pillarName = Object.keys(action.payload.filter)[0];
       return {
         ...state,
         selectedData: {
           ...state.selectedData,
           filter: {
             ...state.selectedData.filter,
-            ...action.payload.filter
+            [pillarName]: {
+              ...state.selectedData.filter[pillarName],
+              ...action.payload.filter[pillarName]
+            }
           }
         }
       }

@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+import * as css from "./basicStyles"
 
 export const dataTopLevel = {
   display: "flex",
@@ -6,7 +7,8 @@ export const dataTopLevel = {
 };
 
 export const dataSelectCont = {
-  flex: "1 0"
+  flex: "1 0",
+  margin: css.LARGE_PADDING
 } as CSSProperties;
 
 export const dataVisCont = {

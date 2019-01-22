@@ -4,6 +4,7 @@ export interface IStore {
   data: ITurnRequest[];
   selectedData: ISelectedData;
   game?: IGame;
+  updateRate: number;
 }
 
 export interface ISelectedData {

@@ -7,9 +7,10 @@ import { IGame } from "src/store/store";
 interface IDataStateProps {
     game?: IGame;
     data: any;
-    selectedData: any
-    cardStats: any
-    selectedCardStats: any
+    selectedData: any;
+    cardStats: any;
+    pillarStats: any;
+    selectedCardStats: any;
 }
 
 class DataView extends React.Component<IDataStateProps> {
@@ -20,7 +21,7 @@ class DataView extends React.Component<IDataStateProps> {
                     <DataSelect {...this.props} />
                 </div>
                 <div style={css.dataVisCont}>
-                    <DataVis cardStats={this.props.selectedCardStats} />
+                    <DataVis cardStats={this.props.selectedCardStats} pillarStats={this.props.pillarStats} />
                 </div>
             </div>);
     }

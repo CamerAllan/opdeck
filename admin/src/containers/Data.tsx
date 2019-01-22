@@ -18,6 +18,7 @@ interface IDataStateProps {
     data: any;
     selectedData: any;
     game?: IGame;
+    updateRate: number
 }
 
 type IDataProps = IDataDispatchProps & IDataStateProps;
@@ -28,8 +29,10 @@ class Data extends React.Component<IDataProps> {
     }
 
     public componentDidMount() {
-        this.props.getAllDataDispatch();
-        this.props.getGameDataDispatch("alienTest");
+        setInterval(() => {
+            this.props.getAllDataDispatch();
+            this.props.getGameDataDispatch("alienTest");
+        }, this.props.updateRate)
     }
 
     public render() {
@@ -37,9 +40,15 @@ class Data extends React.Component<IDataProps> {
         // Process data
         const data = this.props.data;
         const cardStats = {}
+        const userStats = {}
+        const pillarStats = {}
+        let validTurnCount = 0;
 
         if (data) {
             for (const user of data) {
+                if (!userStats[user]) {
+                    userStats[user] = { gamesPlayed: 0, }
+                }
                 for (const gameKey in user.games) {
                     if (user.games.hasOwnProperty(gameKey)) {
                         const game = user.games[gameKey];
@@ -49,7 +58,6 @@ class Data extends React.Component<IDataProps> {
 
                                 let include: boolean = true;
                                 Object.keys(this.props.selectedData.filter).forEach((pillar) => {
-                                    console.log(turn.pillars[pillar].value);
 
                                     if (this.props.selectedData.filter[pillar].moreThan &&
                                         this.props.selectedData.filter[pillar].moreThan <= turn.pillars[pillar].value) {
@@ -63,6 +71,18 @@ class Data extends React.Component<IDataProps> {
                                 })
 
                                 if (include) {
+
+                                    validTurnCount++;
+
+                                    Object.keys(turn.pillars).forEach((pillarName) => {
+                                        if (pillarStats[pillarName] === 0 || pillarStats[pillarName]) {
+                                            pillarStats[pillarName] = pillarStats[pillarName] + turn.pillars[pillarName].value;
+                                        }
+                                        else {
+                                            pillarStats[pillarName] = 0
+                                        }
+                                    })
+
                                     const card = turn.cardId;
 
                                     if (!cardStats[card]) {
@@ -86,20 +106,27 @@ class Data extends React.Component<IDataProps> {
             }
         }
 
-        const filteredStats = [];
+        const filteredCardStats = [];
         const selectedCardStats = [];
+        const processedPillarStats = [];
+
+        for (const key in pillarStats) {
+            if (pillarStats.hasOwnProperty(key)) {
+                processedPillarStats.push({ id: key, value: pillarStats[key] / validTurnCount })
+            }
+        }
 
         for (const key in cardStats) {
             if (cardStats.hasOwnProperty(key)) {
                 const card = cardStats[key];
-                filteredStats.push({ id: key, ...card })
+                filteredCardStats.push({ id: key, ...card })
                 if (this.props.selectedData.cards.indexOf(key) > -1) {
                     selectedCardStats.push({ id: key, ...card });
                 }
             }
         }
         return (
-            <DataView game={this.props.game} data={this.props.data} selectedData={this.props.selectedData} cardStats={filteredStats} selectedCardStats={selectedCardStats} />
+            <DataView game={this.props.game} data={this.props.data} selectedData={this.props.selectedData} cardStats={filteredCardStats} pillarStats={processedPillarStats} selectedCardStats={selectedCardStats} />
         );
     }
 }

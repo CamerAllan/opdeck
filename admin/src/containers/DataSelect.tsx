@@ -33,15 +33,29 @@ class DataSelect extends React.Component<IDataSelectProps> {
   }
 
   public render() {
+
+    const cardOptions = this.formatOptions(this.props.cardStats)
+
     return (
       <DataSelectView
-        {...this.props}
+        game={this.props.game}
+        cardOptions={cardOptions}
         selectActions={{
           card: { select: this.selectCard },
           filter: { updateFilter: this.props.updateFilterDispatch }
         }}
       />
     );
+  }
+
+  private formatOptions = (cardStats: any) => {
+    const cardOptions: Array<{ value: string; label: string }> = []
+    cardStats.forEach((card: any) => {
+      if (this.props.selectedData.cards.indexOf(card.id) < 0) {
+        cardOptions.push({ value: card.id, label: card.id });
+      }
+    });
+    return cardOptions;
   }
 
   private selectCard = (ids: string[]) => {

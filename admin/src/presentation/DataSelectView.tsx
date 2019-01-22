@@ -1,13 +1,12 @@
 import * as React from "react";
+import * as basicCSS from "src/styles/basicStyles";
 import * as css from "src/styles/dataSelectStyles";
-import { ISelectedData, IGame } from "src/store/store";
 import DataSelectLimitView from "./DataSelectLimitView"
 import Select from "react-select";
+import { IGame } from "src/store/store";
 interface IDataSelectStateProps {
   game?: IGame;
-  data: any;
-  selectedData: ISelectedData;
-  cardStats: any;
+  cardOptions: Array<{ value: string; label: string }>;
   selectActions: {
     card: {
       select: (ids: string[]) => void;
@@ -20,19 +19,17 @@ interface IDataSelectStateProps {
 
 class DataSelectView extends React.Component<IDataSelectStateProps> {
   public render() {
-    const cardOptions: Array<{ value: string; label: string }> = [];
-
-    this.props.cardStats.forEach((card: any) => {
-      cardOptions.push({ value: card, label: card.id });
-    });
 
     const cardList = (
-      <div>
-        Cards:
+      <div >
+        <div style={basicCSS.headerFontCentered}>
+          Cards:
+        </div>
         <Select
+          closeMenuOnSelect={false}
           isMulti={true}
           onChange={this.handleCardChange}
-          options={cardOptions}
+          options={this.props.cardOptions}
         />
       </div>
     );
@@ -42,14 +39,20 @@ class DataSelectView extends React.Component<IDataSelectStateProps> {
       Object.keys(this.props.game.pillars).forEach((pillarName) => {
         if (this.props.game) {
           const pillar = this.props.game.pillars[pillarName];
-          pillarFilters.push(<DataSelectLimitView pillar={pillar} pillarName={pillarName} filter={this.props.selectActions.filter.updateFilter} />);
+          pillarFilters.push(<DataSelectLimitView key={pillarName} pillar={pillar} pillarName={pillarName} filter={this.props.selectActions.filter.updateFilter} />);
         }
       })
     }
 
     return (
       <div style={css.selectMenu}>
-        <div style={css.selectCont}>{cardList}{pillarFilters}</div>
+        <div style={css.selectCont}>
+          {cardList}
+          <div style={basicCSS.headerFontCentered}>
+            Pillars:
+          </div>
+          {pillarFilters}
+        </div>
       </div>
     );
   }

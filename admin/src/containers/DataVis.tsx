@@ -15,6 +15,7 @@ interface IDataVisDispatchProps {
 
 interface IDataVisStateProps {
     cardStats: any
+    pillarStats: any
 }
 
 type IDataVisProps = IDataVisDispatchProps & IDataVisStateProps;
@@ -31,7 +32,7 @@ class DataVis extends React.Component<IDataVisProps> {
     public render() {
 
         return (
-            <DataVisView data={this.props.cardStats} />
+            <DataVisView {...this.props} />
         );
     }
 }

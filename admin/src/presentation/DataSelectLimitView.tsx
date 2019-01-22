@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as basicCSS from "src/styles/basicStyles";
 import * as css from "src/styles/dataSelectStyles";
 import Select from "react-select";
 import { IPillar } from "../store/store"
@@ -20,7 +21,7 @@ class DataSelectLimitView extends React.Component<IDataSelectLimitStateProps> {
 
         filters.push(
             <div>
-                <div>
+                <div style={basicCSS.bodyFont}>
                     {this.props.pillarName}
                 </div>
                 <div style={css.limitCont}>
@@ -50,8 +51,4 @@ class DataSelectLimitView extends React.Component<IDataSelectLimitStateProps> {
     private handlePillarChangeMore = (choice: any) =>
         this.props.filter(this.props.pillarName, choice.value, true)
 }
-
-
-
-
 export default DataSelectLimitView;
