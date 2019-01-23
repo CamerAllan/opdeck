@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as basicCSS from "src/styles/basicStyles";
-import * as css from "src/styles/dataSelectStyles";
+import * as css from "src/styles/data/dataSelectStyles";
 import Select from "react-select";
 import { IPillar } from "../../store/store"
 

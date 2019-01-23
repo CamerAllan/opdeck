@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as basicCSS from "src/styles/basicStyles";
-import * as css from "src/styles/dataSelectStyles";
+import * as css from "src/styles/data/dataSelectStyles";
 import SelectLimitView from "./SelectLimitView"
 import Select from "react-select";
 import { IPillars } from "src/store/store";

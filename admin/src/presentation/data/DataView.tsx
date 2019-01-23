@@ -2,6 +2,7 @@ import * as React from "react";
 import Select from "../../containers/common/Select";
 import DataVis from "../../containers/data/DataVis";
 import * as css from "../../styles/adminStyles";
+import * as dataCSS from "../../styles/data/dataVisStyles";
 import { ISelectedData, ICards, IPillars } from "src/store/store";
 
 interface IDataStateProps {
@@ -18,7 +19,7 @@ class DataView extends React.Component<IDataStateProps> {
                 <div style={css.adminSelectCont}>
                     <Select selectedCards={this.props.selectedData.cards} pillars={this.props.pillars} cards={this.props.cards} />
                 </div>
-                <div style={css.adminVisCont}>
+                <div style={dataCSS.visContainer}>
                     <DataVis {...this.props.processedData} selectedData={this.props.selectedData} />
                 </div>
             </div>);

@@ -1,15 +1,9 @@
 import { CSSProperties } from "react";
-import * as css from "./basicStyles"
+import * as commonVis from "../commonVisStyles"
+import * as css from "../basicStyles"
 
 export const visContainer = {
-  display: "flex",
-  flexFlow: "row wrap",
-  height: "100%",
-  width: "100%",
-  overflow: "auto",
-  overflowX: "hidden",
-  maxHeight: "100vh",
-  maxWidth: "100%"
+  ...commonVis.visContainer
 } as CSSProperties;
 
 export const vis = {

@@ -32,7 +32,15 @@ class Page extends React.Component<IStore> {
 
     const maker = () => (
       <div className="App">
-        <Maker />
+        <div style={css.top}>
+          <div style={css.middle}>
+            <div style={css.header} />
+            <div style={css.body}>
+              <Maker />
+            </div>
+            <div style={css.footer} />
+          </div>
+        </div>
       </div>
     )
 

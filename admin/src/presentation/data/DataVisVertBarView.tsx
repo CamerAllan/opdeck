@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as css from "../../styles/dataVisStyles";
+import * as css from "../../styles/data/dataVisStyles";
 const V = require("react-vis");
 
 interface IDataVisVertBarStateProps {

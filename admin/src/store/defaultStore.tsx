@@ -1,4 +1,4 @@
-import { IStore } from "./store";
+import { IStore, Menu } from "./store";
 
 
 const defaultStore: IStore = {
@@ -6,7 +6,8 @@ const defaultStore: IStore = {
   turns: [],
   pillars: {},
   selectedData: { cards: [], users: [], pillars: {} },
-  updateRate: 500
+  updateRate: 500,
+  menu: Menu.VIS
 };
 
 export default defaultStore;

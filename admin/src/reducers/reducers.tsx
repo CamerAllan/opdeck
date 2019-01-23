@@ -2,11 +2,48 @@ import { Reducer } from "redux";
 import * as types from "../actions/actionTypes";
 
 import defaultStore from "../store/defaultStore";
-import { IStore, IGame } from "../store/store";
+import { IStore, IGame, Menu } from "../store/store";
 import { ITurnRequest } from "src/store/requestTypes";
 
 function mainReducer(state = defaultStore, action: any): IStore {
   switch (action.type) {
+    case types.OPEN_ADD_CARD_MENU: {
+      return {
+        ...state,
+        menu: Menu.ADD_CARD
+      }
+    }
+    case types.OPEN_ADD_PILLAR_MENU: {
+      return {
+        ...state,
+        menu: Menu.ADD_PILLAR
+      }
+    }
+    case types.ADD_CARD: {
+      return {
+        ...state,
+        cards: {
+          ...state.cards,
+          [action.payload.id]: action.payload.card
+        }
+      }
+    }
+    case types.ADD_PILLAR: {
+      return {
+        ...state,
+        pillars: {
+          ...state.pillars,
+          [action.payload.id]: action.payload.pillar
+        }
+      }
+    }
+    case types.CLOSE_MENU: {
+      return {
+        ...state,
+        menu: Menu.VIS
+      }
+    }
+
     case types.GET_ALL_DATA_SUCCESS: {
       const turns: ITurnRequest[] = []
 

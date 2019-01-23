@@ -2,7 +2,7 @@
 import * as types from "./actionTypes";
 import { ThunkDispatch } from "redux-thunk";
 import { Action } from "redux";
-import { IStore, IWeightings, IGame } from "src/store/store";
+import { IStore, IWeightings, IGame, ICard, IPillar } from "src/store/store";
 
 export function getAllData() {
   return async (dispatch: ThunkDispatch<IStore, void, Action>) => {
@@ -96,3 +96,30 @@ export const filterPillars = (filter: IWeightings) => ({
     filter
   }
 })
+
+export const closeMenu = () => ({
+  type: types.CLOSE_MENU
+})
+
+export const openAddCardMenu = () => ({
+  type: types.OPEN_ADD_CARD_MENU
+})
+
+export const openAddPillarMenu = () => ({
+  type: types.OPEN_ADD_PILLAR_MENU
+})
+export const addCard = (id: string, card: ICard) => ({
+  type: types.ADD_CARD,
+  payload: {
+    id,
+    card
+  }
+})
+export const addPillar = (id: string, pillar: IPillar) => ({
+  type: types.ADD_PILLAR,
+  payload: {
+    id,
+    pillar
+  }
+})
+

@@ -6,8 +6,14 @@ export interface IStore {
   turns: ITurnRequest[];
   selectedData: ISelectedData;
   updateRate: number;
+  menu: Menu;
 }
 
+export enum Menu {
+  VIS,
+  ADD_CARD,
+  ADD_PILLAR,
+}
 export interface ISelectedData {
   cards: string[];
   pillars: IWeightings;
