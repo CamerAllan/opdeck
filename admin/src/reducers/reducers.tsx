@@ -2,20 +2,37 @@ import { Reducer } from "redux";
 import * as types from "../actions/actionTypes";
 
 import defaultStore from "../store/defaultStore";
-import { IStore } from "../store/store";
+import { IStore, IGame } from "../store/store";
+import { ITurnRequest } from "src/store/requestTypes";
 
 function mainReducer(state = defaultStore, action: any): IStore {
   switch (action.type) {
     case types.GET_ALL_DATA_SUCCESS: {
+      const turns: ITurnRequest[] = []
+
+      action.payload.data.forEach((user: any) => {
+        Object.keys(user.games).forEach((game) => {
+          if (user.games.hasOwnProperty(game)) {
+            Object.keys(user.games[game].turns).forEach((turn) => {
+              if (user.games[game].turns.hasOwnProperty(turn)) {
+                turns.push(user.games[game].turns[turn]);
+              }
+            })
+          }
+        })
+      });
+
       return {
         ...state,
-        data: action.payload.data
+        turns
       };
     }
     case types.GET_GAME_DATA_SUCCESS: {
+      const game = action.payload.game as IGame;
       return {
         ...state,
-        game: action.payload.game
+        cards: game.cards,
+        pillars: game.pillars,
       };
     }
     case types.SELECT_CARD: {
@@ -33,10 +50,10 @@ function mainReducer(state = defaultStore, action: any): IStore {
         ...state,
         selectedData: {
           ...state.selectedData,
-          filter: {
-            ...state.selectedData.filter,
+          pillars: {
+            ...state.selectedData.pillars,
             [pillarName]: {
-              ...state.selectedData.filter[pillarName],
+              ...state.selectedData.pillars[pillarName],
               ...action.payload.filter[pillarName]
             }
           }

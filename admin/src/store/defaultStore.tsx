@@ -2,8 +2,10 @@ import { IStore } from "./store";
 
 
 const defaultStore: IStore = {
-  data: [],
-  selectedData: { cards: [], users: [], filter: {} },
+  cards: {},
+  turns: [],
+  pillars: {},
+  selectedData: { cards: [], users: [], pillars: {} },
   updateRate: 500
 };
 

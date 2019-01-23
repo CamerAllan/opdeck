@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as css from "src/styles/dataVisStyles";
 import DataVisVertBarView from "./DataVisVertBarView"
 import DataVisHorBarView from "./DataVisHorBarView"
 
@@ -11,7 +10,7 @@ interface IDataVisStateProps {
 class DataVisView extends React.Component<IDataVisStateProps> {
   public render() {
     return (
-      <div style={css.visContainer}>
+      <>
         <DataVisHorBarView
           data={this.props.cardStats}
           xName={"balance"} yName={"id"}
@@ -32,7 +31,7 @@ class DataVisView extends React.Component<IDataVisStateProps> {
           title={"Pillar Averages"}
           description={"Average pillar values in selected turns."}
         />
-      </div>
+      </>
     );
   }
 }

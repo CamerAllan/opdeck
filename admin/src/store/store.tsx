@@ -1,18 +1,18 @@
 import { ITurnRequest } from "./requestTypes";
 
 export interface IStore {
-  data: ITurnRequest[];
+  cards: ICards;
+  pillars: IPillars;
+  turns: ITurnRequest[];
   selectedData: ISelectedData;
-  game?: IGame;
   updateRate: number;
 }
 
 export interface ISelectedData {
   cards: string[];
-  filter: IWeightings;
+  pillars: IWeightings;
   users: string[];
 }
-
 
 // Frontend
 

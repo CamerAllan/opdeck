@@ -1,8 +1,8 @@
 import * as React from "react";
-import * as css from "../styles/dataVisStyles";
+import * as css from "../../styles/dataVisStyles";
 const V = require("react-vis");
 
-interface IDataVisVertBarStateProps {
+interface IDataVisHorBarStateProps {
     data: Array<{}>;
     xName: string;
     yName: string;
@@ -10,7 +10,7 @@ interface IDataVisVertBarStateProps {
     description: string;
 }
 
-class DataVisVertBarView extends React.Component<IDataVisVertBarStateProps> {
+class DataVisHorBarView extends React.Component<IDataVisHorBarStateProps> {
     public render() {
         const getX = (d: any) => d[this.props.xName];
         const getY = (d: any) => d[this.props.yName];
@@ -26,17 +26,17 @@ class DataVisVertBarView extends React.Component<IDataVisVertBarStateProps> {
                 <div>
                     {<V.FlexibleWidthXYPlot
                         animation={true}
-                        margin={{ left: 50, right: 50, top: 50, bottom: 120 }}
-                        xType={"ordinal"}
+                        margin={{ left: 120, right: 50, top: 50, bottom: 50 }}
+                        yType={"ordinal"}
                         getX={getX}
                         getY={getY}
                         height={500}
                     >
                         <V.VerticalGridLines />
                         <V.HorizontalGridLines />
-                        <V.XAxis orientation="bottom" tickLabelAngle={-90} />
+                        <V.XAxis orientation="bottom" />
                         <V.YAxis orientation="left" />
-                        <V.VerticalBarSeries data={this.props.data} style={{}} />
+                        <V.HorizontalBarSeries data={this.props.data} style={{}} />
                     </V.FlexibleWidthXYPlot>}
                 </div>
             </div>
@@ -45,4 +45,4 @@ class DataVisVertBarView extends React.Component<IDataVisVertBarStateProps> {
     }
 }
 
-export default DataVisVertBarView;
+export default DataVisHorBarView;

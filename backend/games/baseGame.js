@@ -446,7 +446,7 @@ exports.game = {
       contents: {
         name: "Discovery of defeat",
         text:
-          "You can no longer afford to pay the right people to keep quite. A leak reveales the extent of your defeat in the west",
+          "You can no longer afford to pay the right people to keep quite. A leak reveals the extent of your defeat in the west",
         responses: {
           accept: {
             text: "Oh dear",

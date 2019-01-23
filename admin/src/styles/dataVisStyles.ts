@@ -2,7 +2,6 @@ import { CSSProperties } from "react";
 import * as css from "./basicStyles"
 
 export const visContainer = {
-  background: "white",
   display: "flex",
   flexFlow: "row wrap",
   height: "100%",

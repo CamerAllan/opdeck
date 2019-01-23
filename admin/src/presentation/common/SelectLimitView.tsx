@@ -2,15 +2,15 @@ import * as React from "react";
 import * as basicCSS from "src/styles/basicStyles";
 import * as css from "src/styles/dataSelectStyles";
 import Select from "react-select";
-import { IPillar } from "../store/store"
+import { IPillar } from "../../store/store"
 
-interface IDataSelectLimitStateProps {
+interface ISelectLimitStateProps {
     pillarName: string;
     pillar: IPillar;
     filter: (pillar: string, value: number, moreThan: boolean) => void;
 }
 
-class DataSelectLimitView extends React.Component<IDataSelectLimitStateProps> {
+class SelectLimitView extends React.Component<ISelectLimitStateProps> {
     public render() {
         const filters = []
         const options: Array<{ value: number; label: number }> = [];
@@ -51,4 +51,4 @@ class DataSelectLimitView extends React.Component<IDataSelectLimitStateProps> {
     private handlePillarChangeMore = (choice: any) =>
         this.props.filter(this.props.pillarName, choice.value, true)
 }
-export default DataSelectLimitView;
+export default SelectLimitView;

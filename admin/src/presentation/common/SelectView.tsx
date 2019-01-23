@@ -1,12 +1,13 @@
 import * as React from "react";
 import * as basicCSS from "src/styles/basicStyles";
 import * as css from "src/styles/dataSelectStyles";
-import DataSelectLimitView from "./DataSelectLimitView"
+import SelectLimitView from "./SelectLimitView"
 import Select from "react-select";
-import { IGame } from "src/store/store";
-interface IDataSelectStateProps {
-  game?: IGame;
-  cardOptions: Array<{ value: string; label: string }>;
+import { IPillars } from "src/store/store";
+
+interface ISelectStateProps {
+  pillars?: IPillars;
+  selectableCards: Array<{ label: string, value: string }>;
   selectActions: {
     card: {
       select: (ids: string[]) => void;
@@ -17,7 +18,7 @@ interface IDataSelectStateProps {
   };
 }
 
-class DataSelectView extends React.Component<IDataSelectStateProps> {
+class SelectView extends React.Component<ISelectStateProps> {
   public render() {
 
     const cardList = (
@@ -29,17 +30,17 @@ class DataSelectView extends React.Component<IDataSelectStateProps> {
           closeMenuOnSelect={false}
           isMulti={true}
           onChange={this.handleCardChange}
-          options={this.props.cardOptions}
+          options={this.props.selectableCards}
         />
       </div>
     );
 
     const pillarFilters: any = [];
-    if (this.props.game) {
-      Object.keys(this.props.game.pillars).forEach((pillarName) => {
-        if (this.props.game) {
-          const pillar = this.props.game.pillars[pillarName];
-          pillarFilters.push(<DataSelectLimitView key={pillarName} pillar={pillar} pillarName={pillarName} filter={this.props.selectActions.filter.updateFilter} />);
+    if (this.props.pillars) {
+      Object.keys(this.props.pillars).forEach((pillarName) => {
+        if (this.props.pillars) {
+          const pillar = this.props.pillars[pillarName];
+          pillarFilters.push(<SelectLimitView key={pillarName} pillar={pillar} pillarName={pillarName} filter={this.props.selectActions.filter.updateFilter} />);
         }
       })
     }
@@ -57,8 +58,6 @@ class DataSelectView extends React.Component<IDataSelectStateProps> {
     );
   }
 
-
-
   private handleCardChange = (selectedOptions: any) => {
     this.props.selectActions.card.select(
       selectedOptions.map((e: any) => e.label)
@@ -66,4 +65,4 @@ class DataSelectView extends React.Component<IDataSelectStateProps> {
   };
 }
 
-export default DataSelectView;
+export default SelectView;
