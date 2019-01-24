@@ -2,6 +2,7 @@ import * as React from "react";
 import { ICards, ICard, IPillars } from "../../store/store";
 import { Formik, Form, Field } from "formik";
 import SelectField from "../form/SelectField";
+import * as css from "../../styles/formStyles";
 
 interface IMakerAddCardStateProps {
   cards: ICards;
@@ -28,14 +29,21 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
     const pillarRejectConsequences: JSX.Element[] = [];
     Object.keys(this.props.pillars).forEach((pillar: string) => {
       pillarAcceptConsequences.push(
-        <Field type="number" name={`accept${pillar}effect`} />
+        <>
+          <label style={css.formLabel}>{pillar} Effect:</label>
+          <Field type="number" name={`accept${pillar}Effect`} />
+        </>
       );
       pillarRejectConsequences.push(
-        <Field type="number" name={`reject${pillar}effect`} />
+        <>
+          <label style={css.formLabel}>{pillar} Effect:</label>
+          <Field type="number" name={`reject${pillar}Effect`} />
+        </>
       );
     });
 
     const onSubmit = (values: any) => {
+      console.log(JSON.stringify(values));
       const card: ICard = {
         contents: {
           name: values.name,
@@ -43,14 +51,22 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
           responses: {
             accept: {
               text: values.acceptText,
-              cardsAdded: [],
-              cardsRemoved: [],
+              cardsAdded: values.acceptCardsAdded
+                ? values.acceptCardsAdded
+                : [],
+              cardsRemoved: values.acceptCardsRemoved
+                ? values.acceptCardsRemoved
+                : [],
               effects: {}
             },
             reject: {
               text: values.rejectText,
-              cardsAdded: [],
-              cardsRemoved: [],
+              cardsAdded: values.rejectCardsAdded
+                ? values.rejectCardsAdded
+                : [],
+              cardsRemoved: values.rejectCardsRemoved
+                ? values.rejectCardsRemoved
+                : [],
               effects: {}
             }
           }
@@ -70,31 +86,69 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
           onSubmit={onSubmit}
         >
           <Form>
-            id:
-            <Field type="text" name="id" />
-            Name:
-            <Field type="text" name="name" />
-            Text:
-            <Field type="text" name="text" />
-            <div>
-              Accept:
-              <Field type="text" name="acceptText" />
-              <Field
-                name="cardsAdded"
-                component={SelectField}
-                options={cardOptions}
-              />
-              {pillarAcceptConsequences}
+            <div style={css.horFormGroupContainer}>
+              <div style={css.formGroupElement}>
+                <label style={css.formLabel}>ID:</label>
+                <Field type="text" name="id" />
+              </div>
+              <div style={css.formGroupElement}>
+                <label style={css.formLabel}>Name:</label>
+                <Field type="text" name="name" />
+              </div>
+              <div style={css.formGroupElement}>
+                <label style={css.formLabel}>Text:</label>
+                <Field type="text" component="textarea" name="text" />
+              </div>
             </div>
-            <div>
-              Reject:
-              <Field type="text" name="rejectText" />
-              <Field
-                name="cardsRemoved"
-                component={SelectField}
-                options={cardOptions}
-              />
-              {pillarRejectConsequences}
+            <div style={css.horFormGroupContainer}>
+              <div style={css.formGroupElement}>
+                <label style={css.formLabel}>Accept:</label>
+                <div style={css.formElement}>
+                  <label style={css.formLabel}>Text:</label>
+                  <Field type="text" name="acceptText" />
+                </div>
+                <div style={css.formElement}>
+                  <label style={css.formLabel}>Cards Added:</label>
+                  <Field
+                    name="acceptCardsAdded"
+                    component={SelectField}
+                    options={cardOptions}
+                  />
+                </div>
+                <div style={css.formElement}>
+                  <label style={css.formLabel}>Cards Removed:</label>
+                  <Field
+                    name="acceptCardsRemoved"
+                    component={SelectField}
+                    options={cardOptions}
+                  />
+                </div>
+                <div style={css.formElement}>{pillarAcceptConsequences}</div>
+              </div>
+              <div style={css.formGroupElement}>
+                <label style={css.formLabel}>Reject:</label>
+                <div style={css.formElement}>
+                  <label style={css.formLabel}>Text:</label>
+                  <Field type="text" name="rejectText" />
+                </div>
+                <div style={css.formElement}>
+                  <label style={css.formLabel}>Cards Added:</label>
+                  <Field
+                    name="rejectCardsAdded"
+                    component={SelectField}
+                    options={cardOptions}
+                  />
+                </div>
+                <div style={css.formElement}>
+                  <label style={css.formLabel}>Cards Removed:</label>
+                  <Field
+                    name="rejectCardsRemoved"
+                    component={SelectField}
+                    options={cardOptions}
+                  />
+                </div>
+                <div style={css.formElement}>{pillarRejectConsequences}</div>
+              </div>
             </div>
             <button onClick={this.props.closeMenuDispatch}>Cancel</button>
             <button type="submit">Submit</button>

@@ -1,10 +1,7 @@
 import { CSSProperties } from "react";
-import * as css from "./basicStyles";
 
 export const top = {
-  background: css.LIGHT,
-  display: "flex",
-  flexDirection: "row"
+  width: "100%"
 } as CSSProperties;
 
 export const middle = {

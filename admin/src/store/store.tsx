@@ -12,7 +12,7 @@ export interface IStore {
 export enum Menu {
   VIS,
   ADD_CARD,
-  ADD_PILLAR,
+  ADD_PILLAR
 }
 export interface ISelectedData {
   cards: string[];
@@ -39,6 +39,7 @@ export interface IGameData {
 }
 
 export interface IGame {
+  id: string;
   pillars: IPillars;
   playDeck: string[];
   reserveDeck: string[];

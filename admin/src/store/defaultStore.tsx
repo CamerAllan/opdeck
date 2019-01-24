@@ -1,6 +1,5 @@
 import { IStore, Menu } from "./store";
 
-
 const defaultStore: IStore = {
   cards: {},
   turns: [],

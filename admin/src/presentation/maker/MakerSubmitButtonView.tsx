@@ -16,7 +16,7 @@ class MakerSubmitButtonView extends React.Component<
 
     return (
       <div>
-        <button onClick={submit}>Cancel</button>
+        <button onClick={submit}>Cancelado</button>
       </div>
     );
   }

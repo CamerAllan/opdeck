@@ -9,8 +9,12 @@ interface ISelectFieldStateProps {
 
 class SelectField extends React.Component<ISelectFieldStateProps> {
   public render() {
-    const onChange = (option: any) =>
-      this.props.form.setFieldValue(this.props.field.name, option.value);
+    const onChange = (options: any) => {
+      this.props.form.setFieldValue(
+        this.props.field.name,
+        options.map((option: { label: string; value: string }) => option.label)
+      );
+    };
 
     const find = (option: any) => option.value === this.props.field.value;
 

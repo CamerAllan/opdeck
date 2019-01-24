@@ -13,7 +13,7 @@ export function getAllData() {
         Accept: "application/json",
         "Content-Type": "application/json"
       }
-    })
+    });
     response
       .json()
       .then(data => {
@@ -52,7 +52,7 @@ export function getGameData(gameName: string) {
         Accept: "application/json",
         "Content-Type": "application/json"
       }
-    })
+    });
     response
       .json()
       .then(game => {
@@ -82,7 +82,6 @@ const getGameDataFailure = (error: any) => ({
   }
 });
 
-
 export const selectCards = (cardIds: string[]) => ({
   type: types.SELECT_CARD,
   payload: {
@@ -95,31 +94,46 @@ export const filterPillars = (filter: IWeightings) => ({
   payload: {
     filter
   }
-})
+});
 
 export const closeMenu = () => ({
   type: types.CLOSE_MENU
-})
+});
 
 export const openAddCardMenu = () => ({
   type: types.OPEN_ADD_CARD_MENU
-})
+});
 
 export const openAddPillarMenu = () => ({
   type: types.OPEN_ADD_PILLAR_MENU
-})
+});
 export const addCard = (id: string, card: ICard) => ({
   type: types.ADD_CARD,
   payload: {
     id,
     card
   }
-})
+});
 export const addPillar = (id: string, pillar: IPillar) => ({
   type: types.ADD_PILLAR,
   payload: {
     id,
     pillar
   }
-})
-
+});
+export const saveGame = (id: string, game: IGame) => {
+  fetch(`/game/${id}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(game)
+  });
+  return {
+    type: types.SAVE_GAME,
+    payload: {
+      id
+    }
+  };
+};

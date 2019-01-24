@@ -45,7 +45,6 @@ class Select extends React.Component<ISelectProps> {
     }
 
     private getSelectableCards(cards: ICards, selectedCards: string[]) {
-        console.log(selectedCards);
         const selectable = [];
         for (const key in cards) {
             if (selectedCards.indexOf(key) === -1) {

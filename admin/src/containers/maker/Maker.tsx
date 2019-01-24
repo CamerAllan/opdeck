@@ -1,15 +1,16 @@
 import * as React from "react";
 import MakerView from "../../presentation/maker/MakerView";
-import { IStore } from "src/store/store";
+import { IStore, IGame } from "src/store/store";
 
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { getAllData, getGameData } from "src/actions/actions";
+import { getAllData, getGameData, saveGame } from "src/actions/actions";
 
 interface IMakerDispatchProps {
   getAllDataDispatch: () => void;
   getGameDataDispatch: (game: string) => void;
+  saveGameDispatch: (id: string, game: IGame) => void;
 }
 
 type IMakerProps = IMakerDispatchProps & IStore;
@@ -19,11 +20,24 @@ class Maker extends React.Component<IMakerProps> {
     super(props);
   }
 
-  public render() {
-    if (!(this.props.cards && this.props.pillars && this.props.turns)) {
-      return <div>loading...</div>;
-    }
+  public componentDidMount() {
+    this.props.getAllDataDispatch();
+    this.props.getGameDataDispatch("alienTest");
+    setInterval(
+      () =>
+        this.props.saveGameDispatch("alienTest", {
+          id: "alienTest",
+          currentCard: "goodMorning",
+          pillars: this.props.pillars,
+          playDeck: [],
+          reserveDeck: Object.keys(this.props.cards),
+          cards: this.props.cards
+        }),
+      10000
+    );
+  }
 
+  public render() {
     return (
       <MakerView
         menu={this.props.menu}
@@ -39,7 +53,8 @@ const mapDispatchToProps = (
   dispatch: ThunkDispatch<IStore, any, AnyAction>
 ) => ({
   getAllDataDispatch: () => dispatch(getAllData()),
-  getGameDataDispatch: (game: string) => dispatch(getGameData(game))
+  getGameDataDispatch: (game: string) => dispatch(getGameData(game)),
+  saveGameDispatch: (id: string, game: IGame) => dispatch(saveGame(id, game))
 });
 
 const mapStateToProps = (state: IStore): IStore => {

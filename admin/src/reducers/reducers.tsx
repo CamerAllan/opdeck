@@ -11,13 +11,13 @@ function mainReducer(state = defaultStore, action: any): IStore {
       return {
         ...state,
         menu: Menu.ADD_CARD
-      }
+      };
     }
     case types.OPEN_ADD_PILLAR_MENU: {
       return {
         ...state,
         menu: Menu.ADD_PILLAR
-      }
+      };
     }
     case types.ADD_CARD: {
       return {
@@ -26,7 +26,7 @@ function mainReducer(state = defaultStore, action: any): IStore {
           ...state.cards,
           [action.payload.id]: action.payload.card
         }
-      }
+      };
     }
     case types.ADD_PILLAR: {
       return {
@@ -35,28 +35,28 @@ function mainReducer(state = defaultStore, action: any): IStore {
           ...state.pillars,
           [action.payload.id]: action.payload.pillar
         }
-      }
+      };
     }
     case types.CLOSE_MENU: {
       return {
         ...state,
         menu: Menu.VIS
-      }
+      };
     }
 
     case types.GET_ALL_DATA_SUCCESS: {
-      const turns: ITurnRequest[] = []
+      const turns: ITurnRequest[] = [];
 
       action.payload.data.forEach((user: any) => {
-        Object.keys(user.games).forEach((game) => {
+        Object.keys(user.games).forEach(game => {
           if (user.games.hasOwnProperty(game)) {
-            Object.keys(user.games[game].turns).forEach((turn) => {
+            Object.keys(user.games[game].turns).forEach(turn => {
               if (user.games[game].turns.hasOwnProperty(turn)) {
                 turns.push(user.games[game].turns[turn]);
               }
-            })
+            });
           }
-        })
+        });
       });
 
       return {
@@ -69,7 +69,7 @@ function mainReducer(state = defaultStore, action: any): IStore {
       return {
         ...state,
         cards: game.cards,
-        pillars: game.pillars,
+        pillars: game.pillars
       };
     }
     case types.SELECT_CARD: {
@@ -95,7 +95,7 @@ function mainReducer(state = defaultStore, action: any): IStore {
             }
           }
         }
-      }
+      };
     }
     default:
       return { ...state };

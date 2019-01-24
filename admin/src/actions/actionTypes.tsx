@@ -13,3 +13,5 @@ export const OPEN_ADD_CARD_MENU = "OPEN_ADD_CARD_MENU";
 export const OPEN_ADD_PILLAR_MENU = "OPEN_ADD_PILLAR_MENU";
 export const ADD_CARD = "ADD_CARD";
 export const ADD_PILLAR = "ADD_PILLAR";
+
+export const SAVE_GAME = "SAVE_GAME";

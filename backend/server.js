@@ -13,6 +13,7 @@ app.use(logger("dev"));
 
 const userData = new db({ filename: "./userData.db", autoload: true });
 const gameData = new db({ filename: "./gameData.db", autoload: true });
+
 const errCallback = (err, newDoc) => {
   if (err) {
     res.status(400);
@@ -23,7 +24,7 @@ const errCallback = (err, newDoc) => {
 // Load any new locally defined games
 // TODO: validate on load
 var normalizedPath = require("path").join(__dirname, "games");
-fs.readdirSync(normalizedPath).forEach(function (file) {
+fs.readdirSync(normalizedPath).forEach(function(file) {
   const game = require("./games/" + file).game;
   gameData.update(
     { id: game.id },
@@ -112,7 +113,7 @@ app.get("/addGame/user/:user/game/:gameName", (req, res) => {
 app.post("/addTurn", (req, res) => {
   const stringToPush = `games.${req.body["gameId"]}.turns.${
     req.body["turnNum"]
-    }`;
+  }`;
 
   userData.update(
     {
@@ -172,6 +173,26 @@ app.get("/game/:gameId", (req, res) => {
       res.send(JSON.stringify(docs[0]));
     }
   });
+});
+
+app.post("/game/:gameId", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  const gameId = req.params.gameId;
+  const game = req.body;
+  gameData.update(
+    { id: gameId },
+    game,
+    { upsert: true }, // Don't re-add existing game
+    (err, newDoc) => {
+      if (err) {
+        res.status(404);
+        res.send(JSON.stringify(err));
+      } else {
+        res.status(200);
+        res.send();
+      }
+    }
+  );
 });
 
 app.listen(process.env.PORT || 8080);

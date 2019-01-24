@@ -3,7 +3,7 @@ import Select from "../../containers/common/Select";
 import MakerVis from "../../containers/maker/MakerVis";
 import MakerAdd from "../../containers/maker/MakerAdd";
 import * as css from "../../styles/adminStyles";
-import * as makerCSS from "../../styles/maker/makerVisStyles";
+// import * as makerCSS from "../../styles/maker/makerVisStyles";
 import { ISelectedData, ICards, IPillars, Menu } from "../../store/store";
 import MakerAddCard from "../../containers/maker/MakerAddCard";
 import MakerAddPillar from "../../containers/maker/MakerAddPillar";
@@ -46,7 +46,7 @@ class MakerView extends React.Component<IMakerStateProps> {
     return (
       <div style={css.adminTopLevel}>
         <div style={css.adminSelectCont}>{leftComponent}</div>
-        <div style={makerCSS.visContainer}>
+        <div style={{ ...css.adminVisCont, flexFlow: "column" }}>
           <MakerVis {...this.props} />
         </div>
       </div>
