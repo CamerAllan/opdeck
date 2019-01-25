@@ -1,8 +1,25 @@
 import * as css from "./basicStyles";
+import { CSSProperties } from "react";
+import * as adminCSS from "./adminStyles";
 
 export const formElement = {
   ...css.bodyFont
 };
+
+export const textElement = {
+  ...formElement,
+  width: "100%",
+  padding: "12px 12px",
+  margin: "8px 0",
+  boxSizing: "border-box",
+  border: "2px solid grey",
+  borderRadius: "5px"
+} as CSSProperties;
+
+export const formButton = {
+  ...formElement,
+  ...adminCSS.adminButton
+} as CSSProperties;
 
 const formGroupContainer = {
   display: "flex",

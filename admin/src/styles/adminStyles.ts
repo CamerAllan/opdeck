@@ -12,6 +12,17 @@ export const adminTopLevel = {
   width: "100%"
 };
 
+export const adminButton = {
+  border: "none",
+  borderRadius: "5px",
+  color: "white",
+  background: "#12939A",
+  display: "inline",
+  margin: "5px",
+  height: "50px",
+  width: "70px"
+} as CSSProperties;
+
 export const adminSelectCont = {
   ...adminArea,
   background: "#cccccc",

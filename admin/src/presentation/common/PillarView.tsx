@@ -10,6 +10,7 @@ interface IPillarStateProps {
 class PillarView extends React.Component<IPillarStateProps> {
   public render() {
     const pillar: IPillar = this.props.pillar;
+
     return (
       <div style={css.pillar(pillar.colour)}>
         <div style={css.title}>{this.props.id}</div>

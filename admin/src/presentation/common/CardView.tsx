@@ -10,6 +10,7 @@ interface ICardStateProps {
 class CardView extends React.Component<ICardStateProps> {
   public render() {
     const card: ICard = this.props.card;
+
     return (
       <div style={css.card}>
         <div style={css.contextContainer}>

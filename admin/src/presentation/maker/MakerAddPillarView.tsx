@@ -68,8 +68,15 @@ class MakerAddPillarView extends React.Component<IMakerAddPillarStateProps> {
               </div>
             </div>
 
-            <button onClick={this.props.closeMenuDispatch}>Cancel</button>
-            <button type="submit">Submit</button>
+            <button
+              style={css.formButton}
+              onClick={this.props.closeMenuDispatch}
+            >
+              Cancel
+            </button>
+            <button style={css.formButton} type="submit">
+              Submit
+            </button>
           </Form>
         </Formik>
       </div>

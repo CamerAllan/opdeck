@@ -31,12 +31,14 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
       pillarAcceptConsequences.push(
         <>
           <label style={css.formLabel}>{pillar} Effect:</label>
+
           <Field type="number" name={`accept${pillar}Effect`} />
         </>
       );
       pillarRejectConsequences.push(
         <>
           <label style={css.formLabel}>{pillar} Effect:</label>
+
           <Field type="number" name={`reject${pillar}Effect`} />
         </>
       );
@@ -89,24 +91,27 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
             <div style={css.horFormGroupContainer}>
               <div style={css.formGroupElement}>
                 <label style={css.formLabel}>ID:</label>
+
                 <Field type="text" name="id" />
               </div>
               <div style={css.formGroupElement}>
                 <label style={css.formLabel}>Name:</label>
+
                 <Field type="text" name="name" />
               </div>
               <div style={css.formGroupElement}>
                 <label style={css.formLabel}>Text:</label>
+
                 <Field type="text" component="textarea" name="text" />
               </div>
             </div>
             <div style={css.horFormGroupContainer}>
               <div style={css.formGroupElement}>
                 <label style={css.formLabel}>Accept:</label>
-                <div style={css.formElement}>
-                  <label style={css.formLabel}>Text:</label>
-                  <Field type="text" name="acceptText" />
-                </div>
+                <label style={css.formLabel}>Text:</label>
+
+                <Field type="text" name="acceptText" />
+
                 <div style={css.formElement}>
                   <label style={css.formLabel}>Cards Added:</label>
                   <Field
@@ -127,10 +132,10 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
               </div>
               <div style={css.formGroupElement}>
                 <label style={css.formLabel}>Reject:</label>
-                <div style={css.formElement}>
-                  <label style={css.formLabel}>Text:</label>
-                  <Field type="text" name="rejectText" />
-                </div>
+                <label style={css.formLabel}>Text:</label>
+
+                <Field style={css.textElement} type="text" name="rejectText" />
+
                 <div style={css.formElement}>
                   <label style={css.formLabel}>Cards Added:</label>
                   <Field
@@ -150,8 +155,15 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
                 <div style={css.formElement}>{pillarRejectConsequences}</div>
               </div>
             </div>
-            <button onClick={this.props.closeMenuDispatch}>Cancel</button>
-            <button type="submit">Submit</button>
+            <button
+              style={css.formButton}
+              onClick={this.props.closeMenuDispatch}
+            >
+              Cancel
+            </button>
+            <button style={css.formButton} type="submit">
+              Submit
+            </button>
           </Form>
         </Formik>
       </div>

@@ -6,6 +6,8 @@ export const GET_GAME_DATA_STARTED = "GET_GAME_DATA_STARTED";
 export const GET_GAME_DATA_FAILED = "GET_GAME_DATA_FAILED";
 
 export const SELECT_CARD = "SELECT_CARD";
+export const SELECT_PILLAR = "SELECT_PILLAR";
+export const SELECT_CARDS = "SELECT_CARDS";
 export const FILTER_PILLARS = "FILTER_PILLARS";
 
 export const CLOSE_MENU = "CLOSE_MENU";
@@ -15,3 +17,6 @@ export const ADD_CARD = "ADD_CARD";
 export const ADD_PILLAR = "ADD_PILLAR";
 
 export const SAVE_GAME = "SAVE_GAME";
+
+export const DELETE_PILLAR = "DELETE_PILLAR";
+export const DELETE_CARD = "DELETE_CARD";

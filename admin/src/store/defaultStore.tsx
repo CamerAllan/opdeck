@@ -4,7 +4,7 @@ const defaultStore: IStore = {
   cards: {},
   turns: [],
   pillars: {},
-  selectedData: { cards: [], users: [], pillars: {} },
+  selectedData: { cards: [], users: [], pillars: {}, pillar: "", card: "" },
   updateRate: 500,
   menu: Menu.VIS
 };

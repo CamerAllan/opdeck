@@ -83,7 +83,7 @@ const getGameDataFailure = (error: any) => ({
 });
 
 export const selectCards = (cardIds: string[]) => ({
-  type: types.SELECT_CARD,
+  type: types.SELECT_CARDS,
   payload: {
     cardIds
   }
@@ -135,5 +135,29 @@ export const saveGame = (id: string, game: IGame) => {
     payload: {
       id
     }
+  };
+};
+export const deleteCard = (id: string) => {
+  return {
+    type: types.DELETE_CARD,
+    payload: id
+  };
+};
+export const deletePillar = (id: string) => {
+  return {
+    type: types.DELETE_PILLAR,
+    payload: id
+  };
+};
+export const selectPillar = (id: string) => {
+  return {
+    type: types.SELECT_PILLAR,
+    payload: id
+  };
+};
+export const selectCard = (id: string) => {
+  return {
+    type: types.SELECT_CARD,
+    payload: id
   };
 };

@@ -7,6 +7,38 @@ import { ITurnRequest } from "src/store/requestTypes";
 
 function mainReducer(state = defaultStore, action: any): IStore {
   switch (action.type) {
+    case types.SELECT_CARD: {
+      return {
+        ...state,
+        selectedData: {
+          ...state.selectedData,
+          card: action.payload
+        }
+      };
+    }
+    case types.SELECT_PILLAR: {
+      return {
+        ...state,
+        selectedData: {
+          ...state.selectedData,
+          pillar: action.payload
+        }
+      };
+    }
+    case types.DELETE_PILLAR: {
+      const { [action.payload]: removed, ...newPillars } = state.pillars;
+      return {
+        ...state,
+        pillars: newPillars
+      };
+    }
+    case types.DELETE_CARD: {
+      const { [action.payload]: removed, ...newCards } = state.cards;
+      return {
+        ...state,
+        cards: newCards
+      };
+    }
     case types.OPEN_ADD_CARD_MENU: {
       return {
         ...state,
@@ -72,7 +104,7 @@ function mainReducer(state = defaultStore, action: any): IStore {
         pillars: game.pillars
       };
     }
-    case types.SELECT_CARD: {
+    case types.SELECT_CARDS: {
       return {
         ...state,
         selectedData: {
