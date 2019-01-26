@@ -16,7 +16,7 @@ class DataView extends React.Component<IDataStateProps> {
   public render() {
     return (
       <div style={css.adminTopLevel}>
-        <div style={css.adminSelectCont}>
+        <div style={css.adminLeftCont}>
           <Select
             selectedCards={this.props.selectedData.cards}
             pillars={this.props.pillars}

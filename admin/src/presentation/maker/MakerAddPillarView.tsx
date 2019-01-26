@@ -44,27 +44,35 @@ class MakerAddPillarView extends React.Component<IMakerAddPillarStateProps> {
             <div style={css.horFormGroupContainer}>
               <div style={css.formGroupElement}>
                 <label style={css.formLabel}>Name:</label>
-                <Field type="text" name="id" />
+                <Field style={css.textElement} type="text" name="id" />
               </div>
               <div style={css.formGroupElement}>
                 <label style={css.formLabel}>Description:</label>
-                <Field type="text" component="textarea" name="description" />
+                <Field
+                  style={css.textAreaElement}
+                  type="text"
+                  component="textarea"
+                  name="description"
+                />
               </div>
+            </div>
+
+            <div style={css.horFormGroupContainer}>
               <div style={css.formGroupElement}>
                 <label style={css.formLabel}>Minimum value:</label>
-                <Field type="number" name="min" />
+                <Field style={css.textElement} type="number" name="min" />
               </div>
               <div style={css.formGroupElement}>
                 <label style={css.formLabel}>Maximum value:</label>
-                <Field type="number" name="max" />
+                <Field style={css.textElement} type="number" name="max" />
               </div>
               <div style={css.formGroupElement}>
                 <label style={css.formLabel}>Initial value:</label>
-                <Field type="number" name="value" />
+                <Field style={css.textElement} type="number" name="value" />
               </div>
               <div style={css.formGroupElement}>
                 <label style={css.formLabel}>Colour:</label>
-                <Field type="text" name="colour" />
+                <Field style={css.textElement} type="text" name="colour" />
               </div>
             </div>
 

@@ -8,12 +8,16 @@ export const formElement = {
 
 export const textElement = {
   ...formElement,
-  width: "100%",
-  padding: "12px 12px",
+  padding: "8px 8px",
   margin: "8px 0",
   boxSizing: "border-box",
   border: "2px solid grey",
   borderRadius: "5px"
+} as CSSProperties;
+
+export const textAreaElement = {
+  ...textElement,
+  width: "100%"
 } as CSSProperties;
 
 export const formButton = {

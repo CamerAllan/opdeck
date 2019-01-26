@@ -18,8 +18,8 @@ export interface ISelectedData {
   cards: string[];
   pillars: IWeightings;
   users: string[];
-  pillar: string;
-  card: string;
+  pillar: string | null;
+  card: string | null;
 }
 
 // Frontend

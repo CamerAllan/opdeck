@@ -15,7 +15,7 @@ export const DARK1 = "#2D2D2A";
 export const LARGE_PADDING = 40;
 
 export const bodyFont = {
-  fontFamily: "Open Sans, sans-serif",
+  fontFamily: "Segoe UI, sans-serif",
   fontSize: BODY_FONT_SIZE
 } as CSSProperties;
 

@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 
 export const card = {
-  background: "#12939A",
+  background: "#f2f2f2",
   borderRadius: "10px",
   padding: "10px 10px 10px 10px",
   height: "100%",
@@ -17,7 +17,7 @@ export const contextContainer = {
 
 export const textFade = {
   backgroundImage:
-    "linear-gradient(rgba(18, 147, 154,0), rgba(18, 147, 154,1))",
+    "linear-gradient(rgba(242, 242, 242,0), rgba(242, 242, 242,1))",
   position: "absolute",
   bottom: 0,
   left: 0,

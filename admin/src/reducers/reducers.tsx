@@ -13,7 +13,8 @@ function mainReducer(state = defaultStore, action: any): IStore {
         selectedData: {
           ...state.selectedData,
           card: action.payload
-        }
+        },
+        menu: Menu.ADD_CARD
       };
     }
     case types.SELECT_PILLAR: {
@@ -22,7 +23,8 @@ function mainReducer(state = defaultStore, action: any): IStore {
         selectedData: {
           ...state.selectedData,
           pillar: action.payload
-        }
+        },
+        menu: Menu.ADD_PILLAR
       };
     }
     case types.DELETE_PILLAR: {
@@ -42,13 +44,21 @@ function mainReducer(state = defaultStore, action: any): IStore {
     case types.OPEN_ADD_CARD_MENU: {
       return {
         ...state,
-        menu: Menu.ADD_CARD
+        menu: Menu.ADD_CARD,
+        selectedData: {
+          ...state.selectedData,
+          card: null
+        }
       };
     }
     case types.OPEN_ADD_PILLAR_MENU: {
       return {
         ...state,
-        menu: Menu.ADD_PILLAR
+        menu: Menu.ADD_PILLAR,
+        selectedData: {
+          ...state.selectedData,
+          pillar: null
+        }
       };
     }
     case types.ADD_CARD: {

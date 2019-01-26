@@ -12,6 +12,7 @@ interface IAddDispatchProps {
 }
 
 interface IAddCardStateProps {
+  selectedCard: string | null;
   cards: ICards;
   pillars: IPillars;
 }
@@ -24,7 +25,9 @@ class Add extends React.Component<IAddProps> {
   }
 
   public render() {
-    return <MakerAddCardView {...this.props} />;
+    return (
+      <MakerAddCardView {...this.props} cardToEdit={this.props.selectedCard} />
+    );
   }
 }
 

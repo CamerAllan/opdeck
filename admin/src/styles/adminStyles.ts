@@ -23,10 +23,13 @@ export const adminButton = {
   width: "70px"
 } as CSSProperties;
 
-export const adminSelectCont = {
+export const adminLeftCont = {
   ...adminArea,
+  display: "flex",
+  flexFlow: "column",
   background: "#cccccc",
-  padding: css.LARGE_PADDING
+  maxHeight: "100vh",
+  minHeight: "100vh"
 } as CSSProperties;
 
 export const adminVisCont = {
