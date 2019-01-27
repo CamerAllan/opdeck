@@ -36,7 +36,7 @@ export const adminVisCont = {
   ...adminArea,
   background: "white",
   display: "flex",
-  flex: "3 1",
+  flex: "2.5 1",
   maxHeight: "100vh",
   maxWidth: "100%",
   minWidth: "400px"

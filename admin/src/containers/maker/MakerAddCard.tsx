@@ -3,11 +3,12 @@ import { ThunkDispatch } from "redux-thunk";
 import { IStore, ICard, ICards, IPillars } from "../../store/store";
 import { AnyAction } from "redux";
 import { connect } from "react-redux";
-import { addCard, closeMenu } from "../../actions/actions";
+import { addCard, closeMenu, deleteCard } from "../../actions/actions";
 import MakerAddCardView from "../../presentation/maker/MakerAddCardView";
 
 interface IAddDispatchProps {
   addCardDispatch: (id: string, card: ICard) => void;
+  deleteCardDispatch: (id: string) => void;
   closeMenuDispatch: () => void;
 }
 
@@ -35,6 +36,7 @@ const mapDispatchToProps = (
   dispatch: ThunkDispatch<IStore, any, AnyAction>
 ) => ({
   addCardDispatch: (id: string, card: ICard) => dispatch(addCard(id, card)),
+  deleteCardDispatch: (id: string) => dispatch(deleteCard(id)),
   closeMenuDispatch: () => dispatch(closeMenu())
 });
 

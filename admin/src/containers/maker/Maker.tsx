@@ -1,11 +1,11 @@
 import * as React from "react";
 import MakerView from "../../presentation/maker/MakerView";
-import { IStore, IGame } from "src/store/store";
+import { IStore, IGame } from "../../store/store";
 
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { getAllData, getGameData, saveGame } from "src/actions/actions";
+import { getAllData, getGameData, saveGame } from "../../actions/actions";
 
 interface IMakerDispatchProps {
   getAllDataDispatch: () => void;

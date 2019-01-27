@@ -16,10 +16,10 @@ export const cardVis = {
 
 export const cardContainer = {
   flex: "1 1 175px",
-  height: "250px",
+  height: "275px",
   margin: "15px",
   maxWidth: "225px",
-  minWidth: "150px",
+  minWidth: "175px",
   transition: "0.5s ease-out"
 };
 
@@ -46,10 +46,12 @@ export const formCont = {
 } as CSSProperties;
 
 export const previewCont = {
+  borderTopLeftRadius: "10px",
+  borderTopRightRadius: "10px",
   display: "flex",
   flexFlow: "row",
   flex: "0 0 300px",
-  padding: "5px",
+  padding: css.LARGE_PADDING,
   background: "grey",
   height: "300px",
   width: "100%",
@@ -58,7 +60,6 @@ export const previewCont = {
 } as CSSProperties;
 
 export const preview = {
-  padding: "10px",
-  height: "280px",
-  width: "200px"
+  height: "225px",
+  width: "150px"
 };

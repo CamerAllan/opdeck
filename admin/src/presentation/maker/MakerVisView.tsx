@@ -22,7 +22,7 @@ class MakerVisView extends React.Component<IMakerVisStateProps> {
     const containerHoverStyle = css`
       &:hover {
         transition: 0.5s ease-out;
-        min-width: 250px !important;
+        min-width: 225px !important;
         height: 300px !important;
       }
     `;

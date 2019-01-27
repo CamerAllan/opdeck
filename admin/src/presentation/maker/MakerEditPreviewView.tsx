@@ -7,15 +7,23 @@ interface IMakerEditPreviewStateProps {
   preview: any;
   submitForm: () => void;
   closeMenuDispatch: () => void;
+  deleteItem: (id: string) => void;
 }
 
 class MakerEditPreviewView extends React.Component<
   IMakerEditPreviewStateProps
 > {
   public render() {
+    const d = () => {
+      this.props.deleteItem(this.props.id ? this.props.id : "");
+    };
+
     return (
       <div style={makerCSS.previewCont}>
         <div style={makerCSS.preview}>{this.props.preview}</div>
+        <button style={css.formButton} onClick={d}>
+          Delete
+        </button>
         <button style={css.formButton} onClick={this.props.closeMenuDispatch}>
           Cancel
         </button>

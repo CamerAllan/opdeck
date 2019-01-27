@@ -16,14 +16,27 @@ class SelectField extends React.Component<ISelectFieldStateProps> {
       );
     };
 
-    const find = (option: any) => option.value === this.props.field.value;
+    let initialValues: any[] | null = null;
+    if (this.props.field.value) {
+      initialValues = [];
+      this.props.options.forEach((o: any) => {
+        console.log(o);
+        console.log(this.props.field);
+        this.props.field.value.forEach((v: any) => {
+          if (o.value === v.value) {
+            initialValues!.push(v);
+          }
+        });
+      });
+    }
 
     return (
       <Select
+        closeMenuOnSelect={false}
         isMulti={true}
         options={this.props.options}
         name={this.props.field.name}
-        value={this.props.options ? this.props.options.find(find) : ""}
+        defaultValue={initialValues ? initialValues : ""}
         onChange={onChange}
         onBlur={this.props.field.onBlur}
       />

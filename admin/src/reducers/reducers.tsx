@@ -3,7 +3,7 @@ import * as types from "../actions/actionTypes";
 
 import defaultStore from "../store/defaultStore";
 import { IStore, IGame, Menu } from "../store/store";
-import { ITurnRequest } from "src/store/requestTypes";
+import { ITurnRequest } from "../store/requestTypes";
 
 function mainReducer(state = defaultStore, action: any): IStore {
   switch (action.type) {
@@ -31,14 +31,16 @@ function mainReducer(state = defaultStore, action: any): IStore {
       const { [action.payload]: removed, ...newPillars } = state.pillars;
       return {
         ...state,
-        pillars: newPillars
+        pillars: newPillars,
+        menu: Menu.VIS
       };
     }
     case types.DELETE_CARD: {
       const { [action.payload]: removed, ...newCards } = state.cards;
       return {
         ...state,
-        cards: newCards
+        cards: newCards,
+        menu: Menu.VIS
       };
     }
     case types.OPEN_ADD_CARD_MENU: {
