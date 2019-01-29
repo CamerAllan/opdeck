@@ -20,7 +20,6 @@ class MakerAddPillarView extends React.Component<IMakerAddPillarStateProps> {
     };
 
     const onSubmit = (values: any) => {
-      console.log(JSON.stringify(values));
       const pillar: IPillar = {
         description: values.description,
         value: values.value,

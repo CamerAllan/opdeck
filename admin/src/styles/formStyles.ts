@@ -50,3 +50,9 @@ export const formGroupElement = {
 export const formLabel = {
   display: "block"
 };
+
+export const formCont = {
+  flex: "1 1",
+  overflowY: "scroll",
+  padding: css.LARGE_PADDING
+} as CSSProperties;

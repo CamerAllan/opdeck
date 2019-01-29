@@ -39,12 +39,6 @@ export const pillarContainer = {
   transition: "0.5s ease-out"
 };
 
-export const formCont = {
-  flex: "1 1",
-  overflowY: "scroll",
-  padding: css.LARGE_PADDING
-} as CSSProperties;
-
 export const previewCont = {
   borderTopLeftRadius: "10px",
   borderTopRightRadius: "10px",

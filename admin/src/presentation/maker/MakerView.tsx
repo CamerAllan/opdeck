@@ -6,6 +6,7 @@ import * as css from "../../styles/adminStyles";
 import { ISelectedData, ICards, IPillars, Menu } from "../../store/store";
 import MakerAddCard from "../../containers/maker/MakerAddCard";
 import MakerAddPillar from "../../containers/maker/MakerAddPillar";
+import GameSelector from "src/containers/GameSelector";
 interface IMakerStateProps {
   selectedData: ISelectedData;
   cards: ICards;
@@ -20,11 +21,21 @@ class MakerView extends React.Component<IMakerStateProps> {
       case Menu.VIS: {
         leftComponent = (
           <>
-            {/* <Select
-              selectedCards={this.props.selectedData.cards}
-              pillars={this.props.pillars}
-              cards={this.props.cards}
-            /> */}
+            <GameSelector
+              gameId={
+                this.props.selectedData.game ? this.props.selectedData.game : ""
+              }
+              game={{
+                id: this.props.selectedData.game
+                  ? this.props.selectedData.game
+                  : "",
+                currentCard: "changemee",
+                cards: this.props.cards,
+                pillars: this.props.pillars,
+                playDeck: [],
+                reserveDeck: []
+              }}
+            />
           </>
         );
         break;

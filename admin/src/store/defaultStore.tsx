@@ -4,9 +4,17 @@ const defaultStore: IStore = {
   cards: {},
   turns: [],
   pillars: {},
-  selectedData: { cards: [], users: [], pillars: {}, pillar: null, card: null },
+  selectedData: {
+    game: null,
+    cards: [],
+    users: [],
+    pillars: {},
+    pillar: null,
+    card: null
+  },
   updateRate: 500,
-  menu: Menu.VIS
+  menu: Menu.VIS,
+  games: []
 };
 
 export default defaultStore;

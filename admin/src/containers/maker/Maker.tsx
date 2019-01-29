@@ -5,12 +5,18 @@ import { IStore, IGame } from "../../store/store";
 import { connect } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { getAllData, getGameData, saveGame } from "../../actions/actions";
+import {
+  getAllData,
+  getGameData,
+  saveGame,
+  getAllGames
+} from "../../actions/actions";
 
 interface IMakerDispatchProps {
   getAllDataDispatch: () => void;
   getGameDataDispatch: (game: string) => void;
   saveGameDispatch: (id: string, game: IGame) => void;
+  getAllGamesDispatch: () => void;
 }
 
 type IMakerProps = IMakerDispatchProps & IStore;
@@ -21,20 +27,20 @@ class Maker extends React.Component<IMakerProps> {
   }
 
   public componentDidMount() {
+    this.props.getAllGamesDispatch();
     this.props.getAllDataDispatch();
-    this.props.getGameDataDispatch("alienTest");
-    setInterval(
-      () =>
-        this.props.saveGameDispatch("alienTest", {
-          id: "alienTest",
-          currentCard: "goodMorning",
-          pillars: this.props.pillars,
-          playDeck: [],
-          reserveDeck: Object.keys(this.props.cards),
-          cards: this.props.cards
-        }),
-      10000
-    );
+    // setInterval(() => {
+    //   if (this.props.selectedData.game) {
+    //     this.props.saveGameDispatch(this.props.selectedData.game, {
+    //       id: this.props.selectedData.game,
+    //       currentCard: "goodMorning",
+    //       pillars: this.props.pillars,
+    //       playDeck: [],
+    //       reserveDeck: Object.keys(this.props.cards),
+    //       cards: this.props.cards
+    //     });
+    //   }
+    // }, 10000);
   }
 
   public render() {
@@ -54,7 +60,8 @@ const mapDispatchToProps = (
 ) => ({
   getAllDataDispatch: () => dispatch(getAllData()),
   getGameDataDispatch: (game: string) => dispatch(getGameData(game)),
-  saveGameDispatch: (id: string, game: IGame) => dispatch(saveGame(id, game))
+  saveGameDispatch: (id: string, game: IGame) => dispatch(saveGame(id, game)),
+  getAllGamesDispatch: () => dispatch(getAllGames())
 });
 
 const mapStateToProps = (state: IStore): IStore => {

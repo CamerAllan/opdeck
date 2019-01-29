@@ -3,7 +3,6 @@ import { ICards, ICard, IPillars } from "../../store/store";
 import { Formik, Form, Field } from "formik";
 import SelectField from "../form/SelectField";
 import * as css from "../../styles/formStyles";
-import * as makerCSS from "../../styles/maker/makerVisStyles";
 import MakerEditPreviewView from "./MakerEditPreviewView";
 import CardView from "../common/CardView";
 
@@ -106,7 +105,6 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
     });
 
     const onSubmit = (values: any) => {
-      console.log(JSON.stringify(values));
       const card: ICard = this.valuesToCard(values);
 
       this.props.addCardDispatch(values.id, card);
@@ -116,7 +114,7 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
     const renderForm = (props: any) => {
       return (
         <>
-          <div style={makerCSS.formCont}>
+          <div style={css.formCont}>
             <Form>
               <div style={css.horFormGroupContainer}>
                 <div style={css.formGroupElement}>
@@ -227,7 +225,6 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
   private valuesToCard = (values: any) => {
     const acceptEffect = {};
     Object.keys(values).forEach((key: any) => {
-      console.log(key);
       if (key.startsWith("acceptEffect")) {
         acceptEffect[key.replace("acceptEffect", "")] = values[key];
       }

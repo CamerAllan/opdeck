@@ -7,6 +7,7 @@ export interface IStore {
   selectedData: ISelectedData;
   updateRate: number;
   menu: Menu;
+  games: string[];
 }
 
 export enum Menu {
@@ -15,6 +16,7 @@ export enum Menu {
   ADD_PILLAR
 }
 export interface ISelectedData {
+  game: string | null;
   cards: string[];
   pillars: IWeightings;
   users: string[];

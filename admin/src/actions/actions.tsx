@@ -82,6 +82,45 @@ const getGameDataFailure = (error: any) => ({
   }
 });
 
+export function getAllGames() {
+  return async (dispatch: ThunkDispatch<IStore, void, Action>) => {
+    dispatch(getAllGamesStarted);
+    const response = await fetch(`/games`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    });
+    response
+      .json()
+      .then(games => {
+        dispatch(getAllGamesSuccess(games));
+      })
+      .catch(reason => {
+        dispatch(getAllGamesFailure(reason));
+      });
+  };
+}
+
+const getAllGamesSuccess = (games: string[]) => {
+  return {
+    type: types.GET_ALL_GAMES_SUCCESS,
+    payload: games
+  };
+};
+
+const getAllGamesStarted = () => ({
+  type: types.GET_ALL_GAMES_STARTED
+});
+
+const getAllGamesFailure = (error: any) => ({
+  type: types.GET_ALL_GAMES_FAILED,
+  payload: {
+    error
+  }
+});
+
 export const selectCards = (cardIds: string[]) => ({
   type: types.SELECT_CARDS,
   payload: {
@@ -158,6 +197,18 @@ export const selectPillar = (id: string) => {
 export const selectCard = (id: string) => {
   return {
     type: types.SELECT_CARD,
+    payload: id
+  };
+};
+export const selectGame = (id: string) => {
+  return {
+    type: types.SELECT_GAME,
+    payload: id
+  };
+};
+export const newGame = (id: string) => {
+  return {
+    type: types.NEW_GAME,
     payload: id
   };
 };

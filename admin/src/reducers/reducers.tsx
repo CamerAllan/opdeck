@@ -7,6 +7,20 @@ import { ITurnRequest } from "../store/requestTypes";
 
 function mainReducer(state = defaultStore, action: any): IStore {
   switch (action.type) {
+    case types.NEW_GAME:
+      return {
+        ...state,
+        games: [...state.games, action.payload],
+        selectedData: {
+          ...state.selectedData,
+          game: action.payload
+        }
+      };
+    case types.SELECT_GAME:
+      return {
+        ...state,
+        selectedData: { ...state.selectedData, game: action.payload }
+      };
     case types.SELECT_CARD: {
       return {
         ...state,
@@ -16,6 +30,9 @@ function mainReducer(state = defaultStore, action: any): IStore {
         },
         menu: Menu.ADD_CARD
       };
+    }
+    case types.GET_ALL_GAMES_SUCCESS: {
+      return { ...state, games: action.payload };
     }
     case types.SELECT_PILLAR: {
       return {
@@ -114,6 +131,13 @@ function mainReducer(state = defaultStore, action: any): IStore {
         ...state,
         cards: game.cards,
         pillars: game.pillars
+      };
+    }
+    case types.GET_GAME_DATA_FAILED: {
+      return {
+        ...state,
+        cards: {},
+        pillars: {}
       };
     }
     case types.SELECT_CARDS: {

@@ -20,8 +20,6 @@ class SelectField extends React.Component<ISelectFieldStateProps> {
     if (this.props.field.value) {
       initialValues = [];
       this.props.options.forEach((o: any) => {
-        console.log(o);
-        console.log(this.props.field);
         this.props.field.value.forEach((v: any) => {
           if (o.value === v.value) {
             initialValues!.push(v);
