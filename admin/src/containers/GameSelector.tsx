@@ -8,13 +8,16 @@ import {
   selectGame,
   getGameData,
   newGame,
-  saveGame
+  saveGame,
+  selectStartingDeck
 } from "src/actions/actions";
+import GameInfo from "./GameInfo";
 
 interface IGameSelectorDispatchProps {
   selectGameDispatch: (id: string) => void;
   newGameDispatch: (id: string) => void;
   saveGameDispatch: (id: string, game: IGame) => void;
+  selectStartingDeckDispatch: (cards: string[]) => void;
 }
 
 interface IGameSelectorStateProps {
@@ -32,6 +35,7 @@ class GameSelector extends React.Component<GameSelectorProps> {
     return (
       <div>
         <GameSelectorView {...this.props} saveGameDispatch={save} />
+        <GameInfo game={this.props.game} />
       </div>
     );
   }
@@ -46,7 +50,9 @@ const mapDispatchToProps = (
   },
   newGameDispatch: (id: string) => dispatch(newGame(id)),
   saveGameDispatch: (gameId: string, game: IGame) =>
-    dispatch(saveGame(gameId, game))
+    dispatch(saveGame(gameId, game)),
+  selectStartingDeckDispatch: (cards: string[]) =>
+    dispatch(selectStartingDeck(cards))
 });
 
 const mapStateToProps: (state: IStore) => IStore = state => {

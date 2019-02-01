@@ -27,7 +27,7 @@ export const adminLeftCont = {
   ...adminArea,
   display: "flex",
   flexFlow: "column",
-  background: "#cccccc",
+  background: "#EEEEEE",
   maxHeight: "100vh",
   minHeight: "100vh"
 } as CSSProperties;
@@ -36,7 +36,7 @@ export const adminVisCont = {
   ...adminArea,
   background: "white",
   display: "flex",
-  flex: "2.5 1",
+  flex: "2.4 1",
   maxHeight: "100vh",
   maxWidth: "100%",
   minWidth: "400px"

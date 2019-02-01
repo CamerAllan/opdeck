@@ -3,6 +3,7 @@ import { CSSProperties } from "react";
 export const card = {
   background: "#f2f2f2",
   borderRadius: "10px",
+  boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
   padding: "10px 10px 10px 10px",
   height: "100%",
   width: "100%",

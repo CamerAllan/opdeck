@@ -29,18 +29,6 @@ class Maker extends React.Component<IMakerProps> {
   public componentDidMount() {
     this.props.getAllGamesDispatch();
     this.props.getAllDataDispatch();
-    // setInterval(() => {
-    //   if (this.props.selectedData.game) {
-    //     this.props.saveGameDispatch(this.props.selectedData.game, {
-    //       id: this.props.selectedData.game,
-    //       currentCard: "goodMorning",
-    //       pillars: this.props.pillars,
-    //       playDeck: [],
-    //       reserveDeck: Object.keys(this.props.cards),
-    //       cards: this.props.cards
-    //     });
-    //   }
-    // }, 10000);
   }
 
   public render() {
@@ -50,6 +38,7 @@ class Maker extends React.Component<IMakerProps> {
         selectedData={this.props.selectedData}
         cards={this.props.cards}
         pillars={this.props.pillars}
+        startingDeck={this.props.startingDeck}
       />
     );
   }

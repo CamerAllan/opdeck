@@ -2,6 +2,7 @@ import { ITurnRequest } from "./requestTypes";
 
 export interface IStore {
   cards: ICards;
+  startingDeck: string[];
   pillars: IPillars;
   turns: ITurnRequest[];
   selectedData: ISelectedData;

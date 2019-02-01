@@ -3,6 +3,7 @@ import { CSSProperties } from "react";
 export const pillar = (colour: string) => {
   return {
     background: `${colour === "" ? "#DDDDDD" : colour}`,
+    boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
     borderRadius: "10px",
     padding: "10px 10px 10px 10px",
     height: "100%",

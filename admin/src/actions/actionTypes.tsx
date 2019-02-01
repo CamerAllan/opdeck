@@ -23,6 +23,7 @@ export const NEW_GAME = "NEW_GAME";
 
 export const SAVE_GAME = "SAVE_GAME";
 export const SELECT_GAME = "SELECT_GAME";
+export const SELECT_STARTING_DECK = "SELECT_STARTING_DECK";
 
 export const DELETE_PILLAR = "DELETE_PILLAR";
 export const DELETE_CARD = "DELETE_CARD";

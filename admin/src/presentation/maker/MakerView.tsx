@@ -1,14 +1,13 @@
 import * as React from "react";
-// import Select from "../../containers/common/Select";
 import MakerVis from "../../containers/maker/MakerVis";
 import * as css from "../../styles/adminStyles";
-// import * as makerCSS from "../../styles/maker/makerVisStyles";
 import { ISelectedData, ICards, IPillars, Menu } from "../../store/store";
 import MakerAddCard from "../../containers/maker/MakerAddCard";
 import MakerAddPillar from "../../containers/maker/MakerAddPillar";
 import GameSelector from "src/containers/GameSelector";
 interface IMakerStateProps {
   selectedData: ISelectedData;
+  startingDeck: string[];
   cards: ICards;
   pillars: IPillars;
   menu: Menu;
@@ -32,7 +31,7 @@ class MakerView extends React.Component<IMakerStateProps> {
                 currentCard: "changemee",
                 cards: this.props.cards,
                 pillars: this.props.pillars,
-                playDeck: [],
+                playDeck: this.props.startingDeck,
                 reserveDeck: []
               }}
             />
@@ -51,7 +50,12 @@ class MakerView extends React.Component<IMakerStateProps> {
         break;
       }
       case Menu.ADD_PILLAR: {
-        leftComponent = <MakerAddPillar pillars={this.props.pillars} />;
+        leftComponent = (
+          <MakerAddPillar
+            pillars={this.props.pillars}
+            selectedPillar={this.props.selectedData.pillar}
+          />
+        );
         break;
       }
     }

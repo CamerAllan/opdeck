@@ -21,19 +21,21 @@ class MakerEditPreviewView extends React.Component<
     return (
       <div style={makerCSS.previewCont}>
         <div style={makerCSS.preview}>{this.props.preview}</div>
-        <button style={css.formButton} onClick={d}>
-          Delete
-        </button>
-        <button style={css.formButton} onClick={this.props.closeMenuDispatch}>
-          Cancel
-        </button>
-        <button
-          style={css.formButton}
-          onClick={this.props.submitForm}
-          type="submit"
-        >
-          Submit
-        </button>
+        <div style={css.horFormGroupContainer}>
+          <button style={css.formButton} onClick={d}>
+            Delete
+          </button>
+          <button style={css.formButton} onClick={this.props.closeMenuDispatch}>
+            Cancel
+          </button>
+          <button
+            style={css.formButton}
+            onClick={this.props.submitForm}
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
       </div>
     );
   }

@@ -16,6 +16,12 @@ function mainReducer(state = defaultStore, action: any): IStore {
           game: action.payload
         }
       };
+    case types.SELECT_STARTING_DECK: {
+      return {
+        ...state,
+        startingDeck: action.payload
+      };
+    }
     case types.SELECT_GAME:
       return {
         ...state,

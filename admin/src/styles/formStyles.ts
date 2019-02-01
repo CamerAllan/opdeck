@@ -22,7 +22,8 @@ export const textAreaElement = {
 
 export const formButton = {
   ...formElement,
-  ...adminCSS.adminButton
+  ...adminCSS.adminButton,
+  display: "inline"
 } as CSSProperties;
 
 const formGroupContainer = {
@@ -32,7 +33,8 @@ const formGroupContainer = {
 
 export const horFormGroupContainer = {
   ...formGroupContainer,
-  flexFlow: "row wrap"
+  flexFlow: "row wrap",
+  justifyContent: "space-between"
 };
 
 export const vertFormGroupContainer = {

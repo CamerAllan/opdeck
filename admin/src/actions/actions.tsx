@@ -206,6 +206,12 @@ export const selectGame = (id: string) => {
     payload: id
   };
 };
+export const selectStartingDeck = (cards: string[]) => {
+  return {
+    type: types.SELECT_STARTING_DECK,
+    payload: cards
+  };
+};
 export const newGame = (id: string) => {
   return {
     type: types.NEW_GAME,

@@ -24,6 +24,7 @@ class MakerVisView extends React.Component<IMakerVisStateProps> {
         transition: 0.5s ease-out;
         min-width: 225px !important;
         height: 300px !important;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2) !important;
       }
     `;
     const pillarDisplay: JSX.Element[] = [];
