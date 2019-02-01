@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 import * as types from "../actions/actionTypes";
-
+import { ICard } from "../store/store";
 import defaultStore from "../store/defaultStore";
 import { IStore, IGame, Menu } from "../store/store";
 import { ITurnRequest } from "../store/requestTypes";
@@ -52,20 +52,74 @@ function mainReducer(state = defaultStore, action: any): IStore {
     }
     case types.DELETE_PILLAR: {
       const { [action.payload]: removed, ...newPillars } = state.pillars;
+      const oldCards = state.cards;
+      const newCards = {};
+      // Remove references to this pillar
+      Object.keys(oldCards).forEach(oc => {
+        const card: ICard = oldCards[oc];
+        delete card.contents.responses.accept.effects[action.payload];
+        delete card.contents.responses.reject.effects[action.payload];
+        delete card.weightings[action.payload];
+        newCards[oc] = card;
+      });
       return {
         ...state,
         pillars: newPillars,
-        menu: Menu.VIS
+        menu: Menu.VIS,
+        cards: newCards
       };
     }
     case types.DELETE_CARD: {
       const { [action.payload]: removed, ...newCards } = state.cards;
+      // Remove references to this card
+      Object.keys(newCards).forEach(c => {
+        const card: ICard = newCards[c];
+        while (
+          card.contents.responses.accept.cardsAdded.indexOf(action.payload) !==
+          -1
+        ) {
+          card.contents.responses.accept.cardsAdded.splice(
+            card.contents.responses.accept.cardsAdded.indexOf(action.payload),
+            1
+          );
+        }
+        while (
+          card.contents.responses.reject.cardsAdded.indexOf(action.payload) !==
+          -1
+        ) {
+          card.contents.responses.reject.cardsAdded.splice(
+            card.contents.responses.reject.cardsAdded.indexOf(action.payload),
+            1
+          );
+        }
+        while (
+          card.contents.responses.accept.cardsRemoved.indexOf(
+            action.payload
+          ) !== -1
+        ) {
+          card.contents.responses.accept.cardsRemoved.splice(
+            card.contents.responses.accept.cardsRemoved.indexOf(action.payload),
+            1
+          );
+        }
+        while (
+          card.contents.responses.reject.cardsRemoved.indexOf(
+            action.payload
+          ) !== -1
+        ) {
+          card.contents.responses.reject.cardsRemoved.splice(
+            card.contents.responses.reject.cardsRemoved.indexOf(action.payload),
+            1
+          );
+        }
+      });
       return {
         ...state,
         cards: newCards,
         menu: Menu.VIS
       };
     }
+
     case types.OPEN_ADD_CARD_MENU: {
       return {
         ...state,
