@@ -1,4 +1,4 @@
-# aliens
+# ETGame
 SH Project hoping to create a framework allowing capture of user's opinions through a gamelike interface.
 
 ## Questions for collaborators
