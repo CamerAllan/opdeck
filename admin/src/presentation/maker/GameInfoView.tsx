@@ -23,14 +23,21 @@ class GameInfoView extends React.Component<IGameInfoViewStateProps> {
       notAdded.push(<li>{na}</li>);
     });
 
+    const notAddedWarning =
+      notAdded.length > 0 ? (
+        <>
+          <label style={css.formLabel}>
+            Warning! These cards are not added to the game by any others:
+          </label>
+          {notAdded}
+        </>
+      ) : null;
+
     return (
       <div style={css.formCont}>
         <label style={css.formLabel}>Pillar effect balance:</label>
         {balances}
-        <label style={css.formLabel}>
-          Warning! These cards are not added to the game by any others:
-        </label>
-        {notAdded}
+        {notAddedWarning}
       </div>
     );
   }

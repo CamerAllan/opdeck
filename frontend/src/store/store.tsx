@@ -11,6 +11,7 @@ export interface IInterfaceData {
 
 export interface IGameData {
   game: IGame;
+  currentCard: string;
   gameId: string;
   turnNum: number;
   settings: ISettings;
@@ -22,7 +23,6 @@ export interface IGame {
   playDeck: string[];
   reserveDeck: string[];
   cards: ICards;
-  currentCard: string;
 }
 
 export interface IPerson {

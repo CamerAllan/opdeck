@@ -86,7 +86,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 const mapStateToProps = (state: IStore, ownProps: IResponseStateProps) => {
   const gameData: IGameData = { ...state.gameData } as IGameData;
   const userData: IUserData = { ...state.userData } as IUserData;
-  const card: string = gameData.game.currentCard;
+  const card: string = gameData.currentCard;
   return {
     userId: userData.userId as string,
     gameId: gameData.gameId,

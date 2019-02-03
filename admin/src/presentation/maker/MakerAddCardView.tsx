@@ -135,7 +135,7 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
                   />
                 </div>
               </div>
-              <div style={css.horFormGroupContainer}>
+              <div style={css.vertFormGroupContainer}>
                 <div style={css.formGroupElement}>
                   <label style={css.formLabel}>Accept:</label>
                   <label style={css.formLabel}>Text:</label>
@@ -144,7 +144,7 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
                     type="text"
                     name="acceptText"
                   />
-                  <div style={css.formElement}>
+                  <div style={css.formGroupElement}>
                     <label style={css.formLabel}>Cards Added:</label>
                     <Field
                       style={css.textElement}
@@ -153,7 +153,7 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
                       options={cardOptions}
                     />
                   </div>
-                  <div style={css.formElement}>
+                  <div style={css.formGroupElement}>
                     <label style={css.formLabel}>Cards Removed:</label>
                     <Field
                       style={css.textElement}
@@ -172,7 +172,7 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
                     type="text"
                     name="rejectText"
                   />
-                  <div style={css.formElement}>
+                  <div style={css.formGroupElement}>
                     <label style={css.formLabel}>Cards Added:</label>
                     <Field
                       style={css.textElement}
@@ -181,7 +181,7 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
                       options={cardOptions}
                     />
                   </div>
-                  <div style={css.formElement}>
+                  <div style={css.formGroupElement}>
                     <label style={css.formLabel}>Cards Removed:</label>
                     <Field
                       style={css.textElement}

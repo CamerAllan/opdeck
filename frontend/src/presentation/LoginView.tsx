@@ -15,6 +15,14 @@ class LoginView extends React.Component<ILoginViewProps> {
         <form onSubmit={this.props.onSubmit}>
           <label htmlFor="username">Enter username</label>
           <input id="username" name="username" type="text" />
+          <label htmlFor="gameId">Enter game id</label>
+          <input
+            id="gameId"
+            name="gameId"
+            type="text"
+            defaultValue="alienTest"
+          />
+          <input type="submit" name="submit" />
         </form>
       </div>
     );

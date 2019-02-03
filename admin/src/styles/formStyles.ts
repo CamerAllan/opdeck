@@ -4,7 +4,7 @@ import * as adminCSS from "./adminStyles";
 
 export const formElement = {
   ...css.bodyFont
-};
+} as CSSProperties;
 
 export const textElement = {
   ...formElement,
@@ -16,8 +16,7 @@ export const textElement = {
 } as CSSProperties;
 
 export const textAreaElement = {
-  ...textElement,
-  width: "100%"
+  ...textElement
 } as CSSProperties;
 
 export const formButton = {
@@ -28,14 +27,14 @@ export const formButton = {
 
 const formGroupContainer = {
   display: "flex",
-  padding: "5px 5px 5px 5px"
-};
+  padding: "5px 5px 5px 5px",
+  width: "100%"
+} as CSSProperties;
 
 export const horFormGroupContainer = {
   ...formGroupContainer,
-  flexFlow: "row wrap",
-  justifyContent: "space-between"
-};
+  flexFlow: "row wrap"
+} as CSSProperties;
 
 export const vertFormGroupContainer = {
   ...formGroupContainer,
@@ -47,7 +46,7 @@ export const formGroupElement = {
   ...formElement,
   flex: "1 0 auto",
   padding: "5px 5px 5px 5px"
-};
+} as CSSProperties;
 
 export const formLabel = {
   display: "block"
@@ -56,5 +55,6 @@ export const formLabel = {
 export const formCont = {
   flex: "1 1",
   overflowY: "scroll",
+  overflowX: "hidden",
   padding: css.LARGE_PADDING
 } as CSSProperties;

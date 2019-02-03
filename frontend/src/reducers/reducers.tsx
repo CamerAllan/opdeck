@@ -13,7 +13,7 @@ import {
   IUserData
 } from "../store/store";
 
-// cheeky nondeterminism will break redux time travel between games
+// non pure function will break redux time travel between games but we'll say that's ok
 function shuffle(a: any[]) {
   let j;
   let x;
@@ -93,12 +93,14 @@ function mainReducer(state = defaultStore, action: any): IStore {
       return {
         ...state,
         gameData: {
-          ...gameData, game: { ...game, currentCard: game.playDeck[0] }
+          ...gameData,
+          game: { ...game },
+          currentCard: game.playDeck[0]
         }
       };
     case types.CHOOSE:
       const newPillars: IPillars = { ...game.pillars };
-      const responses = game.cards[game.currentCard].contents.responses;
+      const responses = game.cards[gameData.currentCard].contents.responses;
       let newReserve: string[] = [...game.reserveDeck];
       const newPlay: string[] = [];
       if (action.choice) {
@@ -140,7 +142,7 @@ function mainReducer(state = defaultStore, action: any): IStore {
             ...game,
             pillars: newPillars,
             reserveDeck: newReserve,
-            playDeck: newPlay,
+            playDeck: newPlay
           }
         }
       };
@@ -158,7 +160,8 @@ function mainReducer(state = defaultStore, action: any): IStore {
       return {
         ...state,
         gameData: {
-          game: { ...action.payload.gameDef },
+          currentCard: action.payload.game.playDeck[0],
+          game: { ...action.payload.game },
           turnNum: 0,
           gameId: action.payload.gameId,
           settings: {}

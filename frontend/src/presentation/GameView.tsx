@@ -13,7 +13,9 @@ interface IGameViewProps {
 
 class GameView extends React.Component<IGameViewProps> {
   public render() {
-    const card = this.props.gameData.game.cards[this.props.gameData.game.currentCard];
+    const card = this.props.gameData.game.cards[
+      this.props.gameData.currentCard
+    ];
     let effectWeightings;
     switch (this.props.hoverLoc) {
       case HoverLoc.ACCEPT: {
@@ -29,40 +31,49 @@ class GameView extends React.Component<IGameViewProps> {
         break;
       }
     }
-    return (<div style={{
-      paddingTop: "20px",
-      paddingLeft: "20px",
-      paddingRight: "20px",
-    }}>
-      <div style={{
-        border: "solid",
-        borderRadius: "5px",
-        borderWidth: "5",
-        borderColor: css.DARK2,
-        paddingLeft: "20px",
-        paddingRight: "20px",
-        paddingBottom: "20px",
-        marginBottom: "20px"
-      }}>
-        <Pillars
-          pillars={this.props.gameData.game.pillars}
-          effectWeightings={effectWeightings}
-        />
+    return (
+      <div
+        style={{
+          paddingTop: "20px",
+          paddingLeft: "20px",
+          paddingRight: "20px"
+        }}
+      >
+        <div
+          style={{
+            border: "solid",
+            borderRadius: "5px",
+            borderWidth: "5",
+            borderColor: css.DARK2,
+            paddingLeft: "20px",
+            paddingRight: "20px",
+            paddingBottom: "20px",
+            marginBottom: "20px"
+          }}
+        >
+          <Pillars
+            pillars={this.props.gameData.game.pillars}
+            effectWeightings={effectWeightings}
+          />
+        </div>
+        <div
+          style={{
+            border: "solid",
+            borderRadius: "5px",
+            borderWidth: "5",
+            borderColor: css.DARK2,
+            paddingLeft: "20px",
+            paddingRight: "20px",
+            marginBottom: "20px"
+          }}
+        >
+          <Card
+            contents={card.contents}
+            pillars={this.props.gameData.game.pillars}
+          />
+          <Response {...this.props} />
+        </div>
       </div>
-      <div style={{
-        border: "solid",
-        borderRadius: "5px",
-        borderWidth: "5",
-        borderColor: css.DARK2,
-        paddingLeft: "20px",
-        paddingRight: "20px",
-        marginBottom: "20px"
-      }}>
-
-        <Card contents={card.contents} pillars={this.props.gameData.game.pillars} />
-        <Response {...this.props} />
-      </div>
-    </div>
     );
   }
 }

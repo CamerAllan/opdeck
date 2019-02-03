@@ -51,7 +51,6 @@ class GameInfo extends React.Component<GameInfoProps> {
         }
       );
     });
-    console.log(addedCards);
 
     const difference = [...cards].filter(x => !addedCards.has(x));
 

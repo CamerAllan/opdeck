@@ -25,9 +25,10 @@ class Login extends React.Component<ILoginProps> {
       event.preventDefault();
       const fd: FormData = new FormData(event.target as any);
       const userId = fd.get("username");
+      const gameId = fd.get("gameId")
       if (typeof userId === "string") {
         this.props.addUserDispatch({ userId });
-        this.props.startGameDispatch({ userId }, "alienTest");
+        this.props.startGameDispatch({ userId }, gameId as string);
       }
     };
     return <LoginView onSubmit={onSubmit} />;

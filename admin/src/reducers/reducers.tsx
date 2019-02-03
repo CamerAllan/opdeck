@@ -190,7 +190,8 @@ function mainReducer(state = defaultStore, action: any): IStore {
       return {
         ...state,
         cards: game.cards,
-        pillars: game.pillars
+        pillars: game.pillars,
+        startingDeck: game.playDeck
       };
     }
     case types.GET_GAME_DATA_FAILED: {

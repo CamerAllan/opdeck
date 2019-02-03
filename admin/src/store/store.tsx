@@ -37,7 +37,6 @@ export interface IGameData {
   turnNum: number;
   pillars: IPillars;
   playDeck: string[];
-  reserveDeck: string[];
   cards: ICards;
   currentCard: string;
   settings: ISettings;
@@ -47,9 +46,7 @@ export interface IGame {
   id: string;
   pillars: IPillars;
   playDeck: string[];
-  reserveDeck: string[];
   cards: ICards;
-  currentCard: string;
 }
 
 export interface IPerson {

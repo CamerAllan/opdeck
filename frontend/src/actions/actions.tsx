@@ -1,9 +1,8 @@
 import { Action } from "redux";
-import { ThunkDispatch } from 'redux-thunk';
+import { ThunkDispatch } from "redux-thunk";
 import * as types from "./actionTypes";
 import * as R from "../store/requestTypes";
 import { HoverLoc, IStore, IGame, IUserData } from "../store/store";
-
 
 // Game
 export function drawCard() {
@@ -32,23 +31,27 @@ export function startGame(userData: IUserData, gameName: string) {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
-      },
-    }).then((response) =>
-      response.json().then(data => {
-        const id: number = data ? data.newGameId : 999
-        const gameDef: IGame = data ? data.newGameDef : "err";
-        dispatch(startGameSuccess(id, gameDef));
-      }).catch((reason) => {
-        dispatch(startGameFailure(reason));
-      }));
-  }
+      }
+    }).then(response =>
+      response
+        .json()
+        .then(data => {
+          const id: number = data ? data.newGameId : 999;
+          const gameDef: IGame = data ? data.newGameDef : "err";
+          dispatch(startGameSuccess(id, gameDef));
+        })
+        .catch(reason => {
+          dispatch(startGameFailure(reason));
+        })
+    );
+  };
 }
 
-const startGameSuccess = (gameId: number, gameDef: IGame) => ({
+const startGameSuccess = (gameId: number, game: IGame) => ({
   type: types.START_GAME_SUCCESS,
   payload: {
     gameId,
-    gameDef
+    game
   }
 });
 
@@ -56,12 +59,14 @@ const startGameStarted = () => ({
   type: types.START_GAME_STARTED
 });
 
-const startGameFailure = (error: any) => ({
-  type: types.START_GAME_FAILURE,
-  payload: {
-    error
-  }
-});
+const startGameFailure = (error: any) => {
+  return {
+    type: types.START_GAME_FAILURE,
+    payload: {
+      error
+    }
+  };
+};
 
 // User
 export function addUser(userData: IUserData) {

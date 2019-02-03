@@ -31,22 +31,8 @@ exports.game = {
       colour: "#75ff75"
     }
   },
-  playDeck: [],
-  reserveDeck: [
-    "goodMorning",
-    "infection",
-    "recruitment",
-    "raid",
-    "speech",
-    "labBroke",
-    "electionInterfere",
-    "renewables",
-    "goodDeed",
-    "scienceBribe",
-    "loanOffer",
-    "recruitmentDrive",
-    "warStart"
-  ],
+  playDeck: ["goodMorning"],
+  reserveDeck: [],
   cards: {
     // START
     goodMorning: {
@@ -57,13 +43,39 @@ exports.game = {
         responses: {
           accept: {
             text: "I rule with an iron fist",
-            cardsAdded: [],
+            cardsAdded: [
+              "infection",
+              "recruitment",
+              "raid",
+              "speech",
+              "labBroke",
+              "electionInterfere",
+              "renewables",
+              "goodDeed",
+              "scienceBribe",
+              "loanOffer",
+              "recruitmentDrive",
+              "warStart"
+            ],
             cardsRemoved: ["goodMorning"],
             effects: { Army: 6, Money: 5, Science: 5, Popularity: 4 }
           },
           reject: {
             text: "I am a benevolent leader",
-            cardsAdded: [],
+            cardsAdded: [
+              "infection",
+              "recruitment",
+              "raid",
+              "speech",
+              "labBroke",
+              "electionInterfere",
+              "renewables",
+              "goodDeed",
+              "scienceBribe",
+              "loanOffer",
+              "recruitmentDrive",
+              "warStart"
+            ],
             cardsRemoved: ["goodMorning"],
             effects: { Army: 4, Money: 5, Science: 5, Popularity: 6 }
           }
@@ -143,7 +155,8 @@ exports.game = {
       weightings: {},
       contents: {
         name: "A Bribe?",
-        text: "The scientists want more power, and they're willing to pay for it",
+        text:
+          "The scientists want more power, and they're willing to pay for it",
         responses: {
           accept: {
             text: "But of course",

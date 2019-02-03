@@ -32,6 +32,7 @@ class GameSelectorView extends React.Component<IGameSelectorViewStateProps> {
     };
 
     const renderForm = (props: any) => {
+      console.log(this.props.game);
       return (
         <>
           <div style={css.formCont}>
@@ -53,6 +54,10 @@ class GameSelectorView extends React.Component<IGameSelectorViewStateProps> {
                 <div style={css.formGroupElement}>
                   {this.props.game ? (
                     <Select
+                      value={this.props.game.playDeck.map(c => ({
+                        label: c,
+                        value: c
+                      }))}
                       closeMenuOnSelect={false}
                       isMulti={true}
                       onChange={deckOnChange}
