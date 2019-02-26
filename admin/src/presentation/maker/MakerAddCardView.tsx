@@ -68,6 +68,9 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
     Object.keys(this.props.pillars).forEach((pillar: string) => {
       let accept = 0;
       let reject = 0;
+      let more = this.props.pillars[pillar].min;
+      let less = this.props.pillars[pillar].max;
+
       if (this.props.cardToEdit) {
         const card: ICard = this.props.cards[this.props.cardToEdit];
         if (card.contents.responses.accept.effects[pillar]) {
@@ -77,10 +80,23 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
         if (card.contents.responses.reject.effects[pillar]) {
           reject = card.contents.responses.reject.effects[pillar];
         }
+
+        if (card.weightings[pillar]) {
+          less = card.weightings[pillar].lessThan
+            ? card.weightings[pillar].lessThan!
+            : less;
+
+          more = card.weightings[pillar].moreThan
+            ? card.weightings[pillar].moreThan!
+            : more;
+        }
       }
 
       initialValues[`acceptEffect${pillar}`] = accept;
       initialValues[`rejectEffect${pillar}`] = reject;
+
+      initialValues[`greaterWeighting${pillar}`] = more;
+      initialValues[`lesserWeighting${pillar}`] = less;
 
       pillarAcceptConsequences.push(
         <>
@@ -100,6 +116,34 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
             type="number"
             name={`rejectEffect${pillar}`}
           />
+        </>
+      );
+    });
+
+    const weightings: JSX.Element[] = [];
+    Object.keys(this.props.pillars).forEach((pillar: string) => {
+      weightings.push(
+        <>
+          <label style={css.formLabel}>{pillar}</label>
+          <div style={css.horFormGroupContainer}>
+            <div style={css.formGroupElement}>
+              <label style={css.formLabel}>Greater Than:</label>
+              <Field
+                style={css.textElement}
+                type="number"
+                name={`greaterWeighting${pillar}`}
+              />
+            </div>
+
+            <div style={css.formGroupElement}>
+              <label style={css.formLabel}>Less Than:</label>
+              <Field
+                style={css.textElement}
+                type="number"
+                name={`lesserWeighting${pillar}`}
+              />
+            </div>
+          </div>
         </>
       );
     });
@@ -135,6 +179,7 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
                   />
                 </div>
               </div>
+              <div style={css.formElement}>{weightings}</div>
               <div style={css.vertFormGroupContainer}>
                 <div style={css.formGroupElement}>
                   <label style={css.formLabel}>Accept:</label>
@@ -237,6 +282,19 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
       }
     });
 
+    const weightings = {};
+    Object.keys(values).forEach((key: any) => {
+      weightings[key.replace("greaterWeighting", "")] = {};
+      weightings[key.replace("lesserWeighting", "")] = {};
+      if (key.startsWith("greaterWeighting")) {
+        weightings[key.replace("greaterWeighting", "")].greaterThan =
+          values[key];
+      }
+      if (key.startsWith("lesserWeighting")) {
+        weightings[key.replace("lesserWeighting", "")].lessThan = values[key];
+      }
+    });
+
     return {
       contents: {
         name: values.name,
@@ -260,7 +318,7 @@ class MakerAddCardView extends React.Component<IMakerAddCardStateProps> {
           }
         }
       },
-      weightings: {}
+      weightings
     };
   };
 

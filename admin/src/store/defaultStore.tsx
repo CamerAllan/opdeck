@@ -13,7 +13,7 @@ const defaultStore: IStore = {
     pillar: null,
     card: null
   },
-  updateRate: 500,
+  updateRate: 5000,
   menu: Menu.VIS,
   games: []
 };

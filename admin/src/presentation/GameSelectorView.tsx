@@ -32,7 +32,6 @@ class GameSelectorView extends React.Component<IGameSelectorViewStateProps> {
     };
 
     const renderForm = (props: any) => {
-      console.log(this.props.game);
       return (
         <>
           <div style={css.formCont}>
