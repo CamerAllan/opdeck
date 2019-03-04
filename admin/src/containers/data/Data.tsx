@@ -29,7 +29,6 @@ class Data extends React.Component<IDataProps> {
   public componentDidMount() {
     this.props.getAllGamesDispatch();
     setInterval(() => {
-      console.log(this.props.selectedData.game);
       this.props.getAllDataDispatch();
       this.props.getGameDataDispatch(
         this.props.selectedData.game
@@ -129,6 +128,7 @@ class Data extends React.Component<IDataProps> {
 
     return (
       <DataView
+        turns={this.props.turns}
         selectGameDispatch={this.props.selectGameDispatch}
         games={this.props.games}
         processedData={processedData}
