@@ -1,7 +1,8 @@
 import { CSSProperties } from "react";
 
-const BODY_FONT_SIZE = 32;
+const GAME_FONT_SIZE = 32;
 const HEADER_FONT_SIZE = 36;
+const MENU_FONT_SIZE = 16;
 
 // Colours
 export const ACCENT = "#C14953";
@@ -10,17 +11,22 @@ export const DARK3 = "#848FA5";
 export const DARK2 = "#4C4C47";
 export const DARK1 = "#2D2D2A";
 
-export const bodyFont = {
+export const gameFont = {
   fontFamily: "Open Sans, sans-serif",
-  fontSize: BODY_FONT_SIZE
+  fontSize: GAME_FONT_SIZE
 } as CSSProperties;
 
-export const bodyFontCentered = {
-  ...bodyFont,
+export const gameFontCentered = {
+  ...gameFont,
   textAlign: "center"
 } as CSSProperties;
 
 export const headerFontCentered = {
-  ...bodyFontCentered,
+  ...gameFontCentered,
   fontSize: HEADER_FONT_SIZE
+} as CSSProperties;
+
+export const menuFont = {
+  ...gameFontCentered,
+  fontSize: MENU_FONT_SIZE
 } as CSSProperties;

@@ -14,6 +14,7 @@ export interface IGameData {
   currentCard: string;
   gameId: string;
   turnNum: number;
+  over: boolean;
   settings: ISettings;
 }
 

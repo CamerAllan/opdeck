@@ -20,6 +20,7 @@ export const rightMargin = {
 export const middle = {
   display: "flex",
   flex: "3 0",
+  flexBasis: "50%",
   flexDirection: "column",
   minHeight: "100vh"
 } as CSSProperties;

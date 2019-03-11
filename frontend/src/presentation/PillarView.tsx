@@ -29,7 +29,7 @@ class PillarView extends React.Component<IPillarViewProps> {
     return (
       <>
         <div style={pillarStyle}>
-          <div style={basicCSS.bodyFontCentered}>{this.props.name}</div>
+          <div style={basicCSS.gameFontCentered}>{this.props.name}</div>
           <div style={css.pillarBarOutline(this.props.colour)}>
             <div style={css.pillarBarFill(percentageFill)} />
           </div>

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import Game from "src/containers/Game";
 import Login from "src/containers/Login";
+import GameOverView from "src/presentation/GameOverView";
 import { IStore } from "src/store/store";
 import * as css from "src/styles/TopLevelStyles";
 
@@ -13,6 +14,12 @@ class Page extends React.Component<IStore> {
 
     if (this.props.interfaceData.gameInProgress) {
       page = <Game {...this.props.gameData} />
+      if (this.props.gameData) {
+        if (this.props.gameData.over) {
+          page = <GameOverView/>
+        }
+      }
+      
     }
 
     return (

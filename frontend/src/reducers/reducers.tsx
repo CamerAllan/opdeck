@@ -133,10 +133,22 @@ function mainReducer(state = defaultStore, action: any): IStore {
 
       shuffle(newPlay);
 
+      let over: boolean = gameData.over; 
+      Object.keys(newPillars).forEach(pillar => {
+        if (newPillars[pillar].value === newPillars[pillar].min) {
+          over = true;
+        }
+      });
+
+      if (newPlay.length === 0) {
+        over = true;
+      }
+
       return {
         ...state,
         gameData: {
           ...gameData,
+          over,
           turnNum: gameData.turnNum + 1,
           game: {
             ...game,
@@ -160,6 +172,7 @@ function mainReducer(state = defaultStore, action: any): IStore {
       return {
         ...state,
         gameData: {
+          over: false,
           currentCard: action.payload.game.playDeck[0],
           game: { ...action.payload.game },
           turnNum: 0,

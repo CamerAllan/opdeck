@@ -7,7 +7,7 @@ export const responses = {
 } as CSSProperties;
 
 export const response = {
-  ...css.bodyFont,
+  ...css.gameFont,
   background: "none",
   border: 0,
   flex: "1 0",
