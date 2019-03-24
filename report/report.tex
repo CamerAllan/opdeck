@@ -1,13 +1,27 @@
-\documentclass{IEEEtran}
+\documentclass[]{report}
 
 \usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
 \usepackage{amsmath,amssymb,amsfonts}
-\usepackage{algorithmic}
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{todonotes}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{float}
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{0pt}{\Huge}
+
+\def\c#1{\texttt{#1}}
+
 \bibliography{bibliography}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{150010440}
+\lhead{CS4099 Senior Honours Project Report}
+\rfoot{You know we on page \thepage{} now son}
+
 \begin{document}
 
 \title{SH Project Report}
@@ -42,7 +56,7 @@
 
 \begin{minipage}{0.4\textwidth}
 \begin{flushleft} \large
-\emph{Authors:}\\
+\emph{Author:}\\
 Cameron \textsc{Allan}
 \end{flushleft}
 \end{minipage}
@@ -71,43 +85,34 @@ Dr. Ruth \textsc{Letham}
     This project was undertaken in collaboration with the St Andrews Centre for Exoplanet Science\cite{CfES}, in an attempt to develop a software artifact capable of capturing user decisions in a game interface. This project focuses on the framework through which these games may be created, played and visualised, with the end goal of analysing these responses and inferring user's opinions on certain subject matters through their choices. The framework is designed to be highly flexible, allowing all aspects of a game's story and development to be decided by an administrator.
 \end{abstract}
 
-\section{Declaration}
-I declare that the material submitted for
-assessment is my own work except where credit is
-explicitly given to others by citation or
-acknowledgement. This work was performed during
-the current academic year except where otherwise
-stated.
+\chapter{Declaration}
+    I declare that the material submitted for
+    assessment is my own work except where credit is
+    explicitly given to others by citation or
+    acknowledgement. This work was performed during
+    the current academic year except where otherwise
+    stated.
 
-The main text of this project report is \todo[inline]{Add word count} NN,NNN* words long, including project specification and plan.
+    The main text of this project report is \todo[inline]{Add word count} NN,NNN* words long, including project specification and plan.
 
-In submitting this project report to the University of
-St Andrews, I give permission for it to be made
-available for use in accordance with the regulations of
-the University Library. I also give permission for
-the title and abstract to be published and for copies of
-the report to be made and supplied at cost to any bona
-fide library or research worker, and to be made
-available on the World Wide Web. I retain the
-copyright in this work.
+    In submitting this project report to the University of
+    St Andrews, I give permission for it to be made
+    available for use in accordance with the regulations of
+    the University Library. I also give permission for
+    the title and abstract to be published and for copies of
+    the report to be made and supplied at cost to any bona
+    fide library or research worker, and to be made
+    available on the World Wide Web. I retain the
+    copyright in this work.
 
-\section{Introduction}
 \include{sections/intro}
-\section{Context Survey}
 \include{sections/context}
-\section{Requirements Specification}
 \include{sections/requirements}
-\section{Software Engineering Process}
 \include{sections/softeng}
-\section{Ethics}
 \include{sections/ethics}
-\section{Design}
 \include{sections/design}
-\section{Implementation}
 \include{sections/implementation}
-\section{Evaluation and Critical Appraisal}
 \include{sections/eval}
-\section{Conclusions}
 \include{sections/conclusion}
 
 \nocite{*}
