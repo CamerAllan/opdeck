@@ -58,13 +58,38 @@ Instead in the final design the cards are merely displayed in a grid.
 The visualisation screen took a similar shape to the game maker, with data selection and filtering happening in a left panel while the visualisations are updated on the right.
 It is possible to filter results to be visualised by pillar values. This limits the data shown only to cards that appeared while pillar values match the specified criteria The visualisations I chose to show are as follows:
 \begin{itemize}
-    \item Accept - Reject balance
+    \item Accept/Reject balance
 
     This is a horizontal bar chart showing the proportion of players that choose one option over the other for a given set of cards. Each card has a value between -1 and 1, where -1 indicates that players choose the reject option every time, while 1 indicates accept is chosen every time.
+
     \item Total times drawn
     
     This is a vertical bar chart showing the total number of times each card has been drawn and responded to.
+    
     \item Pillar average
 
     This shows the average pillar levels over all turns.
 \end{itemize}
+
+The intention of these visualisations is to allow a user to `play' with the data. The live updating charts allow the user to rapidly identify relationships, for example between pillar levels and accept/reject balance.
+
+\section{Frontend}
+When using Redux, one of the first design decisions that must be made is the structure of the Redux store. This is the JavaScript object that holds the page's state. Figures \ref{fig:store_shape} and \ref{fig:card_example} show a visual representation of the store for the game site. The game logic runs client-side, so to enable this, the entire game definition is requested from the database server once the player requests to play it. Depending on the use case, this could be considered a downside as technically a player could `cheat' the game through using console commands. This choice did however greatly simplify the API between the client and sever, as once the game has begun, the client only needs to send the outcome of each turn.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1.0\textwidth]{./images/design/store_shape.png}
+	\caption{Redux store object structure. Note that the pillars (Army, Science, Popularity, Money) are game definition dependent. Cards object is omitted due to large size.}
+	\label{fig:store_shape}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1.0\textwidth]{./images/design/card_example.png}
+	\caption{Example of a card object in the store. This is a starting card that adds many other cards to the game no matter which option is chosen.}
+	\label{fig:card_example}
+\end{figure}
+
+
+
+\section{Backend}
