@@ -13,6 +13,15 @@
 \titleformat{\chapter}[display]
   {\normalfont\bfseries}{}{0pt}{\Huge}
 
+%
+    % Compiler warnings
+    %
+    \hfuzz=10pt 
+    \vfuzz=10pt
+    \hbadness=10000
+    \vbadness=10000
+
+
 \def\c#1{\texttt{#1}}
 
 \bibliography{bibliography}
@@ -46,9 +55,9 @@
 %   TITLE
 %----------------------------------------------------------------------------------------
 
-\HRule \\[0.4cm]
+\HRule\\[0.4cm]
 { \huge \bfseries An online card-based game to explore human response to predefined scenarios}\\[0.4cm] % Title of your document
-\HRule \\[1.5cm]
+\HRule\\[1.5cm]
  
 %----------------------------------------------------------------------------------------
 %   AUTHORS
@@ -104,6 +113,10 @@ Dr. Ruth \textsc{Letham}
     fide library or research worker, and to be made
     available on the World Wide Web. I retain the
     copyright in this work.
+
+\listoftodos
+
+\todo[inline]{Define phrases: pillar, admin user, player, game definitoin, game instance?}
 
 \include{sections/intro}
 \include{sections/context}

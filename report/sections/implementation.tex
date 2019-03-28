@@ -1,5 +1,9 @@
 \chapter{Implementation}
 
+\todo[inline]{Game workings}
+\todo[inline]{Reducers}
+\todo[inline]{Unit tests}
+
 \section{Tools \& Technologies}
 
 \subsection{Node.js}
@@ -35,3 +39,32 @@ It did however suit the needs of the project, and I believe I made the right cho
 
 \section{Frontend}
 
+\subsection{Game}
+
+\subsubsection{Logic}
+Most of the game logic happens in the redux reducers. 
+This is the part of the code where actions arrive and the payload gets processed, resulting in some change to the game state which is then propagated through the page.
+
+Reducers should technically be pure functions, as this makes them reliably testable and allows the time travel aspect of the debug tools to work correctly. 
+I have followed this convention for all of my reducers, except for \c{CHOOSE}, which is called when the player makes a choice. 
+This is because of the shuffle function that gets called, which has a random element.
+
+The shuffle function I used is an implementation of the Fisher-Yates Shuffle\cite{Shuffle}. 
+I needed this to ensure that the game remained unpredictable across replays, improving replayability.
+
+\subsubsection{Images}
+The colouring of images was one of the more technically involved parts of the project. 
+In order to avoid heavily pixel processing I knew I would have to use SVGs, which can be edited with comparably insignificant computation (also having the advantage of being infinitely scalable). 
+I then had to acquire some example images to use for my game definition. 
+To maintain a similar art style I sourced them all from the same artist, Katerina Limpitsouni, on her site unDraw\cite{Undraw}. These images are open-source and usable for free and without attribution. 
+The website has the advantage of allowing the main colour of each image downloaded to be set through a colour picker. 
+After failing to find a solution to edit specific colours of an SVG in JavaScript, I resorted to wrapping each image in a React component, which passes through and injects the desired colour. 
+This was not a favourable solution, as it's not possible to do this through the game maker tool. 
+Considering this a prototypical feature (and not part of requirements), I believe the implementation is satisfactory.
+
+Alternatively to this solution, another, less technically challenging but more time consuming possibility would be to fill the image URL property of each card, which could then be downloaded and rendered client-side.
+
+\subsubsection{Hover}
+When the user hovers over an answer with the mouse, the pillars affected by that response are outlined with a border, the colour of which depends on whether the effect is positive or negative. 
+There were multiple ways in which this could have been implemented; I decided to use an enum property in the global state. 
+Doing so makes it extensible - other effects or other hovering elements could be added easily.

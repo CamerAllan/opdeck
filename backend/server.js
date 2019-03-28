@@ -22,7 +22,6 @@ const errCallback = (err, newDoc) => {
 };
 
 // Load any new locally defined games
-// TODO: validate on load
 var normalizedPath = require("path").join(__dirname, "games");
 fs.readdirSync(normalizedPath).forEach(function(file) {
   const game = require("./games/" + file).game;

@@ -13,7 +13,10 @@ import {
   IUserData
 } from "../store/store";
 
-// non pure function will break redux time travel between games but we'll say that's ok
+/**
+non pure function will break redux time travel debug
+between games but we'll say that's ok
+*/
 function shuffle(a: any[]) {
   let j;
   let x;
