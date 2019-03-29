@@ -13,10 +13,9 @@ import {
   IUserData
 } from "../store/store";
 
-/**
-non pure function will break redux time travel debug
-between games but we'll say that's ok
-*/
+
+// non pure function will break redux time travel debug between games but we'll say that's ok
+
 function shuffle(a: any[]) {
   let j;
   let x;
@@ -30,7 +29,7 @@ function shuffle(a: any[]) {
   return a;
 }
 
-function isPlayable(cardId: string, pillars: IPillars, cards: ICards) {
+export function isPlayable(cardId: string, pillars: IPillars, cards: ICards) {
   const card = cards[cardId];
 
   let valid: boolean = true;
@@ -50,11 +49,11 @@ function isPlayable(cardId: string, pillars: IPillars, cards: ICards) {
   return valid;
 }
 
-function addCards(cards: string[], cardsToAdd: string[]): string[] {
+export function addCards(cards: string[], cardsToAdd: string[]): string[] {
   return [...new Set([...cards, ...cardsToAdd])];
 }
 
-function removeCards(cards: string[], cardsToRemove: string[]): string[] {
+export function removeCards(cards: string[], cardsToRemove: string[]): string[] {
   return cards.filter(card => {
     let isIn: boolean = true;
     for (const toRemove of cardsToRemove) {
@@ -66,7 +65,7 @@ function removeCards(cards: string[], cardsToRemove: string[]): string[] {
   });
 }
 
-function changePillar(newPillars: IPillars, pillar: string, effects: IEffects) {
+export function changePillar(newPillars: IPillars, pillar: string, effects: IEffects) {
   const increment = Math.round(effects[pillar]);
   const newPillar = newPillars[pillar];
   const newValue = newPillar.value + increment;
