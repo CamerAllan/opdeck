@@ -1,9 +1,5 @@
 \chapter{Implementation}
 
-\todo[inline]{Game workings}
-\todo[inline]{Reducers}
-\todo{When remove card from game, all references to it are also removed}
-
 \section{Tools \& Technologies}
 
 \subsection{Node.js}
@@ -93,5 +89,9 @@ Cards are displayed in a responsive grid, which was done using CSS-flexboxes. I 
 	\label{fig:responsive}
 \end{figure}
 
+Removing a card or pillar removes all references to it held by other cards/pillars. This ensures that games remain consistent.
+
 \section{Testing}
 Thanks to the structure enforced by Redux, the application logic is entirely contained within one file - \c{reducers.tsx}. This simplifies testing, as the important code can be covered with a few well chosen unit tests. To write these tests I used Jest\cite{Jest} - a fairly simple JavaScript testing framework.
+
+While there exist libraries capable of testing the UI, I found my UI small enough that manual testing was both possible and sufficient. 

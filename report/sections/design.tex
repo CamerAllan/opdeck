@@ -6,7 +6,7 @@
 \todo[inline]{Maybe draw an example as this is a bit confusing}
 The game provides a fairly straightforward experience from the user's point of view.
 Conceptually, it is a card game, so I will describe it as such.
-The game consists of three decks which I dub `in play', `out of play' and `reserve'. In addition to this, there are $n$ `pillars' - these are attributes of importance within the game story's context. Each of these has a minimum, maximum and current value.
+The game consists of three decks which I dub `in play', `out of play' and `reserve'. In addition to this, there are $n$ `pillars' - these are attributes of importance within the game story context. Each of these has a minimum, maximum and current value.
 The `in play' deck has a defined starting set of cards, with the `reserve deck' containing all others - `out of play' starts empty.
 Both decks are shuffled at the start of the game, and each pillar has a predefined starting value.
 
@@ -29,9 +29,9 @@ The game ends when any of the pillars fall to their minimum value.
 \section{UI}
 
 \subsection{Game}
-As described above, the game sounds like a lot of effort on behalf of the player, having to sort and shuffle cards. Fortunately, this effort can be removed completely through work done by the computer. This leaves a simple game from the user perspective; users are presented with a card, make a choice, and get the next card.
+As it is described above, the game takes a lot of effort on behalf of the player, having to sort and shuffle cards. Fortunately, this effort can be removed completely through work done by the computer. This leaves a simple game from the user perspective; users are presented with a card, make a choice, and get the next card.
 
-This meant that the design for the game UI could also be simple. Figure \ref{fig:game_comp} shows my first design for this UI alongside the final product. Initially, I wasn't sure whether the pillars should be visible to the user, however after some testing it was clear that they were needed to provide the player with feedback as they played the game, so they were later added to the top of the screen.
+This simple perspective meant that the design for the game UI was quite straightforward. Figure \ref{fig:game_comp} shows my first design for this UI alongside the final product. Initially, I wasn't sure whether the pillars would be visible to the player, however after some testing it was clear that they were needed to provide the player with feedback as they played the game, so they were later added to the top of the screen.
 
 \begin{figure}[!h]
 	\centering
@@ -41,7 +41,7 @@ This meant that the design for the game UI could also be simple. Figure \ref{fig
 	\label{fig:game_comp}
 \end{figure}
 
-Pillars are displayed as vertical bars at the top of the screen, each having their own fill colour (customisable through game definition). I was inspired to add this colour customisation by other survey gamification tools, as a way to make the game more visually engaging, without forcing a colour scheme that could conflict with the desires of admin users. Pillars fill from bottom to top, and represent where the current value lies between the defined min and max.
+Pillars are displayed as vertical bars at the top of the screen, each having their own fill colour (customisable in the game maker). I was inspired to add this colour customisation by other survey gamification tools, as a way to make the game more visually engaging without imposing any particular colour scheme, as doing so could conflict with the desires of game creators. Pillars fill from bottom to top, and represent where the current value lies between the defined min and max.
 
 \begin{figure}[!h]
 	\centering
@@ -138,7 +138,6 @@ Figure \ref{fig:pillar_edit} shows the pillar editing menu, which is very simila
 Clicking \c{Save Current} will save the updated game definition to the database, and it can then be played from the game UI by entering the correct game ID.
 
 \subsubsection{Visualisation}
-\todo[inline]{Discuss export}
 
 The visualisation screen took a similar shape to the game maker, with data selection and filtering happening in a left panel while the visualisations are updated on the right.
 It is possible to filter results to be visualised by pillar values. This limits the data shown only to cards that appeared while pillar values match the specified criteria The visualisations I chose to show are as follows:
@@ -187,4 +186,4 @@ When using Redux, one of the first design decisions that must be made is the str
 
 \section{Backend}
 Access to the database is provided through a backend server, which exposes a RESTful \cite{REST} API. This is a lightweight server that directly accesses and modifies the databases, of which there are two. One database stores game definitions, while the other stores user turn data.
-The brief API documentation 
+The documentation for this API is in the top level of the \c{backend} folder.
