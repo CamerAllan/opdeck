@@ -1,0 +1,400 @@
+\section{Add User}\label{add-user}
+
+Used to add a user to the user database.
+
+\textbf{URL} : \texttt{\textless{}endpoint\textgreater{}/addUser}
+
+\textbf{Method} : \texttt{POST}
+
+\textbf{Data constraints}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\{}
+  \DataTypeTok{"userId"}\NormalTok{: }\StringTok{"[valid username]"}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Request example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\{}
+  \DataTypeTok{"userId"}\NormalTok{: }\StringTok{"testuser"}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Success Response}\label{success-response}
+
+\textbf{Code} : \texttt{200 OK}
+
+\section{Start game}\label{start-game}
+
+Adds the beginning of a game to a given user and returns the definition
+for that game.
+
+\textbf{URL} :
+\texttt{\textless{}endpoint\textgreater{}/addGame/user/\textless{}userId\textgreater{}/game/\textless{}gameId\textgreater{}}
+
+\textbf{Method} : \texttt{GET}
+
+\subsection{Success Response}\label{success-response-1}
+
+\textbf{Code} : \texttt{200 OK}
+
+\subsection{Example Response}\label{example-response}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\{}
+   \DataTypeTok{"newGameId"}\NormalTok{:}\DecValTok{1}\NormalTok{,}
+   \DataTypeTok{"newGameDef"}\NormalTok{:\{}
+      \DataTypeTok{"id"}\NormalTok{:}\StringTok{"alienTest"}\NormalTok{,}
+      \DataTypeTok{"currentCard"}\NormalTok{:}\StringTok{"goodMorning"}\NormalTok{,}
+      \DataTypeTok{"pillars"}\NormalTok{:\{}
+         \DataTypeTok{"Army"}\NormalTok{:\{}
+            \DataTypeTok{"value"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+            \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+            \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+            \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of the strength of your army"}\NormalTok{,}
+            \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#f45342"}
+         \NormalTok{\},}
+         \DataTypeTok{"Science"}\NormalTok{:\{}
+            \DataTypeTok{"value"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+            \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+            \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+            \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of the your scientific advancement"}\NormalTok{,}
+            \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#fcff75"}
+         \NormalTok{\},}
+         \DataTypeTok{"Popularity"}\NormalTok{:\{}
+            \DataTypeTok{"value"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+            \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+            \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+            \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of how much the people like you"}\NormalTok{,}
+            \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#6bdcff"}
+         \NormalTok{\},}
+         \DataTypeTok{"Money"}\NormalTok{:\{}
+            \DataTypeTok{"value"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+            \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+            \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+            \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of the wealth of your country"}\NormalTok{,}
+            \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#75ff75"}
+         \NormalTok{\}}
+      \NormalTok{\},}
+      \DataTypeTok{"playDeck"}\NormalTok{:[}
+         \StringTok{"goodMorning"}
+      \NormalTok{],}
+      \DataTypeTok{"reserveDeck"}\NormalTok{:[}
+
+      \NormalTok{],}
+      \DataTypeTok{"cards"}\NormalTok{:\{}
+         \DataTypeTok{"goodMorning"}\NormalTok{:\{}
+            \DataTypeTok{"weightings"}\NormalTok{:\{}
+
+            \NormalTok{\},}
+            \DataTypeTok{"contents"}\NormalTok{:\{}
+               \DataTypeTok{"name"}\NormalTok{:}\StringTok{"Good morning"}\NormalTok{,}
+               \DataTypeTok{"text"}\NormalTok{:}\StringTok{"You awake to find yourself ruler of a small nation"}\NormalTok{,}
+               \DataTypeTok{"responses"}\NormalTok{:\{}
+                  \DataTypeTok{"accept"}\NormalTok{:\{}
+                     \DataTypeTok{"text"}\NormalTok{:}\StringTok{"I rule with an iron fist"}\NormalTok{,}
+                     \DataTypeTok{"cardsAdded"}\NormalTok{:[}
+                        \StringTok{"infection"}\NormalTok{,}
+                        \StringTok{"recruitment"}\NormalTok{,}
+                        \StringTok{"raid"}\NormalTok{,}
+                        \StringTok{"speech"}\NormalTok{,}
+                        \StringTok{"labBroke"}\NormalTok{,}
+                        \StringTok{"electionInterfere"}\NormalTok{,}
+                        \StringTok{"renewables"}\NormalTok{,}
+                        \StringTok{"goodDeed"}\NormalTok{,}
+                        \StringTok{"scienceBribe"}\NormalTok{,}
+                        \StringTok{"loanOffer"}\NormalTok{,}
+                        \StringTok{"recruitmentDrive"}\NormalTok{,}
+                        \StringTok{"warStart"}
+                     \NormalTok{],}
+                     \DataTypeTok{"cardsRemoved"}\NormalTok{:[}
+                        \StringTok{"goodMorning"}
+                     \NormalTok{],}
+                     \DataTypeTok{"effects"}\NormalTok{:\{}
+                        \DataTypeTok{"Army"}\NormalTok{:}\DecValTok{6}\NormalTok{,}
+                        \DataTypeTok{"Money"}\NormalTok{:}\DecValTok{5}\NormalTok{,}
+                        \DataTypeTok{"Science"}\NormalTok{:}\DecValTok{5}\NormalTok{,}
+                        \DataTypeTok{"Popularity"}\NormalTok{:}\DecValTok{4}
+                     \NormalTok{\}}
+                  \NormalTok{\},}
+                  \DataTypeTok{"reject"}\NormalTok{:\{}
+                     \DataTypeTok{"text"}\NormalTok{:}\StringTok{"I am a benevolent leader"}\NormalTok{,}
+                     \DataTypeTok{"cardsAdded"}\NormalTok{:[}
+                        \StringTok{"infection"}\NormalTok{,}
+                        \StringTok{"recruitment"}\NormalTok{,}
+                        \StringTok{"raid"}\NormalTok{,}
+                        \StringTok{"speech"}\NormalTok{,}
+                        \StringTok{"labBroke"}\NormalTok{,}
+                        \StringTok{"electionInterfere"}\NormalTok{,}
+                        \StringTok{"renewables"}\NormalTok{,}
+                        \StringTok{"goodDeed"}\NormalTok{,}
+                        \StringTok{"scienceBribe"}\NormalTok{,}
+                        \StringTok{"loanOffer"}\NormalTok{,}
+                        \StringTok{"recruitmentDrive"}\NormalTok{,}
+                        \StringTok{"warStart"}
+                     \NormalTok{],}
+                     \DataTypeTok{"cardsRemoved"}\NormalTok{:[}
+                        \StringTok{"goodMorning"}
+                     \NormalTok{],}
+                     \DataTypeTok{"effects"}\NormalTok{:\{}
+                        \DataTypeTok{"Army"}\NormalTok{:}\DecValTok{4}\NormalTok{,}
+                        \DataTypeTok{"Money"}\NormalTok{:}\DecValTok{5}\NormalTok{,}
+                        \DataTypeTok{"Science"}\NormalTok{:}\DecValTok{5}\NormalTok{,}
+                        \DataTypeTok{"Popularity"}\NormalTok{:}\DecValTok{6}
+                     \NormalTok{\}}
+                  \NormalTok{\}}
+               \NormalTok{\}}
+            \NormalTok{\}}
+         \NormalTok{\},}
+         \ErrorTok{.}
+         \ErrorTok{.}
+         \ErrorTok{.}
+      \NormalTok{\}}
+   \NormalTok{\}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Add Turn}\label{add-turn}
+
+Adds a turn to the user database.
+
+\textbf{URL} : \texttt{\textless{}endpoint\textgreater{}/addTurn}
+
+\textbf{Method} : \texttt{POST}
+
+\textbf{Data constraints}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\{}
+  \DataTypeTok{"userId"}\NormalTok{: }\StringTok{"[valid username]"}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Request example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\{}
+   \DataTypeTok{"userId"}\NormalTok{:}\StringTok{"testUsername"}\NormalTok{,}
+   \DataTypeTok{"gameId"}\NormalTok{:}\DecValTok{1}\NormalTok{,}
+   \DataTypeTok{"cardId"}\NormalTok{:}\StringTok{"goodMorning"}\NormalTok{,}
+   \DataTypeTok{"turnNum"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+   \DataTypeTok{"pillars"}\NormalTok{:\{}
+      \DataTypeTok{"Army"}\NormalTok{:\{}
+         \DataTypeTok{"value"}\NormalTok{:}\DecValTok{5}\NormalTok{,}
+         \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+         \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+         \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of the strength of your army"}\NormalTok{,}
+         \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#f45342"}
+      \NormalTok{\},}
+      \DataTypeTok{"Science"}\NormalTok{:\{}
+         \DataTypeTok{"value"}\NormalTok{:}\DecValTok{3}\NormalTok{,}
+         \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+         \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+         \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of the your scientific advancement"}\NormalTok{,}
+         \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#fcff75"}
+      \NormalTok{\},}
+      \DataTypeTok{"Popularity"}\NormalTok{:\{}
+         \DataTypeTok{"value"}\NormalTok{:}\DecValTok{9}\NormalTok{,}
+         \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+         \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+         \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of how much the people like you"}\NormalTok{,}
+         \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#6bdcff"}
+      \NormalTok{\},}
+      \DataTypeTok{"Money"}\NormalTok{:\{}
+         \DataTypeTok{"value"}\NormalTok{:}\DecValTok{3}\NormalTok{,}
+         \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+         \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+         \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of the wealth of your country"}\NormalTok{,}
+         \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#75ff75"}
+      \NormalTok{\}}
+   \NormalTok{\},}
+   \DataTypeTok{"answer"}\NormalTok{:}\DecValTok{false}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Success Response}\label{success-response-2}
+
+\textbf{Code} : \texttt{200 OK}
+
+\section{Get All Turns}\label{get-all-turns}
+
+Returns all data stored in the user turns database.
+
+\textbf{URL} : \texttt{\textless{}endpoint\textgreater{}/all}
+
+\textbf{Method} : \texttt{GET}
+
+\subsection{Success Response}\label{success-response-3}
+
+\textbf{Code} : \texttt{200 OK}
+
+\textbf{Response example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{[}
+   \NormalTok{\{}
+      \DataTypeTok{"userId"}\NormalTok{:}\StringTok{"j"}\NormalTok{,}
+      \DataTypeTok{"games"}\NormalTok{:\{}
+         \DataTypeTok{"1"}\NormalTok{:\{}
+            \DataTypeTok{"turns"}\NormalTok{:\{}
+               \DataTypeTok{"0"}\NormalTok{:\{}
+                  \DataTypeTok{"userId"}\NormalTok{:}\StringTok{"j"}\NormalTok{,}
+                  \DataTypeTok{"gameId"}\NormalTok{:}\DecValTok{1}\NormalTok{,}
+                  \DataTypeTok{"cardId"}\NormalTok{:}\StringTok{"goodMorning"}\NormalTok{,}
+                  \DataTypeTok{"turnNum"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                  \DataTypeTok{"pillars"}\NormalTok{:\{}
+                     \DataTypeTok{"Army"}\NormalTok{:\{}
+                        \DataTypeTok{"value"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+                        \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of the strength of your army"}\NormalTok{,}
+                        \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#f45342"}
+                     \NormalTok{\},}
+                     \DataTypeTok{"Science"}\NormalTok{:\{}
+                        \DataTypeTok{"value"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+                        \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of the your scientific advancement"}\NormalTok{,}
+                        \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#fcff75"}
+                     \NormalTok{\},}
+                     \DataTypeTok{"Popularity"}\NormalTok{:\{}
+                        \DataTypeTok{"value"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+                        \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of how much the people like you"}\NormalTok{,}
+                        \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#6bdcff"}
+                     \NormalTok{\},}
+                     \DataTypeTok{"Money"}\NormalTok{:\{}
+                        \DataTypeTok{"value"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+                        \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of the wealth of your country"}\NormalTok{,}
+                        \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#75ff75"}
+                     \NormalTok{\}}
+                  \NormalTok{\},}
+                  \DataTypeTok{"answer"}\NormalTok{:}\DecValTok{false}
+               \NormalTok{\}}
+               \ErrorTok{.}
+               \ErrorTok{.}
+               \ErrorTok{.}
+            \NormalTok{\}}
+         \NormalTok{\}}
+         \ErrorTok{.}
+         \ErrorTok{.}
+         \ErrorTok{.}
+      \NormalTok{\}}
+   \NormalTok{\}}
+\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Get Games}\label{get-games}
+
+Get a list of all game definitions ids.
+
+\textbf{URL} : \texttt{\textless{}endpoint\textgreater{}/games}
+
+\textbf{Method} : \texttt{GET}
+
+\subsection{Success Response}\label{success-response-4}
+
+\textbf{Code} : \texttt{200 OK}
+
+\textbf{Response example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{[}
+    \StringTok{"alienTest"}\NormalTok{,}
+    \StringTok{"test game 2"}\NormalTok{,}
+    \StringTok{"Test Game: Battle Royale"}
+\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Update Game}\label{update-game}
+
+Add or update game
+
+\textbf{URL} :
+\texttt{\textless{}endpoint\textgreater{}/game/\textless{}gameId\textgreater{}}
+
+\textbf{Method} : \texttt{POST}
+
+\textbf{Reqest example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{[}
+   \NormalTok{\{}
+      \DataTypeTok{"userId"}\NormalTok{:}\StringTok{"j"}\NormalTok{,}
+      \DataTypeTok{"games"}\NormalTok{:\{}
+         \DataTypeTok{"1"}\NormalTok{:\{}
+            \DataTypeTok{"turns"}\NormalTok{:\{}
+               \DataTypeTok{"0"}\NormalTok{:\{}
+                  \DataTypeTok{"userId"}\NormalTok{:}\StringTok{"j"}\NormalTok{,}
+                  \DataTypeTok{"gameId"}\NormalTok{:}\DecValTok{1}\NormalTok{,}
+                  \DataTypeTok{"cardId"}\NormalTok{:}\StringTok{"goodMorning"}\NormalTok{,}
+                  \DataTypeTok{"turnNum"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                  \DataTypeTok{"pillars"}\NormalTok{:\{}
+                     \DataTypeTok{"Army"}\NormalTok{:\{}
+                        \DataTypeTok{"value"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+                        \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of the strength of your army"}\NormalTok{,}
+                        \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#f45342"}
+                     \NormalTok{\},}
+                     \DataTypeTok{"Science"}\NormalTok{:\{}
+                        \DataTypeTok{"value"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+                        \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of the your scientific advancement"}\NormalTok{,}
+                        \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#fcff75"}
+                     \NormalTok{\},}
+                     \DataTypeTok{"Popularity"}\NormalTok{:\{}
+                        \DataTypeTok{"value"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+                        \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of how much the people like you"}\NormalTok{,}
+                        \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#6bdcff"}
+                     \NormalTok{\},}
+                     \DataTypeTok{"Money"}\NormalTok{:\{}
+                        \DataTypeTok{"value"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"min"}\NormalTok{:}\DecValTok{0}\NormalTok{,}
+                        \DataTypeTok{"max"}\NormalTok{:}\DecValTok{10}\NormalTok{,}
+                        \DataTypeTok{"description"}\NormalTok{:}\StringTok{"A measure of the wealth of your country"}\NormalTok{,}
+                        \DataTypeTok{"colour"}\NormalTok{:}\StringTok{"#75ff75"}
+                     \NormalTok{\}}
+                  \NormalTok{\},}
+                  \DataTypeTok{"answer"}\NormalTok{:}\DecValTok{false}
+               \NormalTok{\}}
+               \ErrorTok{.}
+               \ErrorTok{.}
+               \ErrorTok{.}
+            \NormalTok{\}}
+         \NormalTok{\}}
+         \ErrorTok{.}
+         \ErrorTok{.}
+         \ErrorTok{.}
+      \NormalTok{\}}
+   \NormalTok{\}}
+\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Success Response}\label{success-response-5}
+
+\textbf{Code} : \texttt{200 OK}

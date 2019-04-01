@@ -1,7 +1,85 @@
 \chapter{Evaluation}
-\todo[inline]{
-'consider adding hidden columns which could affect the game but couldn't be seen by the user'
-'only two answers per question?'
-'subdecks - response can swap the whole deck eg when finding aliens'
-    -can be done technically but easier
-'Add/remove all UI element'}
+
+\section{User Evaluation}
+
+\subsection{Data Collection}
+Towards the end of this project, I gave a presentation of my software to the members \cite{CfESMembers} of the St Andrews Exoplanet Research Society. This provided an excellent opportunity to get feedback on the software in its current state, as well as feature requests as inspiration for future work. To collect this information, I designed a brief artifact evaluation form which is attached as Appendix \ref{appendix:artifact_eval}. This form covers the main non-functional, user facing requirements of my system. It consists of seven statements, each of which the respondent must express their agreement by circling the appropriate point on a seven point Likert scale.
+
+The items on the form were as follows:
+\begin{enumerate}[label=\textbf{it.\arabic*}]
+    \item\label{i:gent} The game is entertaining
+    \item\label{i:gint} The game interface is intuitive
+    \item\label{i:gatt} The game interface is attractive
+    \item\label{i:vis} The visualisation section provides useful controls and visualisations
+    \item\label{i:gmint} The game maker interface is intuitive
+    \item\label{i:gmuse} The game maker provides useful feedback when making a game \footnote{Due to time restrictions, I was unable to sufficiently present this aspect of the game maker, therefore I told participants to ignore this question and will not include it in my analysis}
+    \item\label{i:s} This software would be useful in evaluating human responses to predefined scenarios
+\end{enumerate}
+
+\subsubsection{Shortcomings}
+The survey I designed was not perfect, here I describe some of its shortcomings:
+
+\begin{enumerate}[label=\textbf{sc.\arabic*}]
+    \item\label{sc:acq} I did not take sufficient measures to avoid acquiescence bias\cite{Acquiescence} when designing the form. This is the tendency for users to generally agree with statements, even if this results in two conflicting answers. Avoiding this would have required adding additional, negatively phrased questions in order to establish a baseline level of respondents' agreeableness.
+    \item\label{sc:brief} The form is brief, with only seven questions. This was a design decision, with the aim of increasing engagement. This however, limited the amount of quantitative feedback I received.
+    \item\label{sc:int} Participants did not have an opportunity to personally interact with the software, answers provided are based upon a presentation that lasted roughly thirty minutes. I particularly feel that this could impact the questions regarding the intuitiveness of the interface; watching somebody else perform a task they are familiar with can make it seem easier, which may affect one's perception of how intuitive it is.
+    \item\label{sc:ex} Responses pertaining to the game UI may have been swayed by the quality of the example game definition I was using. Improving this was not an item of high priority therefore it may not have provided the best demonstration of the framework.
+\end{enumerate}
+\subsection{Quantitative Analysis}
+
+Since they are categorical, it is not appropriate to average Likert scale data \cite{LikertAv}. For this reason, I have visualised the results as an aggregated stacked bar chart in figure \ref{fig:eval_responses}.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{./images/eval/Aggregated_Evaluation_Responses.png}
+    \caption{Visualisation of artifact evaluation likert items. Number to the right of each item indicates the number of responses.}
+    \label{fig:eval_responses}
+\end{figure}
+
+From the data, it is immediately striking that none of the responses to any of the items exceeded 4, meaning that none of them were negative. It is impossible to judge how much of this could be due to acquiescence bias; I will however interpret this as negligible, due to the extent to which the responses are positive.
+
+Items \ref{i:gent}, \ref{i:gatt} and \ref{i:s} received the lowest levels of agreement. The response to \ref{i:gent} could have been influenced by \ref{sc:ex}, or be a deeper comment on the game framework itself. 
+
+\ref{i:gatt} could be influenced by the images used in this game definition (\ref{sc:ex}), however this aside, in my effort to avoid imposing a bias onto the framework, perhaps achieving a neutral response is desirable here.
+
+\ref{i:s} is intended to provide an assessment of the software as a whole, being used for its intended purpose. This sees agreement, which is a strong sign. The reasoning for this seeing less agreement than the other items which constitute it could be explained by the general feeling of doubt around the concept of a game being used to gather player's opinions.
+
+One piece of written feedback was submitted, which stated that it was `very intuitive to create the game'
+
+\subsection{Qualitative Feedback}
+The half an hour following the presentation consisted of discussion around the software and its potential uses.
+
+\subsubsection{Feature Requests}
+There were several suggestions to improve various aspects of the software pipeline:
+
+\begin{itemize}
+    \item Addition of `sub-decks' - decks of cards which can be easily added or removed in one click, rather than having to select each card manually, possibly multiple times. 
+    \item Addition of more than one choice per card.
+    \item Addition of an option for pillars to be `invisible'. This would add depth to the games that could be created, allowing for hidden factors that the player can not predict, such as how they are perceived by an enemy
+    \item Addition of game-end condition customisation, for example two pillars must be empty before the game ends, or one must fill.
+    \item Addition of different endings, some considered winning and others losing.
+\end{itemize}
+
+\section{Objective Evaluation}
+\begin{table}[]
+    \begin{tabular}{|p{1.5cm}|p{6cm}|p{1.5cm}|p{6cm}|}
+    \hline
+    Priority  & Objective                                                                                                                               & Complete?             & Comments                                                                                                                                                                                                                                                                                                \\
+    \hline
+    Primary   & Devise and implement a game that presents the player with scenarios and allows them to choose from potential responses                  & \cmark&                                                                                                                                                                                                                                                                                                         \\
+              & Devise and implement a flexible infrastructure to model and constrain scenarios and their impacts                                       & \cmark&                                                                                                                                                                                                                                                                                                         \\
+              & In collaboration with Anne Smith and Christine Helling, devise a sample set of appropriate scenarios with impacts and populate the game & \xmark& Due to the lateness of my first meeting with Anne and Christine, there was not enough time for them to become familiar with the framework and create test scenarios. I did however create my own example scenario.                                                                                      \\
+              & Devise and implement an infrastructure for capturing and recording player responses                                                     & \cmark&                                                                                                                                                                                                                                                                                                         \\
+              & Implement basic visualisation of responses                                                                                              & \cmark&                                                                                                                                                                                                                                                                                                         \\
+    \hline
+    Secondary & Devise and implement an admin centre to allow easy creation of new game content                                                         & \cmark& This became a more primary objective, as it became obvious that without the game maker tool, the software would be much less accessible, as technical experience would be required to create new games                                                                                                  \\
+              & Carry out an experiment to assess the effectiveness of the game as a tool to assess people's real world views                           & \xmark& It became clear early on that this was a more psychological question, and that I had neither the time or knowledge required to answer this question                                                                                                                                                     \\
+              & Create more advanced visualisation and analysis tools                                                                                   & \xmark& After basic visualisations were complete, I prioritised the quality of the game maker tool over more advanced visualisations. The reasoning behind this was that I could not be certain I was providing useful visualisations, and in that case, external tools could be used with the exportable data. \\
+    \hline
+    Tertiary  & Perform a wider user experiment                                                                                                         & \cmark & This was achieved in the form of the user evaluation forms handed back from members of the Centre for Exoplanet Research.                                                                                                                                                                              \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\section{Summary}
+Comparing my project to the software I found to be most like mine, Datagame \cite{Datagame}, I find that my software holds up well. I believe the game I have created is as engaging, if not more so than the games available on Datagame. Both game makers offer a similar toolset, and while I cannot speak for any analysis tools that Datagame provides, I believe the functionality provided by my analysis tools - combined with data export functionality - is sufficient. Is previoiusly stated, I cannot evaluate the accuracy with which the tool can infer player's opinions, however it may provide a point from which research into this area can proceed.

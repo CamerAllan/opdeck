@@ -1,6 +1,6 @@
 \chapter{Design}
 
-\todo{}
+\todo{Discuss LimitedLiterature (citation) - quote in findings}
 
 \section{Gameplay Overview}
 \todo[inline]{Maybe draw an example as this is a bit confusing}
@@ -13,16 +13,16 @@ Both decks are shuffled at the start of the game, and each pillar has a predefin
 The player draws and reads a card from the play deck, each one showing the following information:
 
 \begin{itemize}
-    \item Title
-    \item Description
-    \item Choice \#1 (`accept')
-    \item Choice \#2 (`reject')
-    \item Requirements to draw
+	\item Title
+	\item Description
+	\item Choice \#1 (`accept')
+	\item Choice \#2 (`reject')
+	\item Requirements to draw
 \end{itemize}
 Each choice on a card consists of text detailing the response, and the effects of the response. Effects are made up of two parts - pillar changes, and cards added/removed. Pillar changes specify amounts to add or remove from one or more pillars. Cards added/removed defines which cards should be moved between `out of play' and `reserve'.
 Requirements to draw consists of conditions that the current pillar levels must satisfy in order for this card to be drawn.
 
-After each choice made (turn), any cards in `out of play' the meet the current pillar requirements are moved to `in play', and any `in play' that do not are moved to `out of play'. 
+After each choice made (turn), any cards in `out of play' the meet the current pillar requirements are moved to `in play', and any `in play' that do not are moved to `out of play'.
 
 The game ends when any of the pillars fall to their minimum value.
 
@@ -74,7 +74,7 @@ As seen in figure \ref{fig:colour_comp}, not only can the image change, but the 
 \subsection{Admin tools}
 
 \subsubsection{Game Maker}
-The game maker interface was the most challenging to design, as I wanted the user to be able to maintain a high-level overview of the game while adding and editing pillars and cards. 
+The game maker interface was the most challenging to design, as I wanted the user to be able to maintain a high-level overview of the game while adding and editing pillars and cards.
 After thinking this through, I initially settled on the design depicted in figure \ref{fig:game_maker}. The main theme is that editing is done in the left panel, while the right side continues to show an interactive view of the game, including a visualisation of the relationships between cards.
 The final design ended up being roughly the same, however the card view is not as complex - connections between cards are not visualised, as after more consideration of the relationships involved, I could not think of a clear way to show this.
 The cards are instead displayed in a grid in the final design.
@@ -143,17 +143,17 @@ Clicking \c{Save Current} will save the updated game definition to the database,
 The visualisation screen took a similar shape to the game maker, with data selection and filtering happening in a left panel while the visualisations are updated on the right.
 It is possible to filter results to be visualised by pillar values. This limits the data shown only to cards that appeared while pillar values match the specified criteria The visualisations I chose to show are as follows:
 \begin{itemize}
-    \item Accept/Reject balance
+	\item Accept/Reject balance
 
-    This is a horizontal bar chart showing the proportion of players that choose one option over the other for a given set of cards. Each card has a value between -1 and 1, where -1 indicates that players choose the reject option every time, while 1 indicates accept is chosen every time.
+	      This is a horizontal bar chart showing the proportion of players that choose one option over the other for a given set of cards. Each card has a value between -1 and 1, where -1 indicates that players choose the reject option every time, while 1 indicates accept is chosen every time.
 
-    \item Total times drawn
-    
-    This is a vertical bar chart showing the total number of times each card has been drawn and responded to.
-    
-    \item Pillar average
+	\item Total times drawn
 
-    This shows the average pillar levels over all turns.
+	      This is a vertical bar chart showing the total number of times each card has been drawn and responded to.
+
+	\item Pillar average
+
+	      This shows the average pillar levels over all turns.
 \end{itemize}
 
 The intention of these visualisations is to allow a user to `play' with the data. The live updating charts allow the user to rapidly identify relationships, for example between pillar levels and accept/reject balance.
@@ -186,4 +186,5 @@ When using Redux, one of the first design decisions that must be made is the str
 \end{figure}
 
 \section{Backend}
-Access to the database is provided through a backend server 
+Access to the database is provided through a backend server, which exposes a RESTful \cite{REST} API. This is a lightweight server that directly accesses and modifies the databases, of which there are two. One database stores game definitions, while the other stores user turn data.
+The brief API documentation 

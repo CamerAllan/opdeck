@@ -10,17 +10,25 @@
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{float}
-\titleformat{\chapter}[display]
-  {\normalfont\bfseries}{}{0pt}{\Huge}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\usepackage[toc,page]{appendix}
+\titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\Huge}
+%TC:group tabular 0 1
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
 
-%
-    % Compiler warnings
-    %
-    \hfuzz=10pt 
-    \vfuzz=10pt
-    \hbadness=10000
-    \vbadness=10000
-
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
 
 \def\c#1{\texttt{#1}}
 
@@ -38,50 +46,50 @@
 
 \begin{titlepage}
 
-\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-\renewcommand{\contentsname}{Table of Contents}
+  \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+  \renewcommand{\contentsname}{Table of Contents}
 
-\center
- 
-%----------------------------------------------------------------------------------------
-%   HEADINGS
-%----------------------------------------------------------------------------------------
+  \center
 
-\textsc{\LARGE University of St Andrews}\\[1.5cm]
-\textsc{\Large CS4099}\\[0.5cm]
-\textsc{\large SH Project Report}\\[0.5cm]
+  %----------------------------------------------------------------------------------------
+  %   HEADINGS
+  %----------------------------------------------------------------------------------------
 
-%----------------------------------------------------------------------------------------
-%   TITLE
-%----------------------------------------------------------------------------------------
+  \textsc{\LARGE University of St Andrews}\\[1.5cm]
+  \textsc{\Large CS4099}\\[0.5cm]
+  \textsc{\large SH Project Report}\\[0.5cm]
 
-\HRule\\[0.4cm]
-{ \huge \bfseries An online card-based game to explore human response to predefined scenarios}\\[0.4cm] % Title of your document
-\HRule\\[1.5cm]
- 
-%----------------------------------------------------------------------------------------
-%   AUTHORS
-%----------------------------------------------------------------------------------------
+  %----------------------------------------------------------------------------------------
+  %   TITLE
+  %----------------------------------------------------------------------------------------
 
-\begin{minipage}{0.4\textwidth}
-\begin{flushleft} \large
-\emph{Author:}\\
-Cameron \textsc{Allan}
-\end{flushleft}
-\end{minipage}
-~
-\begin{minipage}{0.4\textwidth}
-\begin{flushright} \large
-\emph{Supervisor:} \\
-Dr. Ruth \textsc{Letham}
-\end{flushright}
-\end{minipage}\\[0.5cm]
+  \HRule\\[0.4cm]
+  { \huge \bfseries An online card-based game to explore human response to predefined scenarios}\\[0.4cm] % Title of your document
+  \HRule\\[1.5cm]
 
-{\large \today}\\[0.5cm]
+  %----------------------------------------------------------------------------------------
+  %   AUTHORS
+  %----------------------------------------------------------------------------------------
 
-\includegraphics[scale=0.5]{images/st-andrews-shield.png}
+  \begin{minipage}{0.4\textwidth}
+    \begin{flushleft} \large
+      \emph{Author:}\\
+      Cameron \textsc{Allan}
+    \end{flushleft}
+  \end{minipage}
+  ~
+  \begin{minipage}{0.4\textwidth}
+    \begin{flushright} \large
+      \emph{Supervisor:} \\
+      Dr. Ruth \textsc{Letham}
+    \end{flushright}
+  \end{minipage}\\[0.5cm]
 
-\vfill
+  {\large \today}\\[0.5cm]
+
+  \includegraphics[scale=0.5]{images/st-andrews-shield.png}
+
+  \vfill
 \end{titlepage}
 
 \tableofcontents
@@ -89,34 +97,32 @@ Dr. Ruth \textsc{Letham}
 \newpage
 
 \begin{abstract}
-    There are many situations in which it is desirable to know the opinions of a population. Aside from standard opinion surveys, little to no research has been done into alternative methods of gathering the public opinion. 
+  There are many situations in which it is desirable to know the opinions of a population. Aside from standard opinion surveys, little to no research has been done into alternative methods of gathering the public opinion.
 
-    This project was undertaken in collaboration with the St Andrews Centre for Exoplanet Science\cite{CfES}, in an attempt to develop a software artifact capable of capturing user decisions in a game interface. This project focuses on the framework through which these games may be created, played and visualised, with the end goal of analysing these responses and inferring user's opinions on certain subject matters through their choices. The framework is designed to be highly flexible, allowing all aspects of a game's story and development to be decided by an administrator.
+  This project was undertaken in collaboration with the St Andrews Centre for Exoplanet Science\cite{CfES}, in an attempt to develop a software artifact capable of capturing user decisions in a game interface. This project focuses on the framework through which these games may be created, played and visualised, with the end goal of analysing these responses and inferring user's opinions on certain subject matters through their choices. The framework is designed to be highly flexible, allowing all aspects of a game's story and development to be decided by an administrator.
 \end{abstract}
 
 \chapter{Declaration}
-    I declare that the material submitted for
-    assessment is my own work except where credit is
-    explicitly given to others by citation or
-    acknowledgement. This work was performed during
-    the current academic year except where otherwise
-    stated.
+I declare that the material submitted for
+assessment is my own work except where credit is
+explicitly given to others by citation or
+acknowledgement. This work was performed during
+the current academic year except where otherwise
+stated.
 
-    The main text of this project report is \todo[inline]{Add word count} NN,NNN* words long, including project specification and plan.
+The main text of this project report is \todo[inline]{Add word count} NN,NNN* words long, including project specification and plan.
 
-    In submitting this project report to the University of
-    St Andrews, I give permission for it to be made
-    available for use in accordance with the regulations of
-    the University Library. I also give permission for
-    the title and abstract to be published and for copies of
-    the report to be made and supplied at cost to any bona
-    fide library or research worker, and to be made
-    available on the World Wide Web. I retain the
-    copyright in this work.
+In submitting this project report to the University of
+St Andrews, I give permission for it to be made
+available for use in accordance with the regulations of
+the University Library. I also give permission for
+the title and abstract to be published and for copies of
+the report to be made and supplied at cost to any bona
+fide library or research worker, and to be made
+available on the World Wide Web. I retain the
+copyright in this work.
 
 \listoftodos
-
-\todo[inline]{Define phrases: pillar, admin user, player, game definitoin, game instance?}
 
 \include{sections/intro}
 \include{sections/context}
@@ -130,4 +136,13 @@ Dr. Ruth \textsc{Letham}
 
 \nocite{*}
 \printbibliography
+
+\begin{appendices}
+  \section{Artifact Evaluation Form}
+  \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{./appendices/feedback.pdf}
+    \label{appendix:artifact_eval}
+  \end{figure}
+\end{appendices}
 \end{document}
