@@ -13,7 +13,7 @@ describe("helper tests", () => {
     it("should return invalid if card is not playable", () => {
       expect(t.isPlayable("tc2", pillars.tp2, cards.tcAll)).toBe(false);
     });
-    it("should return valid if card is not playable", () => {
+    it("should return valid if card is playable", () => {
       expect(t.isPlayable("tc1", pillars.tp2, cards.tcAll)).toBe(true);
     });
   });
