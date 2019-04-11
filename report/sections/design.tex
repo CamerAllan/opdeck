@@ -1,14 +1,12 @@
 \chapter{Design}
 
-\todo{Discuss LimitedLiterature (citation) - quote in findings}
-
 \section{Gameplay Overview}
 \todo[inline]{Maybe draw an example as this is a bit confusing}
 The game provides a fairly straightforward experience from the user's point of view.
-Conceptually, it is a card game, so I will describe it as such.
-The game consists of three decks which I dub `in play', `out of play' and `reserve'. In addition to this, there are $n$ `pillars' - these are attributes of importance within the game story context. Each of these has a minimum, maximum and current value.
+Conceptually it is a card game, so it will be described as such.
+The game consists of three decks which I dub `in play', `out of play' and `reserve'. In addition to this, there are $n$ `pillars' - these are attributes of importance within the context of the game story. Each of these has a minimum, maximum and current value.
 The `in play' deck has a defined starting set of cards, with the `reserve deck' containing all others - `out of play' starts empty.
-Both decks are shuffled at the start of the game, and each pillar has a predefined starting value.
+Both decks are shuffled at the beginning of the game, and each pillar has a predefined starting value.
 
 The player draws and reads a card from the play deck, each one showing the following information:
 
@@ -22,16 +20,23 @@ The player draws and reads a card from the play deck, each one showing the follo
 Each choice on a card consists of text detailing the response, and the effects of the response. Effects are made up of two parts - pillar changes, and cards added/removed. Pillar changes specify amounts to add or remove from one or more pillars. Cards added/removed defines which cards should be moved between `out of play' and `reserve'.
 Requirements to draw consists of conditions that the current pillar levels must satisfy in order for this card to be drawn.
 
-After each choice made (turn), any cards in `out of play' the meet the current pillar requirements are moved to `in play', and any `in play' that do not are moved to `out of play'.
+After each choice made (turn), any cards in `out of play' whose pillar requirements are met are moved to `in play', and any `in play' that do not are moved to `out of play'.
 
 The game ends when any of the pillars fall to their minimum value.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/design/diag.png}
+	\caption{Diagram of the main game loop. Actions followed by a question mark are optional, depending on the game definition}
+	\label{fig:diag}
+\end{figure}
 
 \section{UI}
 
 \subsection{Game}
 As it is described above, the game takes a lot of effort on behalf of the player, having to sort and shuffle cards. Fortunately, this effort can be removed completely through work done by the computer. This leaves a simple game from the user perspective; users are presented with a card, make a choice, and get the next card.
 
-This simple perspective meant that the design for the game UI was quite straightforward. Figure \ref{fig:game_comp} shows my first design for this UI alongside the final product. Initially, I wasn't sure whether the pillars would be visible to the player, however after some testing it was clear that they were needed to provide the player with feedback as they played the game, so they were later added to the top of the screen.
+This simple perspective meant that the design for the game UI was quite straightforward. Figure~\ref{fig:game_comp} shows my first design for this UI alongside the final product. Initially, it was uncertain whether the pillars would be visible to the player. It is generally accepted that visual feedback is an important aspect of interface design~\cite{fb}. One important consideration in this decision was the  edge case where a card may present itself on two consecutive turns. Taking this into account, it was decided that visualising pillar updates was important, so this was included at the top of the interface.
 
 \begin{figure}[!h]
 	\centering
@@ -41,7 +46,9 @@ This simple perspective meant that the design for the game UI was quite straight
 	\label{fig:game_comp}
 \end{figure}
 
-Pillars are displayed as vertical bars at the top of the screen, each having their own fill colour (customisable in the game maker). I was inspired to add this colour customisation by other survey gamification tools, as a way to make the game more visually engaging without imposing any particular colour scheme, as doing so could conflict with the desires of game creators. Pillars fill from bottom to top, and represent where the current value lies between the defined min and max.
+Pillars are displayed as vertical bars at the top of the screen. 
+These fill from bottom to top, representing where the current value lies between the predefined min and max.
+Each pillar has its own fill colour (customisable in the game maker), which was inspired by Datagame~\cite{Datagame} who offer the same feature. This serves to make the game more visually engaging without imposing any particular colour scheme, as doing so could conflict with the desires of game creators.
 
 \begin{figure}[!h]
 	\centering
@@ -51,7 +58,7 @@ Pillars are displayed as vertical bars at the top of the screen, each having the
 	\label{fig:colour_comp}
 \end{figure}
 
-The image shown with a given card is dependent upon the pillars the card influences, as seen in figure \ref{fig:advisor_comp}. In this example game, I gave each pillar an `advisor' image, so that the advisor representing the pillar most affected by a card is shown.
+The image shown with a given card is dependent upon the pillars the card influences, as seen in figure~\ref{fig:advisor_comp}. In this example game, I gave each pillar an `advisor' image, so that the advisor representing the pillar most affected by a card is shown.
 
 \begin{figure}[!h]
 	\centering
@@ -61,7 +68,7 @@ The image shown with a given card is dependent upon the pillars the card influen
 	\label{fig:advisor_comp}
 \end{figure}
 
-As seen in figure \ref{fig:colour_comp}, not only can the image change, but the primary colour of the image may also change. I decided to include this feature as cards may affect more than one pillar, and this was not being represented when only using different images. With this colour shifting implemented, the image can represent secondary pillar effects.
+As seen in figure~\ref{fig:colour_comp}, not only can the image change, but the primary colour of the image may also change. I decided to include this feature as cards may affect more than one pillar, and this was not being represented when only using different images. With this colour shifting implemented, the image can represent secondary pillar effects.
 
 \begin{figure}[!h]
 	\centering
@@ -75,9 +82,9 @@ As seen in figure \ref{fig:colour_comp}, not only can the image change, but the 
 
 \subsubsection{Game Maker}
 The game maker interface was the most challenging to design, as I wanted the user to be able to maintain a high-level overview of the game while adding and editing pillars and cards.
-After thinking this through, I initially settled on the design depicted in figure \ref{fig:game_maker}. The main theme is that editing is done in the left panel, while the right side continues to show an interactive view of the game, including a visualisation of the relationships between cards.
-The final design ended up being roughly the same, however the card view is not as complex - connections between cards are not visualised, as after more consideration of the relationships involved, I could not think of a clear way to show this.
-The cards are instead displayed in a grid in the final design.
+After thinking this through, I initially settled on the design depicted in figure~\ref{fig:game_maker}. The main theme is that editing is done in the left panel, while the right side continues to show an interactive view of the game, including a visualisation of the relationships between cards.
+The final design ended up being roughly the same, however the card view is not as complex - the connections between cards are not visualised. 
+There are two ways in which cards can be connected (Add to deck/Remove from deck); this is difficult to visualise in a clear and intuitive way when scaled to the size of an average game. For this reason, the cards are instead displayed in a grid in the final design.
 
 \begin{figure}[!h]
 	\centering
@@ -87,7 +94,7 @@ The cards are instead displayed in a grid in the final design.
 	\label{fig:game_maker}
 \end{figure}
 
-In the section on the right, the user can see the game pillars and cards that they have created. This side is scrollable, while the left section remains in view. If the details of a card are too large for the view, the text fades out. The card view can be expanded by hovering over it, as seen in figure \ref{fig:expand} - when this is done, other cards shrink and move to allow the extra space. New cards and pillars can be added with the large \c{+} buttons by the headers, while existing ones can be edited by clicking on them. Both of these options opens the edit view on the left section.
+In the section on the right, the user can see the game pillars and cards that they have created. This side is scrollable, while the left section remains in view. If the details of a card are too large for the view, the text fades out. The card view can be expanded by hovering over it, as seen in figure~\ref{fig:expand} - when this is done, other cards shrink and move to allow the extra space. New cards and pillars can be added with the large \c{+} buttons by the headers, while existing ones can be edited by clicking on them. Both of these options opens the edit view on the left section.
 
 \begin{figure}[!h]
 	\centering
@@ -99,7 +106,7 @@ In the section on the right, the user can see the game pillars and cards that th
 
 The left section provides contextual menus. When no pillar or card is selected, it provides high-level functionality, such as saving, switching, or creating new game definitions. Also present here is starting deck selection, game balance information and any warnings.
 
-The pillar effect balance provides the admin user with an idea of how balanced their game is in its current state. This is done by summing all of the effects that are applied to each pillar for any given response to all cards. This acts as an indicator of how well a user is likely to do if they randomly pick their responses. The higher the balance values, easier the game.
+The pillar effect balance provides the admin user with an idea of how balanced their game is in its current state. This is done by summing all of the effects that are applied to each pillar for any given response to all cards. This acts as an indicator of how well a user is likely to do if they randomly pick their responses. The higher the balance values, easier the game. In addition, this serves to notify the creator of any unintentional bias within their game. Understanding and manipulating the relationship between cards and pillars is key in gathering unbiased data.
 
 Warnings appear when a card has no chance of being added to the game. This means that a card has been created, but it is neither in the starting deck, nor is it added by any other card. This is only a shallow check - if card A is added by another card B, which itself is never added, the warning will only appear for card B. I consider this acceptable, as once card B is added or deleted, the situation will be resolved.
 
@@ -126,7 +133,7 @@ When editing a card, a live preview can be seen at the bottom of the panel, alon
 	\label{fig:add_card}
 \end{figure}
 
-Figure \ref{fig:pillar_edit} shows the pillar editing menu, which is very similar to the card editing view. The colour of the pillar can be entered as a hex value, which is immediately reflected in the preview below.
+Figure~\ref{fig:pillar_edit} shows the pillar editing menu, which is very similar to the card editing view. The colour of the pillar can be entered as a hex value, which is immediately reflected in the preview below.
 
 \begin{figure}[!h]
 	\centering
@@ -135,7 +142,7 @@ Figure \ref{fig:pillar_edit} shows the pillar editing menu, which is very simila
 	\label{fig:pillar_edit}
 \end{figure}
 
-Clicking \c{Save Current} will save the updated game definition to the database, and it can then be played from the game UI by entering the correct game ID.
+Clicking \c{Save Current} will save the updated game definition to the configured game definition database. Once saved, a game can be played from the game UI by entering the correct game ID.
 
 \subsubsection{Visualisation}
 
@@ -167,8 +174,8 @@ The intention of these visualisations is to allow a user to `play' with the data
 
 The other function this page offers is the ability to export data to CSV. This effectively repackages the database as a csv file, where each row represents the turn of a user. Individual games are uniquely identified by sets of rows with the same user id and game id.
 
-\section{Frontend}
-When using Redux, one of the first design decisions that must be made is the structure of the Redux store. This is the JavaScript object that holds the page's state. Figures \ref{fig:store_shape} and \ref{fig:card_example} show a visual representation of the store for the game site. The game logic runs client-side, so to enable this, the entire game definition is requested from the database server once the player requests to play it. Depending on the use case, this could be considered a downside as technically a player could `cheat' the game through using console commands. This choice did however greatly simplify the API between the client and sever, as once the game has begun, the client only needs to send the outcome of each turn.
+\section{Data Structures}
+When using Redux, one of the first design decisions that must be made is the structure of the Redux store. This is the JavaScript object that holds the page's state. Figures~\ref{fig:store_shape} and~\ref{fig:card_example} show a visual representation of the store for the game site. The game logic runs client-side, so to enable this, the entire game definition is requested from the database server once the player requests to play it. Depending on the use case, this could be considered a downside as technically a player could `cheat' the game through using console commands. This choice did however greatly simplify the API between the client and sever, as once the game has begun, the client only needs to send the outcome of each turn.
 
 \begin{figure}[!h]
 	\centering
@@ -184,6 +191,6 @@ When using Redux, one of the first design decisions that must be made is the str
 	\label{fig:card_example}
 \end{figure}
 
-\section{Backend}
-Access to the database is provided through a backend server, which exposes a RESTful \cite{REST} API. This is a lightweight server that directly accesses and modifies the databases, of which there are two. One database stores game definitions, while the other stores user turn data.
+\section{Database}
+Access to the database is provided through a backend server, which exposes a RESTful~\cite{REST} API. This is a lightweight server that directly accesses and modifies the databases, of which there are two. One database stores game definitions, while the other stores user turn data.
 The documentation for this API is in the top level of the \c{backend} folder.

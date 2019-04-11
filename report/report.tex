@@ -20,13 +20,15 @@
 \titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\Huge}
 %TC:group tabular 0 1
 \hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=black,
-    urlcolor=black
-}
-
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black
+  }
+  
+\newcommand{\od}{\textit{OpDeck}}
+\newcommand{\etal}{\textit{et al}.}
 \newcommand{\cmark}{\ding{51}}
 \newcommand{\xmark}{\ding{55}}
 
@@ -64,7 +66,7 @@
   %----------------------------------------------------------------------------------------
 
   \HRule\\[0.4cm]
-  { \huge \bfseries An online card-based game to explore human response to predefined scenarios}\\[0.4cm] % Title of your document
+  { \huge \bfseries \od{}: An online card-based game to explore human response to predefined scenarios}\\[0.4cm] % Title of your document
   \HRule\\[1.5cm]
 
   %----------------------------------------------------------------------------------------
@@ -97,16 +99,23 @@
 
 \todo[inline]{Figure out tense of various sections (is context review past, eval present?)}
 \todo[inline]{Figure out name for software instead of "the game"/"my game"/"my artifact"}
+\todo[inline]{Fix page numbers and headers}
 
 \newpage
 
 \begin{abstract}
-  There are many situations in which it is desirable to know the opinions of a population. Aside from standard opinion surveys, little to no research has been done into alternative methods of gathering the public opinion.
-
-  This project was undertaken in collaboration with the St Andrews Centre for Exoplanet Science\cite{CfES}, in an attempt to develop a software artifact capable of capturing user decisions in a game interface. This project focuses on the framework through which these games may be created, played and visualised, with the end goal of analysing these responses and inferring user's opinions on certain subject matters through their choices. The framework is designed to be highly flexible, allowing all aspects of a game's story and development to be decided by an administrator.
+  There are many situations in which it is desirable to know the opinions of a population. 
+  Traditional opinion polls have been used extensively throughout history, with paper surveys giving way to their online counterparts. 
+  This has made it possible to reach a much wider audience, while giving the surveyor more control over input restriction and validation.
+  A further benefit of surveys in the digital age is the possibility of enrichment through various gamification methods. 
+  While there do exist tools designed to gamify surveys, these are limited in depth - the interface and the wording of questions can be modified, but at their core the outputs of these products still adhere to the traditional Q\&A format.
+  In collaboration with the St Andrews Centre for Exoplanet Science~\cite{CfES}, this project focuses on creating a framework that implements gamification at a deeper level - moving away from the Q\&A format. 
+  Within this framework, games may be created, played, and visualised, with the aim of inferring user's opinions on certain subject matters through gameplay analysis. 
+  The framework is designed to be highly flexible, allowing all aspects of a game's story and development to be decided by an administrator.
+  
 \end{abstract}
 
-\chapter{Declaration}
+\section{Declaration}
 I declare that the material submitted for
 assessment is my own work except where credit is
 explicitly given to others by citation or
@@ -114,7 +123,7 @@ acknowledgement. This work was performed during
 the current academic year except where otherwise
 stated.
 
-The main text of this project report is \todo[inline]{Add word count} NN,NNN* words long, including project specification and plan.
+The main text of this project report is \todo[inline]{Add word count} ~7000* words long, including project specification and plan.
 
 In submitting this project report to the University of
 St Andrews, I give permission for it to be made

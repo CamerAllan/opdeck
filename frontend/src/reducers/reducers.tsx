@@ -13,7 +13,6 @@ import {
   IUserData
 } from "../store/store";
 
-
 // non pure function will break redux time travel debug between games but we'll say that's ok
 
 function shuffle(a: any[]) {
@@ -53,7 +52,10 @@ export function addCards(cards: string[], cardsToAdd: string[]): string[] {
   return [...new Set([...cards, ...cardsToAdd])];
 }
 
-export function removeCards(cards: string[], cardsToRemove: string[]): string[] {
+export function removeCards(
+  cards: string[],
+  cardsToRemove: string[]
+): string[] {
   return cards.filter(card => {
     let isIn: boolean = true;
     for (const toRemove of cardsToRemove) {
@@ -65,13 +67,24 @@ export function removeCards(cards: string[], cardsToRemove: string[]): string[] 
   });
 }
 
-export function changePillar(newPillars: IPillars, pillar: string, effects: IEffects) {
+export function changePillar(
+  newPillars: IPillars,
+  pillar: string,
+  effects: IEffects
+) {
   const increment = Math.round(effects[pillar]);
   const newPillar = newPillars[pillar];
-  const newValue = newPillar.value + increment;
-  if (newValue <= newPillar.max && newValue >= newPillar.min) {
-    newPillars[pillar].value += increment;
+  const incrementedValue = newPillar.value + increment;
+  let newValue;
+
+  if (increment > 0) {
+    newValue = Math.min(newPillar.max, incrementedValue);
+  } else {
+    newValue = Math.max(newPillar.min, incrementedValue);
   }
+
+  newPillars[pillar].value = newValue;
+
   return newPillars;
 }
 
@@ -135,7 +148,7 @@ function mainReducer(state = defaultStore, action: any): IStore {
 
       shuffle(newPlay);
 
-      let over: boolean = gameData.over; 
+      let over: boolean = gameData.over;
       Object.keys(newPillars).forEach(pillar => {
         if (newPillars[pillar].value === newPillars[pillar].min) {
           over = true;

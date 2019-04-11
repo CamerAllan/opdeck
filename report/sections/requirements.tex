@@ -1,30 +1,44 @@
 \chapter{Requirements}
 
-Below are the software requirements that I specified early on in the project.
+Below are the software requirements that I specified before starting the implementation of OpDeck.
 
 \section{Functional Requirements}
 
-\begin{itemize}
-        \item A user can enter a unique id, under which their game data will be recorded
-        \item A user can choose a game to play by entering the game code
-        \item A user can read and respond to scenarios presented to them
-        \item A user can see the effect that their responses will have on the pillars
-        \item A user can lose a game, when the value of one of their pillars reaches zero
-        \item An administrator can add, edit and remove cards from a game definition
-        \item An administrator can add, edit and remove pillars from a game definition
-        \item An administrator can view a summary of the game they are creating, which contains information on any machine detectable oversights and game balance 
-        \item An administrator can save a game they are editing and return to it later, or let users play it
-        \item An administrator can save their progress in editing one game and switch to another
-        \item An administrator can select specific cards and obtain visualisations that summarise how players respond to them
-        \item An administrator can filter turns included in visualisations by the state of the game during those turns
-        \item An administrator can export and download all game data to an appropriate data processing format
-\end{itemize}
+\newcounter{AdminReq}
+\newcommand{\adminreq}[1]{\item \textbf{Admin} {#1}\stepcounter{AdminReq}}
+\stepcounter{AdminReq}
+
+\newcounter{UserReq}
+\newcommand{\userreq}[1]{\item \textbf{User~~~} {#1}\stepcounter{UserReq}}
+\stepcounter{UserReq}
+
+\newcommand{\hpr}{\textit{High Priority~~~~~}}
+\newcommand{\mpr}{\textit{Medium Priority~}}
+\newcommand{\lpr}{\textit{Low Priority~~~~~~}}
+
+\begin{enumerate}[label=\textbf{FR.\arabic*}]
+    \userreq{\hpr A user can read and respond to scenarios presented to them}
+    \userreq{\hpr A user can lose a game, when the value of one of their pillars reaches zero}
+    \userreq{\mpr A user can enter a unique id, under which their game data will be recorded}
+    \userreq{\mpr A user can choose a game to play by entering the game code}
+    \userreq{\mpr A user can see the effect that their responses will have on the pillars}
+    \userreq{\mpr A user can lose a game, when there are no more cards in the deck}
+    \userreq{\lpr A user can view an image related to the current scenario}
+    \adminreq{\hpr An administrator can add, edit and remove cards from a game definition}
+    \adminreq{\hpr An administrator can add, edit and remove pillars from a game definition}
+    \adminreq{\hpr An administrator can save a game they are editing and return to it later, or let users play it}
+    \adminreq{\mpr An administrator can select specific cards and obtain visualisations that summarise how players respond to them}
+    \adminreq{\mpr An administrator can export and download all game data to an appropriate data processing format}
+    \adminreq{\lpr An administrator can filter turns included in visualisations by the state of the game during those turns}
+    \adminreq{\lpr An administrator can save their progress in editing one game and switch to another}    
+    \adminreq{\lpr An administrator can view a summary of the game they are creating, which contains information on any machine detectable oversights and game balance}
+\end{enumerate}
 
 \section{Non-Functional Requirements}
 
-\begin{itemize}
+\begin{enumerate}[label=\textbf{NR.\arabic*}]
     \item All interfaces are clear and intuitive
     \item The game interface is responsive to input - there should be minimal delay between an input action and the outcome
     \item The game interface does not influence the user's choice in a way that is not customisable
     \item User data should be stored securely
-\end{itemize}
+\end{enumerate}

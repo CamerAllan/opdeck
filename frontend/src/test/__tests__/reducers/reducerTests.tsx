@@ -26,15 +26,19 @@ describe("helper tests", () => {
   });
   describe("changePillar tests", () => {
     it("should return the set of pillars with value updated", () => {
-      expect(t.changePillar(pillars.tp1, "Army", {Army: 2}).Army.value).toBe(2);
+      expect(t.changePillar(pillars.tp1, "Army", { Army: 2 }).Army.value).toBe(
+        2
+      );
     });
     it("should cap pillar value at max", () => {
-      expect(t.changePillar(pillars.tp1, "Army", {Army: 100}).Army.value).toBe(10);
+      expect(
+        t.changePillar(pillars.tp1, "Army", { Army: 100 }).Army.value
+      ).toBe(10);
     });
     it("should cap pillar value at min", () => {
-      expect(t.changePillar(pillars.tp1, "Army", {Army: -100}).Army.value).toBe(0);
+      expect(
+        t.changePillar(pillars.tp1, "Army", { Army: -100 }).Army.value
+      ).toBe(0);
     });
   });
 });
-
-// describe("reducer tests", () => {});
