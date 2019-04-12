@@ -1,6 +1,6 @@
 \chapter{Requirements}
 
-Below are the software requirements that I specified before starting the implementation of OpDeck.
+Below are the software requirements as specified before beginning the implementation of OpDeck.
 
 \section{Functional Requirements}
 
@@ -9,29 +9,79 @@ Below are the software requirements that I specified before starting the impleme
 \stepcounter{AdminReq}
 
 \newcounter{UserReq}
-\newcommand{\userreq}[1]{\item \textbf{User~~~} {#1}\stepcounter{UserReq}}
+\newcommand{\userreq}[1]{\item \textbf{User} {#1}\stepcounter{UserReq}}
 \stepcounter{UserReq}
 
-\newcommand{\hpr}{\textit{High Priority~~~~~}}
-\newcommand{\mpr}{\textit{Medium Priority~}}
-\newcommand{\lpr}{\textit{Low Priority~~~~~~}}
+\newcommand{\hpr}{\textit{High Priority}}
+\newcommand{\mpr}{\textit{Medium Priority}}
+\newcommand{\lpr}{\textit{Low Priority}}
 
 \begin{enumerate}[label=\textbf{FR.\arabic*}]
-    \userreq{\hpr A user can read and respond to scenarios presented to them}
-    \userreq{\hpr A user can lose a game, when the value of one of their pillars reaches zero}
-    \userreq{\mpr A user can enter a unique id, under which their game data will be recorded}
-    \userreq{\mpr A user can choose a game to play by entering the game code}
-    \userreq{\mpr A user can see the effect that their responses will have on the pillars}
-    \userreq{\mpr A user can lose a game, when there are no more cards in the deck}
-    \userreq{\lpr A user can view an image related to the current scenario}
-    \adminreq{\hpr An administrator can add, edit and remove cards from a game definition}
-    \adminreq{\hpr An administrator can add, edit and remove pillars from a game definition}
-    \adminreq{\hpr An administrator can save a game they are editing and return to it later, or let users play it}
-    \adminreq{\mpr An administrator can select specific cards and obtain visualisations that summarise how players respond to them}
-    \adminreq{\mpr An administrator can export and download all game data to an appropriate data processing format}
-    \adminreq{\lpr An administrator can filter turns included in visualisations by the state of the game during those turns}
-    \adminreq{\lpr An administrator can save their progress in editing one game and switch to another}    
-    \adminreq{\lpr An administrator can view a summary of the game they are creating, which contains information on any machine detectable oversights and game balance}
+
+    \userreq{\hpr 
+    
+    A user can choose a game to play by entering the game code}\label{4}
+    \userreq{\hpr 
+    
+    A user can read and respond to scenarios presented to them}\label{1}
+
+    Depends on: \ref{4}\ 
+    \userreq{\hpr 
+    
+    A user can lose a game, when the value of one of their pillars reaches zero}\label{2}
+    
+    Depends on: \ref{1}\ 
+    \userreq{\mpr 
+
+    A user can enter a unique id, under which their game data will be recorded}\label{3}
+    \userreq{\mpr 
+    
+    A user can see the effect that their responses will have on the pillars}\label{5}
+
+
+    Depends on: \ref{1}\ 
+    \userreq{\mpr 
+    
+    A user can lose a game, when there are no more cards in the deck}\label{6}
+
+    Depends on: \ref{1}\ 
+    \userreq{\lpr 
+    
+    A user can view an image related to the current scenario}\label{7}
+
+    Depends on: \ref{1}\ 
+    \adminreq{\hpr 
+    
+    An administrator can add, edit and remove cards from a game definition}\label{8}
+    \adminreq{\hpr 
+    
+    An administrator can add, edit and remove pillars from a game definition}\label{9}
+    \adminreq{\hpr 
+    
+    An administrator can save a game they are editing and return to it later, or let users play it}\label{10}
+    \adminreq{\mpr 
+    
+    An administrator can select specific cards and obtain visualisations that summarise how players respond to them}\label{11}
+
+    Depends on: \ref{4}, \ref{1}\ 
+    \adminreq{\mpr 
+    
+    An administrator can export and download all game data to an appropriate data processing format}\label{12}
+
+    Depends on: \ref{4}, \ref{1}\ 
+    \adminreq{\lpr 
+    
+    An administrator can filter turns included in visualisations by the state of the game during those turns}\label{13}
+
+    Depends on: \ref{1}\ 
+    \adminreq{\lpr 
+    
+    An administrator can save their progress in editing one game and switch to another}\label{14}
+    \adminreq{\lpr 
+    
+    An administrator can view a summary of the game they are creating, which contains information on any machine detectable oversights and game balance}\label{15}
+
+    Depends on: \ref{8}, \ref{9}\ 
 \end{enumerate}
 
 \section{Non-Functional Requirements}

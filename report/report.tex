@@ -5,7 +5,6 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
-\usepackage{todonotes}
 \usepackage[margin=1in]{geometry}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
@@ -37,6 +36,8 @@
 \bibliography{bibliography}
 \pagestyle{fancy}
 \fancyhf{}
+\fancyfoot[C]{\thepage} % except the center
+
 \rhead{150010440}
 \lhead{CS4099 Senior Honours Project Report}
 % \rfoot{\thepage{}}
@@ -94,25 +95,20 @@
   \vfill
 \end{titlepage}
 
-\listoftodos
 \tableofcontents
-
-\todo[inline]{Figure out tense of various sections (is context review past, eval present?)}
-\todo[inline]{Figure out name for software instead of "the game"/"my game"/"my artifact"}
-\todo[inline]{Fix page numbers and headers}
 
 \newpage
 
 \begin{abstract}
-  There are many situations in which it is desirable to know the opinions of a population. 
-  Traditional opinion polls have been used extensively throughout history, with paper surveys giving way to their online counterparts. 
+  There are many situations in which it is desirable to know the opinions of a population.
+  Traditional opinion polls have been used extensively throughout history, with paper surveys giving way to their online counterparts.
   This has made it possible to reach a much wider audience, while giving the surveyor more control over input restriction and validation.
-  A further benefit of surveys in the digital age is the possibility of enrichment through various gamification methods. 
+  A further benefit of surveys in the digital age, is the possibility of enrichment through various gamification methods.
   While there do exist tools designed to gamify surveys, these are limited in depth - the interface and the wording of questions can be modified, but at their core the outputs of these products still adhere to the traditional Q\&A format.
-  In collaboration with the St Andrews Centre for Exoplanet Science~\cite{CfES}, this project focuses on creating a framework that implements gamification at a deeper level - moving away from the Q\&A format. 
-  Within this framework, games may be created, played, and visualised, with the aim of inferring user's opinions on certain subject matters through gameplay analysis. 
-  The framework is designed to be highly flexible, allowing all aspects of a game's story and development to be decided by an administrator.
-  
+  In collaboration with the St Andrews Centre for Exoplanet Science~\cite{CfES}, this project aims to build \od{} - a framework that implements gamification at a deeper level, moving away from the standard Q\&A format.
+  Using \od{}, games may be created, played, and visualised, with the aim of inferring user's opinions on certain subject matters through gameplay analysis.
+  \od{} is designed to be highly flexible, allowing all aspects of a game's story and development to be decided by an administrator.
+
 \end{abstract}
 
 \section{Declaration}
@@ -123,7 +119,7 @@ acknowledgement. This work was performed during
 the current academic year except where otherwise
 stated.
 
-The main text of this project report is \todo[inline]{Add word count} ~7000* words long, including project specification and plan.
+The main text of this project report is 8,056 words long, including project specification and plan.
 
 In submitting this project report to the University of
 St Andrews, I give permission for it to be made
@@ -134,8 +130,6 @@ the report to be made and supplied at cost to any bona
 fide library or research worker, and to be made
 available on the World Wide Web. I retain the
 copyright in this work.
-
-\listoftodos
 
 \include{sections/intro}
 \include{sections/context}
@@ -148,14 +142,57 @@ copyright in this work.
 \include{sections/conclusion}
 
 \nocite{*}
-\printbibliography
+\printbibliography{}
 
 \begin{appendices}
-  \section{Artifact Evaluation Form}
+  \section{User Manual}
+  \subsection{Start the backend}
+  This step is required for the frontend (game) or admin sections to run correctly.
+  \begin{enumerate}
+    \item Download \od{} from MMS
+    \item Ensure that Node and NPM are installed on you machine
+    \item Navigate to the project root directory
+    \item \c{cd backend}
+    \item \c{npm install}
+    \item \c{node server.js}
+  \end{enumerate}
+
+  Once this server is running, admin and game applications can be run simultaneously
+
+  \subsection{Start the game}
+  These steps should be performed in a new terminal window, while the backend server is running.
+  \begin{enumerate}
+    \item Navigate to the project root directory
+    \item \c{cd frontend}
+    \item \c{npm install}
+    \item \c{npm start}
+    \item Navigate to \c{localhost:3001}
+  \end{enumerate}
+
+  \subsection{Start the admin tools}
+  These steps should be performed in a new terminal window, while the backend server is running.
+
+  Note that no user data is uploaded in the submission, so the game must be played before the visualisation app is populated.
+  \begin{enumerate}
+    \item Navigate to the project root directory
+    \item \c{cd admin}
+    \item \c{npm install}
+    \item \c{npm start}
+    \item Navigate to \c{localhost:3000/maker} for game maker tools
+    \item Navigate to \c{localhost:3000/data} for visualisation tools
+  \end{enumerate}
+
+\newpage
+  \section{Artifact Evaluation Ethics Form}
   \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.9\textwidth]{./appendices/feedback.pdf}
-    \label{appendix:artifact_eval}
+    \includegraphics[width=0.9\textwidth]{./appendices/ethics.pdf}\label{appendix:ethic}
+  \end{figure}
+  \newpage
+  \section{User Evaluation Form}
+  \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{./appendices/feedback.pdf}\label{appendix:artifact_eval}
   \end{figure}
 \end{appendices}
 \end{document}
