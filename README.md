@@ -1,6 +1,7 @@
 # OpDeck
 
 SH Project hoping to create a framework allowing capture of user's opinions through a gamelike interface.
+Read my report on this project [here](https://github.com/CamerAllan/aliens/blob/master/report/report.pdf)
 
 # User Manual
 
